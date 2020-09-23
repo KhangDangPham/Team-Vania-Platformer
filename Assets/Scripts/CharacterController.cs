@@ -6,6 +6,7 @@ using UnityEngine;
 public class CharacterController : MonoBehaviour
 {
     public float speed = 10;
+    public float jumpForce = 10;
     bool isJumping = false;
     private Rigidbody2D rb;
 
@@ -26,18 +27,22 @@ public class CharacterController : MonoBehaviour
     void FixedUpdate()
     {
         float horizontalMove = Input.GetAxis("Horizontal");
-        float verticalMove = 0; //placeholder for if we ever need vertical movement besides jumping
+        float verticalMove = 0; //placeholder for other vertical forces minus jumping
 
-        if(isJumping)
-        {
-            verticalMove = 20;
-            isJumping = false;
-        }
 
-        Debug.Log("VMove: " + verticalMove + " HMove: " + horizontalMove);
 
         Vector2 movement = new Vector2(horizontalMove, verticalMove);
 
-        rb.AddForce(movement * speed * rb.mass);
+        transform.position += new Vector3(movement.x, movement.y, 0) * speed * Time.deltaTime;
+
+        if(isJumping)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, 0);
+            rb.AddForce(new Vector2(0, jumpForce));
+            isJumping = false;
+        }
+
+
+        //rb.AddForce(movement * speed * rb.mass * rb.drag);
     }
 }
