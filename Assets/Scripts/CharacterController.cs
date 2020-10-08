@@ -45,6 +45,7 @@ public class CharacterController : MonoBehaviour
         }
 
     }
+
     void FixedUpdate()
     {
         float horizontalMove = Input.GetAxis("Horizontal");
@@ -67,6 +68,7 @@ public class CharacterController : MonoBehaviour
         //rb.AddForce(movement * speed * rb.mass * rb.drag);
     }
 
+    //This function checks if the player is grounded
     bool Grounded()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up);
@@ -90,6 +92,7 @@ public class CharacterController : MonoBehaviour
         }
     }
 
+    //Public function used to damage the player
     public void TakeDamage(int damage)
     {
         health -= damage;
@@ -100,6 +103,7 @@ public class CharacterController : MonoBehaviour
         }
     }
 
+    //Called when the player dies
     private void Die()
     {
         transform.position = respawnPoint;
