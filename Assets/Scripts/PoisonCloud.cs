@@ -17,7 +17,7 @@ public class PoisonCloud : MonoBehaviour
         Debug.Log("Entered");
         if(collision.gameObject.tag == "Player")
         {
-            collision.gameObject.GetComponent<CharacterController>().TakeDamage(25);
+            collision.gameObject.GetComponent<PlayerController>().TakeDamage(25);
         }
     }
 

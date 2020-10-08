@@ -14,7 +14,7 @@ public class SpikeTrap : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
-            collision.gameObject.GetComponent<CharacterController>().TakeDamage(100);
+            collision.gameObject.GetComponent<PlayerController>().TakeDamage(100);
         }
     }
 
