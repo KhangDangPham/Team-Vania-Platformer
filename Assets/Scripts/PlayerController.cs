@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //This script will handle all of the player's movement
-public class CharacterController : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     public float speed = 10;
     public float jumpForce = 10;
@@ -25,6 +25,7 @@ public class CharacterController : MonoBehaviour
 
     private void Update()
     {
+
         if (Input.GetButtonDown("Jump") && jumps > 0)
         {
             if (Grounded())
@@ -45,7 +46,6 @@ public class CharacterController : MonoBehaviour
         }
 
     }
-
     void FixedUpdate()
     {
         float horizontalMove = Input.GetAxis("Horizontal");
@@ -68,14 +68,13 @@ public class CharacterController : MonoBehaviour
         //rb.AddForce(movement * speed * rb.mass * rb.drag);
     }
 
-    //This function checks if the player is grounded
     bool Grounded()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up);
         if(hit.collider != null)
         {
             float distanceToGround = Mathf.Abs(hit.point.y - transform.position.y);
-            Debug.Log("Hit: " + hit.collider.gameObject.name + "Distance to ground: " + distanceToGround);
+            //Debug.Log("Hit: " + hit.collider.gameObject.name + "Distance to ground: " + distanceToGround);
             if(distanceToGround < .52)
             {
                 jumps = 2;
@@ -92,7 +91,6 @@ public class CharacterController : MonoBehaviour
         }
     }
 
-    //Public function used to damage the player
     public void TakeDamage(int damage)
     {
         health -= damage;
@@ -103,7 +101,30 @@ public class CharacterController : MonoBehaviour
         }
     }
 
-    //Called when the player dies
+    public void TakeDamage(int damage, Vector2 enemyPosition, float force = 6f)
+    {
+        health -= damage;
+        if (health <= 0)
+        {
+            health = 0;
+            Die();
+            return;
+        }
+
+        Vector2 kbMovement = (Vector2)transform.position - enemyPosition;
+
+        if(kbMovement.x < 0)
+        {
+            kbMovement.x = -1;
+        }
+
+        kbMovement.y = 1;
+
+        kbMovement *= force;
+
+        rb.AddForce(kbMovement, ForceMode2D.Impulse);
+    }
+
     private void Die()
     {
         transform.position = respawnPoint;
