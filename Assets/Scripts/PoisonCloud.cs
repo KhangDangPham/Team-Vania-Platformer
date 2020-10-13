@@ -5,6 +5,7 @@ using UnityEngine;
 public class PoisonCloud : MonoBehaviour
 {
     public float lifeTime = 10f;
+    public int damage = 50;
     public BoxCollider2D cloudZone;
 
     private void Start()
@@ -17,7 +18,7 @@ public class PoisonCloud : MonoBehaviour
         Debug.Log("Entered");
         if(collision.gameObject.tag == "Player")
         {
-            collision.gameObject.GetComponent<PlayerController>().TakeDamage(25);
+            collision.gameObject.GetComponent<PlayerController>().TakeDamage(damage);
         }
     }
 
