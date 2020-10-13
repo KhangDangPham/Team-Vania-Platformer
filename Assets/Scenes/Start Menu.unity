@@ -307,7 +307,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc2a792fe168812488e9092698d61995, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 1022440411}
 --- !u!1 &1332204057
 GameObject:
   m_ObjectHideFlags: 0
@@ -413,7 +412,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc2a792fe168812488e9092698d61995, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
 --- !u!1 &1368707052
 GameObject:
   m_ObjectHideFlags: 0
@@ -652,6 +650,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d728b6a6bba2bb4d88eda400f29688d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nextScene: Demo Scene (Carlos)
 --- !u!4 &1512612491
 Transform:
   m_ObjectHideFlags: 0
