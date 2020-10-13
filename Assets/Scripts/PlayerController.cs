@@ -202,8 +202,11 @@ public class PlayerController : MonoBehaviour
 
     public void BasicMeleeAttack()
     {
-        Vector2 spawnPosition = transform.position + transform.right * 1;
+        Vector3 spawnPosition = transform.position;
+
+        spawnPosition += spriteRenderer.flipX ? transform.right * -1 : transform.right * 1;
         BasicHitbox hitBox = Instantiate(attackHitBox, spawnPosition, Quaternion.identity).GetComponent<BasicHitbox>();
+        
         hitBox.Initialize("Player", new Vector2(2, 2), new Vector2(0, 0), .25f, 15);
     }
 

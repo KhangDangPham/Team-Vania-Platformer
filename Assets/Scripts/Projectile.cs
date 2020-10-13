@@ -20,7 +20,11 @@ public class Projectile : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             collision.gameObject.GetComponent<PlayerController>().TakeDamage(10, transform.position, 3);
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
+        else if(collision.gameObject.tag == "Ground")
+        {
+            Destroy(gameObject);
+        }
     }
 }
