@@ -10,10 +10,12 @@ public class PlayerController : MonoBehaviour
     public int health = 100;
     public Vector2 respawnPoint;
 
+    public GameObject attackHitBox;
     Rigidbody2D rb;
     Animator animator;
     SpriteRenderer spriteRenderer;
 
+    float invulnerabilityTimer = 5f;
     bool canMove = true;
     bool isJumping = false;
     bool hasLeftGround = false;
@@ -62,6 +64,7 @@ public class PlayerController : MonoBehaviour
             TakeDamage(100);
         }
 
+
     }
     void FixedUpdate()
     {
@@ -107,6 +110,7 @@ public class PlayerController : MonoBehaviour
 
         Grounded();
 
+        invulnerabilityTimer -= Time.deltaTime;
     }
 
     bool Grounded()
@@ -115,7 +119,6 @@ public class PlayerController : MonoBehaviour
         if(hit.collider != null)
         {
             float distanceToGround = Mathf.Abs(hit.point.y - transform.position.y);
-            Debug.Log(distanceToGround);
             //Debug.Log("Hit: " + hit.collider.gameObject.name + "Distance to ground: " + distanceToGround);
             if(distanceToGround < .94)
             {
@@ -150,16 +153,25 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        if(invulnerabilityTimer > 0)
+        {
+            return;
+        }
         health -= damage;
         if(health <= 0)
         {
             health = 0;
             Die();
         }
+        invulnerabilityTimer = 5;
     }
 
     public void TakeDamage(int damage, Vector2 enemyPosition, float force = 6f)
     {
+        if (invulnerabilityTimer > 0)
+        {
+            return;
+        }
         health -= damage;
         if (health <= 0)
         {
@@ -180,6 +192,7 @@ public class PlayerController : MonoBehaviour
         kbMovement *= force;
 
         rb.AddForce(kbMovement, ForceMode2D.Impulse);
+        invulnerabilityTimer = 5;
     }
 
     private void Die()
@@ -189,6 +202,13 @@ public class PlayerController : MonoBehaviour
     }
 
     public void BasicMeleeAttack()
+    {
+        Vector2 spawnPosition = transform.position + transform.right * 1;
+        BasicHitbox hitBox = Instantiate(attackHitBox, spawnPosition, Quaternion.identity).GetComponent<BasicHitbox>();
+        hitBox.Initialize("Player", new Vector2(2, 2), new Vector2(0, 0), .25f, 15);
+    }
+
+    public void DisableMovement()
     {
         canMove = false;
     }

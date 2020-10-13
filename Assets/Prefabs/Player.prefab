@@ -205,6 +205,8 @@ MonoBehaviour:
   jumpForce: 435
   health: 100
   respawnPoint: {x: 0, y: 0}
+  attackHitBox: {fileID: 9177505655542393021, guid: 606ff7b029ad5a2419e37749eb402cae,
+    type: 3}
 --- !u!61 &2396122623605499289
 BoxCollider2D:
   m_ObjectHideFlags: 0
