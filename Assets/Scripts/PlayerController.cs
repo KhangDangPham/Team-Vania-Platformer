@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 //This script will handle all of the player's movement
 public class PlayerController : MonoBehaviour
@@ -8,7 +9,6 @@ public class PlayerController : MonoBehaviour
     public float speed = 10;
     public float jumpForce = 10;
     public int health = 100;
-    public Vector2 respawnPoint;
 
     public GameObject attackHitBox;
     Rigidbody2D rb;
@@ -18,14 +18,13 @@ public class PlayerController : MonoBehaviour
     float invulnerabilityTimer = 5f;
     bool canMove = true;
     bool isJumping = false;
-    bool hasLeftGround = false;
+    //bool hasLeftGround = false;
     int jumps = 2;
 
 
 
     void Start()
     {
-        respawnPoint = transform.position;
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -133,7 +132,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                hasLeftGround = true;
+                //hasLeftGround = true;
                 return false;
             }
         }
@@ -197,7 +196,7 @@ public class PlayerController : MonoBehaviour
 
     private void Die()
     {
-        transform.position = respawnPoint;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         health = 100;
     }
 
