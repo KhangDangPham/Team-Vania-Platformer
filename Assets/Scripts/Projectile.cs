@@ -14,12 +14,17 @@ public class Projectile : MonoBehaviour
         rb.AddForce(direction * speed, ForceMode2D.Impulse);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player")
         {
             collision.gameObject.GetComponent<PlayerController>().TakeDamage(10, transform.position, 3);
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
+        else if(collision.gameObject.tag == "Ground")
+        {
+            Destroy(gameObject);
+        }
     }
 }

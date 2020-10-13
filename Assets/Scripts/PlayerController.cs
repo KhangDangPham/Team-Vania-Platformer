@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 //This script will handle all of the player's movement
 public class PlayerController : MonoBehaviour
@@ -8,19 +9,26 @@ public class PlayerController : MonoBehaviour
     public float speed = 10;
     public float jumpForce = 10;
     public int health = 100;
-    public Vector2 respawnPoint;
 
+    public GameObject attackHitBox;
     Rigidbody2D rb;
+    Animator animator;
+    SpriteRenderer spriteRenderer;
 
+    float invulnerabilityTimer = 5f;
+    bool canMove = true;
     bool isJumping = false;
+    //bool hasLeftGround = false;
     int jumps = 2;
 
 
 
     void Start()
     {
-        respawnPoint = transform.position;
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
     }
 
     private void Update()
@@ -38,6 +46,16 @@ public class PlayerController : MonoBehaviour
             }
             Debug.Log("Jumping");
             isJumping = true;
+            /*animator.SetBool("IsJumping", true);
+            if (isJumping)
+            {
+                animator.SetTrigger("DoubleJump");
+            }*/
+        }
+
+        if(Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            animator.SetTrigger("BasicAttack");
         }
 
         if(Input.GetKeyDown(KeyCode.X))
@@ -45,13 +63,40 @@ public class PlayerController : MonoBehaviour
             TakeDamage(100);
         }
 
+
     }
     void FixedUpdate()
     {
         float horizontalMove = Input.GetAxis("Horizontal");
         float verticalMove = 0; //placeholder for other vertical forces minus jumping
 
+        if(canMove)
+        {
+            //flip the character to face the movement direction
+            if (horizontalMove < 0)
+            {
+                spriteRenderer.flipX = true;
+            }
+            else if (horizontalMove > 0)
+            {
+                spriteRenderer.flipX = false;
+            }
 
+            //Set walking variable
+            if (horizontalMove != 0 && rb.velocity.x == 0)
+            {
+                animator.SetBool("IsWalking", true);
+            }
+            else
+            {
+                animator.SetBool("IsWalking", false);
+            }
+        }
+        else
+        {
+            horizontalMove = 0;
+        }
+        
 
         Vector2 movement = new Vector2(horizontalMove, verticalMove);
 
@@ -59,13 +104,12 @@ public class PlayerController : MonoBehaviour
 
         if(isJumping)
         {
-            rb.velocity = new Vector2(rb.velocity.x, 0);
-            rb.AddForce(new Vector2(0, jumpForce));
-            isJumping = false;
+            Jump();
         }
+
         Grounded();
 
-        //rb.AddForce(movement * speed * rb.mass * rb.drag);
+        invulnerabilityTimer -= Time.deltaTime;
     }
 
     bool Grounded()
@@ -75,13 +119,20 @@ public class PlayerController : MonoBehaviour
         {
             float distanceToGround = Mathf.Abs(hit.point.y - transform.position.y);
             //Debug.Log("Hit: " + hit.collider.gameObject.name + "Distance to ground: " + distanceToGround);
-            if(distanceToGround < .52)
+            if(distanceToGround < .94)
             {
                 jumps = 2;
+                /*if (hasLeftGround)
+                {
+                    animator.SetBool("IsJumping", false);
+                    isJumping = false;
+                    hasLeftGround = false;
+                }*/
                 return true;
             }
             else
             {
+                //hasLeftGround = true;
                 return false;
             }
         }
@@ -91,18 +142,35 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void Jump()
+    {
+        rb.velocity = new Vector2(rb.velocity.x, 0);
+        rb.AddForce(new Vector2(0, jumpForce));
+        jumps -= 1;
+        isJumping = false;
+    }
+
     public void TakeDamage(int damage)
     {
+        if(invulnerabilityTimer > 0)
+        {
+            return;
+        }
         health -= damage;
         if(health <= 0)
         {
             health = 0;
             Die();
         }
+        invulnerabilityTimer = 5;
     }
 
     public void TakeDamage(int damage, Vector2 enemyPosition, float force = 6f)
     {
+        if (invulnerabilityTimer > 0)
+        {
+            return;
+        }
         health -= damage;
         if (health <= 0)
         {
@@ -123,11 +191,33 @@ public class PlayerController : MonoBehaviour
         kbMovement *= force;
 
         rb.AddForce(kbMovement, ForceMode2D.Impulse);
+        invulnerabilityTimer = 5;
     }
 
     private void Die()
     {
-        transform.position = respawnPoint;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         health = 100;
+    }
+
+    public void BasicMeleeAttack()
+    {
+        Vector3 spawnPosition = transform.position;
+
+        spawnPosition += spriteRenderer.flipX ? transform.right * -1 : transform.right * 1;
+        BasicHitbox hitBox = Instantiate(attackHitBox, spawnPosition, Quaternion.identity).GetComponent<BasicHitbox>();
+        
+        hitBox.Initialize("Player", new Vector2(2, 2), new Vector2(0, 0), .25f, 15);
+    }
+
+    public void DisableMovement()
+    {
+        canMove = false;
+    }
+
+    public void EnableMovement()
+    {
+        canMove = true;
+        animator.ResetTrigger("BasicAttack");
     }
 }
