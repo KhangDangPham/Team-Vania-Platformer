@@ -7,6 +7,7 @@ public class MeleeEnemyController : MonoBehaviour
 
     public int health = 100;
 
+    public int damage = 25;
     public float aggroRange = 10f;
     public float speed = 1f;
     public float attackRange = 1.1f;
@@ -137,7 +138,7 @@ public class MeleeEnemyController : MonoBehaviour
     protected virtual void Attack()
     {
         currentCooldown = attackCooldown;
-        player.TakeDamage(10, transform.position);
+        player.TakeDamage(damage, transform.position);
     }
 
     private void Die()
