@@ -13,6 +13,7 @@ public class MeleeEnemyController : MonoBehaviour
     public float attackRange = 1.1f;
     public float attackCooldown = 1f;
 
+    protected SpriteRenderer spriteRenderer;
     protected PlayerController player;
     protected Rigidbody2D rb;
     protected float currentCooldown = 0f;
@@ -24,6 +25,7 @@ public class MeleeEnemyController : MonoBehaviour
         //Looks for a gameobject with the tag "Player", and gets the PlayerController script
         player = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<PlayerController>();
         rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -46,10 +48,12 @@ public class MeleeEnemyController : MonoBehaviour
             if(positionDifference.x > 0)
             {
                 movement.x = 1;
+                spriteRenderer.flipX = true;
             }
             else
             {
                 movement.x = -1;
+                spriteRenderer.flipX = false;
             }
 
             transform.position += new Vector3(movement.x, movement.y, 0) * speed * Time.deltaTime;
