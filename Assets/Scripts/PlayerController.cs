@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     Animator animator;
     SpriteRenderer spriteRenderer;
 
-    float invulnerabilityTimer = 5f;
+    float invulnerabilityTimer = 0f;
     bool canMove = true;
     bool isJumping = false;
     //bool hasLeftGround = false;
@@ -162,7 +162,7 @@ public class PlayerController : MonoBehaviour
             health = 0;
             Die();
         }
-        invulnerabilityTimer = 5;
+        invulnerabilityTimer = 2;
     }
 
     public void TakeDamage(int damage, Vector2 enemyPosition, float force = 6f)
@@ -191,7 +191,7 @@ public class PlayerController : MonoBehaviour
         kbMovement *= force;
 
         rb.AddForce(kbMovement, ForceMode2D.Impulse);
-        invulnerabilityTimer = 5;
+        invulnerabilityTimer = 2;
     }
 
     private void Die()
