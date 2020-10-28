@@ -23,7 +23,8 @@ public class RangedCombat : MonoBehaviour
 
             if (Input.GetMouseButtonDown(1))
             {
-                Instantiate(projectile, startPoint.position, transform.rotation);
+                GameObject arrow = Instantiate(projectile, startPoint.position, transform.rotation);
+                arrow.GetComponent<PlayerProjectile>().InitializeProjectile(transform.position, 30);
                 fireRate = startFireRate;
             }
 
