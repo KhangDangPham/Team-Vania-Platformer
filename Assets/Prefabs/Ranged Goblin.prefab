@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4949661289997913724
+--- !u!1 &1999906705006930631
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,38 +8,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4715857571086151396}
-  - component: {fileID: 7370463891932030784}
-  - component: {fileID: 3308930114607066943}
-  - component: {fileID: 5546105348997209623}
+  - component: {fileID: 1999906705006930635}
+  - component: {fileID: 1999906705006930628}
+  - component: {fileID: 1999906705006930629}
+  - component: {fileID: 1999906705006930630}
+  - component: {fileID: 1999906705006930634}
   m_Layer: 0
-  m_Name: Poison Trap
-  m_TagString: Untagged
+  m_Name: RangedEnemy
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4715857571086151396
+--- !u!4 &1999906705006930635
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4949661289997913724}
+  m_GameObject: {fileID: 1999906705006930631}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 36.5, y: -0.11, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalPosition: {x: 15.49, y: 2.98, z: -3.7566078}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &7370463891932030784
+--- !u!212 &1999906705006930628
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4949661289997913724}
+  m_GameObject: {fileID: 1999906705006930631}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -73,56 +74,82 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -7708920532220806285, guid: 59519404e25316a4f99ca7b6d098092c,
-    type: 3}
-  m_Color: {r: 0, g: 1, b: 0.11642933, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 6e385533412813249b829e94cca08604, type: 3}
+  m_Color: {r: 1, g: 0.49903232, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.16, y: 0.16}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &3308930114607066943
+--- !u!50 &1999906705006930629
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1999906705006930631}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
+--- !u!61 &1999906705006930630
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4949661289997913724}
+  m_GameObject: {fileID: 1999906705006930631}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 0.16, y: 0.16}
+    oldSize: {x: 3.46, y: 3.75}
+    newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 3, y: 3.5}
   m_EdgeRadius: 0
---- !u!114 &5546105348997209623
+--- !u!114 &1999906705006930634
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4949661289997913724}
+  m_GameObject: {fileID: 1999906705006930631}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 536f0e0ec82d54c499ed3150dc81ba4a, type: 3}
+  m_Script: {fileID: 11500000, guid: 9ead903a3ae98b54eb5c3aadf591b337, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PoisonCloud: {fileID: 8238374156494355435, guid: 8f3a044465d4a1f4684549f6880be966,
+  health: 15
+  damage: 25
+  aggroRange: 30
+  speed: 0
+  attackRange: 30
+  attackCooldown: 4
+  projectile: {fileID: 6668560351099667932, guid: 4b859d1f9d08534458551d8954fb09b2,
     type: 3}
-  cooldown: 10
+  projectileDamage: 10
