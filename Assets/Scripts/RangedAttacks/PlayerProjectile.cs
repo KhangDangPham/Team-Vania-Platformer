@@ -4,20 +4,21 @@ using UnityEngine;
 
 public class PlayerProjectile : MonoBehaviour
 {
-   
-   
+
+
     public Rigidbody2D rb;
+    
 
-    public void InitializeProjectile(Vector2 shooterPosition, float speed)
+    void Start()
     {
-        Vector2 direction = (Vector2)transform.position - shooterPosition;
-
-        Debug.Log(direction);
-
-        rb.AddForce(direction * speed, ForceMode2D.Impulse);
+        rb = GetComponent<Rigidbody2D>();
     }
 
-
+    void Update()
+    {
+        float angle = Mathf.Atan2(rb.velocity.y, rb.velocity.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Enemy")
@@ -31,6 +32,8 @@ public class PlayerProjectile : MonoBehaviour
         }
     }
 }
+    
+   
 
 /*
    Could be used for magic projectile 

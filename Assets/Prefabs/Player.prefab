@@ -72,7 +72,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.5283019, g: 0.5283019, b: 0.5283019, a: 0}
+  m_BackGroundColor: {r: 0.061587755, g: 0.07427481, b: 0.0754717, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -380,8 +380,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baf0646f5570865499ac69f072283365, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: 0
   projectile: {fileID: 222620950901220622, guid: 7c0a3a84daeb08043b07130b1844e20e,
     type: 3}
+  launchForce: 11
   startPoint: {fileID: 6333807259692036810}
   startFireRate: 1
