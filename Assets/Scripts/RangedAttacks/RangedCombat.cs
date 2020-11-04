@@ -13,36 +13,75 @@ public class RangedCombat : MonoBehaviour
     public Transform startPoint;
 
     private float fireRate;
+    private float hideCountdown = 0;
     public float startFireRate;
+    public float hideDelay = 2.5f;
+
+    SpriteRenderer spriteRenderer;
+    Transform playerTransform;
+
+    private void Start()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
 
     // Update is called once per frame
     private void Update()
     {
-        /*Vector3 difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-        float rotZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0f, 0f, rotZ + offset);
-        */
+        AdjustBowPosition();
+
+        fireRate -= Time.deltaTime;
+        hideCountdown -= Time.deltaTime;
+
+        if(hideCountdown <= 0)
+        {
+            spriteRenderer.enabled = false;
+        }
+    }
+
+    public void SetPlayerTransform(Transform sentTransform)
+    {
+        playerTransform = sentTransform;
+    }
+
+    public void Shoot()
+    {
+        if (fireRate <= 0)
+        {
+            spriteRenderer.enabled = true;
+
+            if (fireRate <= 0)
+            {
+                GameObject arrow = Instantiate(projectile, startPoint.position, startPoint.rotation);
+                arrow.GetComponent<Rigidbody2D>().velocity = transform.right * launchForce;
+                fireRate = startFireRate;
+                hideCountdown = hideDelay;
+            }
+        }
+    }
+
+    private void AdjustBowPosition()
+    {
         Vector2 objectPosition = transform.position;
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 direction = mousePosition - objectPosition;
         transform.right = direction;
 
+        Vector2 posDifference = (Vector2)playerTransform.position - mousePosition;
 
+        Debug.Log(posDifference);
 
-        if (fireRate <= 0)
+        if(posDifference.x > 0.6f)
         {
-
-            if (Input.GetMouseButtonDown(1))
-            {
-                GameObject arrow = Instantiate(projectile, startPoint.position, startPoint.rotation);
-                arrow.GetComponent<Rigidbody2D>().velocity = transform.right * launchForce;
-                fireRate = startFireRate;
-            }
-
+            transform.localPosition = new Vector2(-3, transform.localPosition.y);
+        }
+        else if (posDifference.x < -0.6f)
+        {
+            transform.localPosition = new Vector2(3, transform.localPosition.y);
         }
         else
         {
-            fireRate -= Time.deltaTime;
+            spriteRenderer.enabled = false;
         }
     }
 }
