@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rb;
     Animator animator;
     SpriteRenderer spriteRenderer;
+    RangedCombat bowScript;
+    HealthBar hpBar;
 
     float invulnerabilityTimer = 0f;
     bool canMove = true;
@@ -28,7 +30,9 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-
+        hpBar = GetComponentInChildren<HealthBar>();
+        bowScript = GetComponentInChildren<RangedCombat>();
+        bowScript.SetPlayerTransform(transform);
     }
 
     private void Update()
@@ -56,6 +60,11 @@ public class PlayerController : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Mouse0))
         {
             animator.SetTrigger("BasicAttack");
+        }
+
+        if(Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            bowScript.Shoot();
         }
 
         if(Input.GetKeyDown(KeyCode.X))
@@ -177,6 +186,10 @@ public class PlayerController : MonoBehaviour
             health = 0;
             Die();
             return;
+        }
+        else
+        {
+            hpBar.UpdateHealth(health);
         }
 
         Vector2 kbMovement = (Vector2)transform.position - enemyPosition;
