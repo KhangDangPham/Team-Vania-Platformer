@@ -16,9 +16,11 @@ public class MeleeEnemyController : MonoBehaviour
     protected SpriteRenderer spriteRenderer;
     protected PlayerController player;
     protected Rigidbody2D rb;
+    protected HealthBar hpBar;
     protected float currentCooldown = 0f;
-    protected float jumpCooldown = 0;
-
+    protected float jumpCooldown = 0f;
+    protected float invulnerabilityTimer = 0f;
+    protected int maxHealth;
 
     void Start()
     {
@@ -26,20 +28,21 @@ public class MeleeEnemyController : MonoBehaviour
         player = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<PlayerController>();
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        hpBar = GetComponentInChildren<HealthBar>();
+
+        maxHealth = health;
     }
 
     // Update is called once per frame
     void Update()
     {
-        currentCooldown -= Time.deltaTime;
-        jumpCooldown -= Time.deltaTime;
 
         float distance = Vector2.Distance(transform.position, player.gameObject.transform.position);
 
         Vector2 positionDifference = player.gameObject.transform.position - transform.position;
 
         //if within aggro range but not within attack range
-        if (attackRange < distance && distance <= aggroRange)
+        if (attackRange < distance && distance <= aggroRange && invulnerabilityTimer <= 0)
         {
 
             //move towards player
@@ -58,7 +61,7 @@ public class MeleeEnemyController : MonoBehaviour
 
             transform.position += new Vector3(movement.x, movement.y, 0) * speed * Time.deltaTime;
         }
-        else if(distance <= attackRange && currentCooldown <= 0) //attack
+        else if(distance <= attackRange && currentCooldown <= 0 && invulnerabilityTimer <= 0) //attack
         {
             Attack();
         }
@@ -73,6 +76,10 @@ public class MeleeEnemyController : MonoBehaviour
         {
             Jump();
         }
+
+        currentCooldown -= Time.deltaTime;
+        jumpCooldown -= Time.deltaTime;
+        invulnerabilityTimer -= Time.deltaTime;
     }
 
     Vector2 CheckSides()
@@ -107,16 +114,10 @@ public class MeleeEnemyController : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        health -= damage;
-        if (health <= 0)
+        if (invulnerabilityTimer > 0)
         {
-            health = 0;
-            Die();
+            return;
         }
-    }
-
-    public void TakeDamage(int damage, Vector2 enemyPosition, float force = 6f)
-    {
         health -= damage;
         if (health <= 0)
         {
@@ -124,6 +125,21 @@ public class MeleeEnemyController : MonoBehaviour
             Die();
             return;
         }
+        else
+        {
+            hpBar.UpdateHealth(health, maxHealth);
+        }
+        invulnerabilityTimer = 2f;
+    }
+
+    public void TakeDamage(int damage, Vector2 enemyPosition, float force = 6f)
+    {
+        if (invulnerabilityTimer > 0)
+        {
+            return;
+        }
+
+        TakeDamage(damage);
 
         Vector2 kbMovement = (Vector2)transform.position - enemyPosition;
 
@@ -137,6 +153,8 @@ public class MeleeEnemyController : MonoBehaviour
         kbMovement *= force;
 
         rb.AddForce(kbMovement, ForceMode2D.Impulse);
+
+
     }
 
     protected virtual void Attack()
