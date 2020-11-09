@@ -1,0 +1,607 @@
+fileFormatVersion: 2
+guid: cd7db38bb5e23d244bef8dd6a5e2d2b0
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4917292209387886319
+    second: Goblin_Ranged_Death_0
+  - first:
+      213: 8059583809954313579
+    second: Goblin_Ranged_Death_1
+  - first:
+      213: 1617141908258001988
+    second: Goblin_Ranged_Death_2
+  - first:
+      213: 197435683196283842
+    second: Goblin_Ranged_Death_3
+  - first:
+      213: -4212623040335468533
+    second: Goblin_Ranged_Death_4
+  - first:
+      213: 8447847417151929872
+    second: Goblin_Ranged_Death_5
+  - first:
+      213: -4518368332574482712
+    second: Goblin_Ranged_Death_6
+  - first:
+      213: -7898699244444211813
+    second: Goblin_Ranged_Death_7
+  - first:
+      213: -1508146568027858130
+    second: Goblin_Ranged_Death_8
+  - first:
+      213: -8157918909888314567
+    second: Goblin_Ranged_Death_9
+  - first:
+      213: -938820383497385897
+    second: Goblin_Ranged_Death_10
+  - first:
+      213: 4797558062605809474
+    second: Goblin_Ranged_Death_11
+  - first:
+      213: -6074696301932099235
+    second: Goblin_Ranged_Death_12
+  - first:
+      213: -4067554668855138493
+    second: Goblin_Ranged_Death_13
+  - first:
+      213: 4054469522932696614
+    second: Goblin_Ranged_Death_14
+  - first:
+      213: 3431223064144397504
+    second: Goblin_Ranged_Death_15
+  - first:
+      213: 2396459672556980869
+    second: Goblin_Ranged_Death_12
+  - first:
+      213: -1717957768325803979
+    second: Goblin_Ranged_Death_17
+  - first:
+      213: -3849983761799182879
+    second: Goblin_Ranged_Death_18
+  - first:
+      213: 3420304276967067656
+    second: Goblin_Ranged_Death_19
+  - first:
+      213: -303866057417325876
+    second: Goblin_Ranged_Death_20
+  - first:
+      213: -4396378101619889217
+    second: Goblin_Ranged_Death_21
+  - first:
+      213: -5530451966388229798
+    second: Goblin_Ranged_Death_22
+  - first:
+      213: -1632978475267032919
+    second: Goblin_Ranged_Death_23
+  - first:
+      213: 1093079019164354699
+    second: Goblin_Ranged_Death_24
+  - first:
+      213: 6121759021967484291
+    second: Goblin_Ranged_Death_25
+  - first:
+      213: -3579901163005649074
+    second: Goblin_Ranged_Death_26
+  - first:
+      213: -2502719716222500858
+    second: Goblin_Ranged_Death_27
+  - first:
+      213: 1554356255832666225
+    second: Goblin_Ranged_Death_28
+  - first:
+      213: 5803842573313212217
+    second: Goblin_Ranged_Death_29
+  - first:
+      213: 1452750049723644155
+    second: Goblin_Ranged_Death_13
+  - first:
+      213: 7866800802668698958
+    second: Goblin_Ranged_Death_31
+  - first:
+      213: 2873330815505381999
+    second: Goblin_Ranged_Death_32
+  - first:
+      213: 6106018775707358118
+    second: Goblin_Ranged_Death_33
+  - first:
+      213: 40746006033321502
+    second: Goblin_Ranged_Death_34
+  - first:
+      213: -3583741191607461845
+    second: Goblin_Ranged_Death_35
+  - first:
+      213: 8818741119613429431
+    second: Goblin_Ranged_Death_36
+  - first:
+      213: -2655482440500859447
+    second: Goblin_Ranged_Death_37
+  - first:
+      213: -1918763308353498755
+    second: Goblin_Ranged_Death_14
+  - first:
+      213: 3967991705054075004
+    second: Goblin_Ranged_Death_39
+  - first:
+      213: -2049719022017067519
+    second: Goblin_Ranged_Death_40
+  - first:
+      213: -3453905394602464824
+    second: Goblin_Ranged_Death_41
+  - first:
+      213: 1329272391707843303
+    second: Goblin_Ranged_Death_42
+  - first:
+      213: -1945800476106203014
+    second: Goblin_Ranged_Death_43
+  - first:
+      213: -4379984354784442550
+    second: Goblin_Ranged_Death_44
+  - first:
+      213: 4550025729633363673
+    second: Goblin_Ranged_Death_45
+  - first:
+      213: -2631698034743362702
+    second: Goblin_Ranged_Death_0
+  - first:
+      213: -857969153867970587
+    second: Goblin_Ranged_Death_1
+  - first:
+      213: 4415417184151756041
+    second: Goblin_Ranged_Death_2
+  - first:
+      213: -7638309031336318167
+    second: Goblin_Ranged_Death_3
+  - first:
+      213: -6238819394333684803
+    second: Goblin_Ranged_Death_4
+  - first:
+      213: -5636041672019012418
+    second: Goblin_Ranged_Death_5
+  - first:
+      213: -6569468983984920769
+    second: Goblin_Ranged_Death_6
+  - first:
+      213: -6344800919806916805
+    second: Goblin_Ranged_Death_7
+  - first:
+      213: 6601458995551407363
+    second: Goblin_Ranged_Death_8
+  - first:
+      213: -7911191066871610948
+    second: Goblin_Ranged_Death_9
+  - first:
+      213: 9064035282747701400
+    second: Goblin_Ranged_Death_10
+  - first:
+      213: -147115866096455460
+    second: Goblin_Ranged_Death_11
+  - first:
+      213: 2396459672556980869
+    second: Goblin_Ranged_Death_16
+  - first:
+      213: 1452750049723644155
+    second: Goblin_Ranged_Death_30
+  - first:
+      213: -1026946720966677032
+    second: Goblin_Ranged_Death_31
+  - first:
+      213: -1918763308353498755
+    second: Goblin_Ranged_Death_38
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Goblin_Ranged_Death_16
+      rect:
+        serializedVersion: 2
+        x: 1404
+        y: 823
+        width: 345
+        height: 230
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58ace4d006fe14120800000000000000
+      internalID: 2396459672556980869
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goblin_Ranged_Death_30
+      rect:
+        serializedVersion: 2
+        x: 505
+        y: 525
+        width: 345
+        height: 199
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf875352974392410800000000000000
+      internalID: 1452750049723644155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goblin_Ranged_Death_38
+      rect:
+        serializedVersion: 2
+        x: 1075
+        y: 502
+        width: 343
+        height: 191
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d715985efee2f55e0800000000000000
+      internalID: -1918763308353498755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goblin_Ranged_Death_0
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 1618
+        width: 269
+        height: 343
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27b370ba4945a7bd0800000000000000
+      internalID: -2631698034743362702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goblin_Ranged_Death_1
+      rect:
+        serializedVersion: 2
+        x: 391
+        y: 1612
+        width: 284
+        height: 350
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e7057ba991e714f0800000000000000
+      internalID: -857969153867970587
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goblin_Ranged_Death_2
+      rect:
+        serializedVersion: 2
+        x: 728
+        y: 1607
+        width: 291
+        height: 348
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 90d558cf886b64d30800000000000000
+      internalID: 4415417184151756041
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goblin_Ranged_Death_3
+      rect:
+        serializedVersion: 2
+        x: 1109
+        y: 1625
+        width: 295
+        height: 337
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 92b6a8ec7664ff590800000000000000
+      internalID: -7638309031336318167
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goblin_Ranged_Death_4
+      rect:
+        serializedVersion: 2
+        x: 1471
+        y: 1651
+        width: 309
+        height: 311
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dbb4ce6c0d24b69a0800000000000000
+      internalID: -6238819394333684803
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goblin_Ranged_Death_5
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 1293
+        width: 338
+        height: 261
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb41208d5f1c8c1b0800000000000000
+      internalID: -5636041672019012418
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goblin_Ranged_Death_6
+      rect:
+        serializedVersion: 2
+        x: 409
+        y: 1249
+        width: 347
+        height: 255
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f37e1aef3ce84d4a0800000000000000
+      internalID: -6569468983984920769
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goblin_Ranged_Death_7
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 1197
+        width: 345
+        height: 273
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b37465cfd2db2f7a0800000000000000
+      internalID: -6344800919806916805
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goblin_Ranged_Death_8
+      rect:
+        serializedVersion: 2
+        x: 1217
+        y: 1215
+        width: 345
+        height: 273
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30d062dfaf71d9b50800000000000000
+      internalID: 6601458995551407363
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goblin_Ranged_Death_9
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 897
+        width: 345
+        height: 273
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb1cfd4d3adc53290800000000000000
+      internalID: -7911191066871610948
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goblin_Ranged_Death_10
+      rect:
+        serializedVersion: 2
+        x: 485
+        y: 904
+        width: 345
+        height: 273
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 898b8cbf01ce9cd70800000000000000
+      internalID: 9064035282747701400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goblin_Ranged_Death_11
+      rect:
+        serializedVersion: 2
+        x: 970
+        y: 842
+        width: 345
+        height: 273
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd03f7436e655fdf0800000000000000
+      internalID: -147115866096455460
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
