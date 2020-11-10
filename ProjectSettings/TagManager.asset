@@ -6,8 +6,6 @@ TagManager:
   tags:
   - Ground
   - Enemy
-  - VolumeSlider
-  - Volume
   layers:
   - Default
   - TransparentFX
