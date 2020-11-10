@@ -13,7 +13,10 @@ public class MeleeEnemyController : MonoBehaviour
     public float attackRange = 1.1f;
     public float attackCooldown = 1f;
 
+    public GameObject attackHitBox;
+
     protected SpriteRenderer spriteRenderer;
+    protected Animator animator;
     protected PlayerController player;
     protected Rigidbody2D rb;
     protected HealthBar hpBar;
@@ -29,6 +32,7 @@ public class MeleeEnemyController : MonoBehaviour
         player = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<PlayerController>();
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
         hpBar = GetComponentInChildren<HealthBar>();
         hpBar.UpdateHealth(health, maxHealth);
 
@@ -61,11 +65,16 @@ public class MeleeEnemyController : MonoBehaviour
                 spriteRenderer.flipX = false;
             }
 
+            animator.SetBool("IsWalking", true);
             transform.position += new Vector3(movement.x, movement.y, 0) * speed * Time.deltaTime;
         }
         else if(distance <= attackRange && currentCooldown <= 0 && invulnerabilityTimer <= 0) //attack
         {
             Attack();
+        }
+        else
+        {
+            animator.SetBool("IsWalking", false);
         }
 
         Vector2 sideDistances = CheckSides();
@@ -142,8 +151,16 @@ public class MeleeEnemyController : MonoBehaviour
 
         TakeDamage(damage);
 
-        invulnerabilityTimer = 1.5f;
-        blinkMode = 1;
+        if(health <= 0)
+        {
+            invulnerabilityTimer = 100f;
+        }
+        else
+        {
+            invulnerabilityTimer = 1f;
+            blinkMode = 1;
+        }
+        
 
         Vector2 kbMovement = (Vector2)transform.position - enemyPosition;
 
@@ -160,6 +177,10 @@ public class MeleeEnemyController : MonoBehaviour
        
     }
 
+    public void DestroyMob()
+    {
+        Destroy(gameObject);
+    }
     private void HandleBlink()
     {
 
@@ -197,12 +218,26 @@ public class MeleeEnemyController : MonoBehaviour
 
     protected virtual void Attack()
     {
+        animator.SetBool("IsWalking", false);
+        animator.SetTrigger("Attack");
+    }
+
+    public void SpawnHitbox()
+    {
+        animator.ResetTrigger("Attack");
         currentCooldown = attackCooldown;
-        player.TakeDamage(damage, transform.position);
+        Vector3 spawnPosition = transform.position;
+
+        spawnPosition += spriteRenderer.flipX ? transform.right * 1 : transform.right * -1;
+        BasicHitbox hitBox = Instantiate(attackHitBox, spawnPosition, Quaternion.identity).GetComponent<BasicHitbox>();
+
+        hitBox.Initialize("Enemy", new Vector2(1.5f, 1.5f), new Vector2(0, 0), .1f, 25, 2.5f);
     }
 
     private void Die()
     {
-        Destroy(gameObject);
+        animator.SetTrigger("Die");
+        Destroy(hpBar.gameObject);
+        //Destroy(gameObject);
     }
 }

@@ -257,7 +257,7 @@ public class PlayerController : MonoBehaviour
         spawnPosition += spriteRenderer.flipX ? transform.right * -1 : transform.right * 1;
         BasicHitbox hitBox = Instantiate(attackHitBox, spawnPosition, Quaternion.identity).GetComponent<BasicHitbox>();
         
-        hitBox.Initialize("Player", new Vector2(2, 2), new Vector2(0, 0), .25f, 15, 4);
+        hitBox.Initialize("Player", new Vector2(2, 2), new Vector2(0, 0), .1f, 15, 3);
     }
 
     public void DisableMovement()

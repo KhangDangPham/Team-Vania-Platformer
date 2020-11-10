@@ -8,6 +8,7 @@ public class Projectile : MonoBehaviour
 
     public void InitializeProjectile(Vector2 shooterPosition, float speed)
     {
+
         Vector2 direction = (Vector2)transform.position - shooterPosition;
 
         rb.AddForce(direction * speed, ForceMode2D.Impulse);
