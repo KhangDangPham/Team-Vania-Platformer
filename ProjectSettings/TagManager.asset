@@ -42,12 +42,6 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Body
-    uniqueID: 2546307775
-    locked: 0
-  - name: arm.L
-    uniqueID: 2967803843
-    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
