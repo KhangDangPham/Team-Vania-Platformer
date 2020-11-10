@@ -14,13 +14,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Demo Scene.unity
     guid: 615f7489976199744a2c50f78ed7f50f
-  - enabled: 0
-    path: Assets/Scenes/Options.unity
-    guid: 009a1fe79d9baee4191ffcc0d7b92c71
-  - enabled: 1
-    path: Assets/Scenes/Team Intro Scene.unity
-    guid: 591b4cc3fa8b51b4e8934cf081fc03b2
-  - enabled: 1
-    path: Assets/Scenes/Options Scene.unity
-    guid: d280eff88dea7c049b077f43f5c75cd1
   m_configObjects: {}
