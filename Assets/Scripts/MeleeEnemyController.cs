@@ -20,6 +20,7 @@ public class MeleeEnemyController : MonoBehaviour
     protected float currentCooldown = 0f;
     protected float jumpCooldown = 0f;
     protected float invulnerabilityTimer = 0f;
+    protected int blinkMode = 0;
     protected int maxHealth;
 
     void Start()
@@ -29,6 +30,7 @@ public class MeleeEnemyController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         hpBar = GetComponentInChildren<HealthBar>();
+        hpBar.UpdateHealth(health, maxHealth);
 
         maxHealth = health;
     }
@@ -80,6 +82,7 @@ public class MeleeEnemyController : MonoBehaviour
         currentCooldown -= Time.deltaTime;
         jumpCooldown -= Time.deltaTime;
         invulnerabilityTimer -= Time.deltaTime;
+        HandleBlink();
     }
 
     Vector2 CheckSides()
@@ -114,10 +117,7 @@ public class MeleeEnemyController : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        if (invulnerabilityTimer > 0)
-        {
-            return;
-        }
+
         health -= damage;
         if (health <= 0)
         {
@@ -129,17 +129,21 @@ public class MeleeEnemyController : MonoBehaviour
         {
             hpBar.UpdateHealth(health, maxHealth);
         }
-        invulnerabilityTimer = 2f;
+
     }
 
     public void TakeDamage(int damage, Vector2 enemyPosition, float force = 6f)
     {
-        if (invulnerabilityTimer > 0)
+
+        if(invulnerabilityTimer > 0f)
         {
             return;
         }
 
         TakeDamage(damage);
+
+        invulnerabilityTimer = 1.5f;
+        blinkMode = 1;
 
         Vector2 kbMovement = (Vector2)transform.position - enemyPosition;
 
@@ -153,8 +157,42 @@ public class MeleeEnemyController : MonoBehaviour
         kbMovement *= force;
 
         rb.AddForce(kbMovement, ForceMode2D.Impulse);
+       
+    }
 
+    private void HandleBlink()
+    {
 
+        if (blinkMode == 0) //blink mode is 0 so we shouldn't be blinking
+        {
+            return;
+        }
+
+        Color tempColor = spriteRenderer.color;
+        if (blinkMode == 1)
+        {
+            if (tempColor.a > .9)
+            {
+                blinkMode = 2;
+            }
+        }
+        else if (blinkMode == 2)
+        {
+            if (tempColor.a < .2)
+            {
+                blinkMode = 1;
+            }
+        }
+
+        tempColor.a += blinkMode == 1 ? 2 * Time.deltaTime : -2 * Time.deltaTime; //if blink mode is 1, we are decreasing opacity, if not, we are increasing opacity
+
+        if (invulnerabilityTimer <= 0) //player is done being invulnerable
+        {
+            tempColor.a = 1;
+            blinkMode = 0;
+        }
+
+        spriteRenderer.color = tempColor;
     }
 
     protected virtual void Attack()

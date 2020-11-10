@@ -10,7 +10,6 @@ public class Projectile : MonoBehaviour
     {
         Vector2 direction = (Vector2)transform.position - shooterPosition;
 
-        Debug.Log(direction);
         rb.AddForce(direction * speed, ForceMode2D.Impulse);
     }
 

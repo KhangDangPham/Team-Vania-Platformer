@@ -19,6 +19,16 @@ public class RangedEnemyController : MeleeEnemyController
         //Calculate relative position in order to spawn the projectile between the player and the enemy
         Vector2 spawnPosition = (Vector2)transform.position;
         Vector2 relativePosition = player.transform.position - transform.position;
+
+        if (relativePosition.x > 0)
+        {
+            spriteRenderer.flipX = true;
+        }
+        else
+        {
+            spriteRenderer.flipX = false;
+        }
+
         relativePosition = relativePosition.normalized;
     
         //Spawn the projectile
