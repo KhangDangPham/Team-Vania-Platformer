@@ -69,8 +69,6 @@ public class RangedCombat : MonoBehaviour
 
         Vector2 posDifference = (Vector2)playerTransform.position - mousePosition;
 
-        Debug.Log(posDifference);
-
         if(posDifference.x > 0.6f)
         {
             transform.localPosition = new Vector2(-3, transform.localPosition.y);
