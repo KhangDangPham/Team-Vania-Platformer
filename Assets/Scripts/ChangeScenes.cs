@@ -9,6 +9,9 @@ public class ChangeScenes : MonoBehaviour
 {
     public static ChangeScenes instance = null;
 
+    public Image black;
+    public Animator anim;
+
     private void Awake()
     {
         //Start at Intro Scene
@@ -33,5 +36,12 @@ public class ChangeScenes : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    IEnumerator Fading(string sceneName)
+    {
+        anim.SetBool("Fade", true);
+        yield return new WaitUntil(() => black.color.a == 1);
+        SceneManager.LoadScene(sceneName);
     }
 }
