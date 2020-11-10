@@ -23,7 +23,7 @@ public class PlayerProjectile : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            collision.gameObject.GetComponent<MeleeEnemyController>().TakeDamage(10, transform.position, 3);
+            collision.gameObject.GetComponent<MeleeEnemyController>().TakeDamage(10);
             Destroy(gameObject);
         }
         else if (collision.gameObject.tag == "Ground")
