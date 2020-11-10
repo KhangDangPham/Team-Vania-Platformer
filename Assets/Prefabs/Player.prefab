@@ -385,3 +385,4 @@ MonoBehaviour:
   launchForce: 11
   startPoint: {fileID: 6333807259692036810}
   startFireRate: 1
+  hideDelay: 2.5
