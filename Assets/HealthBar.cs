@@ -6,8 +6,8 @@ using TMPro;
 public class HealthBar : MonoBehaviour
 {
 
-    Image hpBar;
-    TextMeshProUGUI hpText;
+    [SerializeField] Image hpBar;
+    [SerializeField] TextMeshProUGUI hpText;
 
     // Start is called before the first frame update
     void Start()

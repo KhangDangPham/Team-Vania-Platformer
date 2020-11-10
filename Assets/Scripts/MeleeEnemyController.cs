@@ -151,11 +151,7 @@ public class MeleeEnemyController : MonoBehaviour
 
         TakeDamage(damage);
 
-        if(health <= 0)
-        {
-            invulnerabilityTimer = 100f;
-        }
-        else
+        if(health > 0)
         {
             invulnerabilityTimer = 1f;
             blinkMode = 1;
@@ -174,6 +170,7 @@ public class MeleeEnemyController : MonoBehaviour
         kbMovement *= force;
 
         rb.AddForce(kbMovement, ForceMode2D.Impulse);
+        
        
     }
 
@@ -237,6 +234,9 @@ public class MeleeEnemyController : MonoBehaviour
     private void Die()
     {
         animator.SetTrigger("Die");
+        invulnerabilityTimer = 100f;
+        gameObject.layer = LayerMask.NameToLayer("Background");
+        spriteRenderer.sortingOrder = -1;
         Destroy(hpBar.gameObject);
         //Destroy(gameObject);
     }
