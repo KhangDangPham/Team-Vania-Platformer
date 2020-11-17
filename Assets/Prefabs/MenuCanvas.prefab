@@ -1369,7 +1369,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 8506122771933347544}
-  audioMixer: {fileID: 0}
+  audioMixer: {fileID: 24100000, guid: b3e2fed9ab03ff14ca984155fac0575f, type: 2}
 --- !u!1 &8506122771509222296
 GameObject:
   m_ObjectHideFlags: 0
