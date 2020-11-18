@@ -34,8 +34,8 @@ public class MeleeEnemyController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         hpBar = GetComponentInChildren<HealthBar>();
-        hpBar.UpdateHealth(health, maxHealth);
 
+        hpBar.InitializeHealthBar(health);
         maxHealth = health;
     }
 
@@ -136,7 +136,7 @@ public class MeleeEnemyController : MonoBehaviour
         }
         else
         {
-            hpBar.UpdateHealth(health, maxHealth);
+            hpBar.UpdateHealth(health);
         }
 
     }
