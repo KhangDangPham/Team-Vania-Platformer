@@ -110,6 +110,7 @@ GameObject:
   - component: {fileID: 1694576913}
   - component: {fileID: 1694576915}
   - component: {fileID: 1694576916}
+  - component: {fileID: 7894000815158520113}
   m_Layer: 0
   m_Name: HeartContainer
   m_TagString: Untagged
@@ -156,10 +157,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90e89807fe875524b92027c79bfc6ccd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpBar: {fileID: 0}
-  hpText: {fileID: 0}
   heartPrefab: {fileID: 984708270222898291, guid: 96ef72c27f111564c939a9b9a8a100ed,
     type: 3}
+--- !u!114 &7894000815158520113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1694576912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 0
+  m_StartCorner: 0
+  m_StartAxis: 0
+  m_CellSize: {x: 100, y: 100}
+  m_Spacing: {x: 0, y: 0}
+  m_Constraint: 2
+  m_ConstraintCount: 1
 --- !u!1 &2393578302756713664
 GameObject:
   m_ObjectHideFlags: 0
