@@ -130,6 +130,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6093475644412057216, guid: 7df2a317996058245b9558117f3493de,
+        type: 3}
+      propertyPath: nextScene
+      value: Start Menu
+      objectReference: {fileID: 0}
     - target: {fileID: 6093475644412057217, guid: 7df2a317996058245b9558117f3493de,
         type: 3}
       propertyPath: m_LocalPosition.x
