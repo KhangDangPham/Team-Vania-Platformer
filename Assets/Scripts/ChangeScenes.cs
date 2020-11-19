@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class ChangeScenes : MonoBehaviour
 {
     public static ChangeScenes instance = null;
+    public string nextScene = "Forest";
 
     private void Awake()
     {
@@ -27,7 +28,7 @@ public class ChangeScenes : MonoBehaviour
     //Load Start - Might be used later
     void loadStart()
     {
-        ChangeScene("Start Menu");
+        ChangeScene(nextScene);
     }
     //Exit Game
     public void QuitGame()
