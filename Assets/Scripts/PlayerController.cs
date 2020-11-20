@@ -62,11 +62,13 @@ public class PlayerController : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Mouse0))
         {
+            FindObjectOfType<AudioManager>().Play("Slash"); //sfx
             animator.SetTrigger("BasicAttack");
         }
 
         if(Input.GetKeyDown(KeyCode.Mouse1))
         {
+            FindObjectOfType<AudioManager>().Play("Bow"); //sfx
             bowScript.Shoot();
         }
 
@@ -116,6 +118,7 @@ public class PlayerController : MonoBehaviour
 
         if(isJumping)
         {
+            FindObjectOfType<AudioManager>().Play("Jump"); //sfx
             Jump();
         }
 
@@ -191,6 +194,7 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
+        FindObjectOfType<AudioManager>().Play("Hurt"); //sfx
         TakeDamage(damage);       
 
         Vector2 kbMovement = (Vector2)transform.position - enemyPosition;

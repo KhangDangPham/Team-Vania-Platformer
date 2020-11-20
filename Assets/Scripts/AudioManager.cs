@@ -52,14 +52,14 @@ public class AudioManager : MonoBehaviour
         {
             s.source = gameObject.AddComponent<AudioSource>();
             s.source.clip = s.clip;
-            s.source.volume = s.volume;
-            s.source.pitch = s.pitch;
+            s.source.volume = s.volume; // 0 is default
+            s.source.pitch = s.pitch; //make sure pitch is at 1
             s.source.loop = s.loop;
             s.source.outputAudioMixerGroup = s.group;
         }
     }
 
-    //use this: AudioManager.instance.Play("");
+    //use this: FindObjectOfType<AudioManager>().Play("");
     public void Play (string name)//play sound
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
