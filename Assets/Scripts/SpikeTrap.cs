@@ -12,13 +12,9 @@ public class SpikeTrap : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if(collision.gameObject.tag == "Player")
         {
             collision.gameObject.GetComponent<PlayerController>().TakeDamage(100);
-        }
-        else if (collision.gameObject.tag == "Enemy")
-        {
-            collision.gameObject.GetComponent<MeleeEnemyController>().TakeDamage(100);
         }
     }
 

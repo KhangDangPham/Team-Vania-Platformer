@@ -2,24 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 public class HealthBar : MonoBehaviour
 {
 
-    [SerializeField] Image hpBar;
-    [SerializeField] TextMeshProUGUI hpText;
+    Image hpBar;
+    Text hpText;
 
     // Start is called before the first frame update
     void Start()
     {
         hpBar = GetComponent<Image>();
-        hpText = GetComponentInChildren<TextMeshProUGUI>();
+        hpText = GetComponentInChildren<Text>();
     }
 
-    public void UpdateHealth(int health, int maxHp)
+    public void UpdateHealth(int health)
     {
-        hpBar.fillAmount = ((float)health / maxHp);
-        hpText.text = health + "";
+        hpBar.fillAmount = ((float)health / 100);
+        hpText.text = health + " / 100";
     }
 
 }

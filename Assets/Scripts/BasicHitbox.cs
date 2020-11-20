@@ -8,8 +8,6 @@ public class BasicHitbox : MonoBehaviour
     float lifespan = 0f;
     int damage;
     string spawner;
-    float knockbackForce;
-    
 
     // Update is called once per frame
     void Update()
@@ -30,30 +28,14 @@ public class BasicHitbox : MonoBehaviour
         
         if(collision.tag == "Player" && spawner != "Player")
         {
-
-            if (knockbackForce != 0)
-            {
-                collision.GetComponent<PlayerController>().TakeDamage(damage, transform.position, knockbackForce);
-            }
-            else
-            {
-                collision.GetComponent<PlayerController>().TakeDamage(damage);
-            }
-
+            collision.GetComponent<PlayerController>().TakeDamage(damage);
         }
         else if (collision.tag == "Enemy" && spawner != "Enemy")
         {
-            if (knockbackForce != 0)
-            {
-                collision.GetComponent<MeleeEnemyController>().TakeDamage(damage, transform.position, knockbackForce);
-            }
-            else
-            {
-                collision.GetComponent<MeleeEnemyController>().TakeDamage(damage);
-            }
+            collision.GetComponent<MeleeEnemyController>().TakeDamage(damage);
         }
     }
-    public void Initialize(string spawner, Vector2 size, Vector2 position, float duration, int damage, float kbForce = 0f)
+    public void Initialize(string spawner, Vector2 size, Vector2 position, float duration, int damage)
     {
         BoxCollider2D hitbox = GetComponent<BoxCollider2D>();
 
@@ -63,8 +45,6 @@ public class BasicHitbox : MonoBehaviour
         lifespan = duration;
         this.damage = damage;
         this.spawner = spawner;
-        knockbackForce = kbForce;
-
         initialized = true;
     }
 }

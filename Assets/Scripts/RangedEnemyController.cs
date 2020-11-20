@@ -14,46 +14,15 @@ public class RangedEnemyController : MeleeEnemyController
             return;
         }
 
-        Vector2 spawnPosition = (Vector2)transform.position;
-        Vector2 relativePosition = player.transform.position - transform.position;
-
-        if (relativePosition.x > 0)
-        {
-            spriteRenderer.flipX = true;
-        }
-        else
-        {
-            spriteRenderer.flipX = false;
-        }
-
-        animator.SetTrigger("Attack");
-    }
-
-    public void Shoot()
-    {
-        Debug.Log("shooting");
-        animator.ResetTrigger("Attack");
         currentCooldown = attackCooldown;
 
         //Calculate relative position in order to spawn the projectile between the player and the enemy
         Vector2 spawnPosition = (Vector2)transform.position;
         Vector2 relativePosition = player.transform.position - transform.position;
-
-        if (relativePosition.x > 0)
-        {
-            spriteRenderer.flipX = true;
-        }
-        else
-        {
-            spriteRenderer.flipX = false;
-        }
-
-        Quaternion projectileRotation = Quaternion.AngleAxis(Mathf.Atan2(relativePosition.y, relativePosition.x) * Mathf.Rad2Deg, Vector3.forward);
-
         relativePosition = relativePosition.normalized;
-
+    
         //Spawn the projectile
-        GameObject Projectile = Instantiate(projectile, (Vector2)transform.position + relativePosition, projectileRotation);
+        GameObject Projectile = Instantiate(projectile, (Vector2)transform.position + relativePosition, Quaternion.identity);
 
         //Initialize the projectile, giving it the information it needs
         Projectile.GetComponent<Projectile>().InitializeProjectile(transform.position, projectileDamage);
