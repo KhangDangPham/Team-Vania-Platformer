@@ -233,6 +233,7 @@ public class MeleeEnemyController : MonoBehaviour
 
     private void Die()
     {
+        FindObjectOfType<AudioManager>().Play("GoblinDeath");
         animator.SetTrigger("Die");
         invulnerabilityTimer = 100f;
         gameObject.layer = LayerMask.NameToLayer("Background");
