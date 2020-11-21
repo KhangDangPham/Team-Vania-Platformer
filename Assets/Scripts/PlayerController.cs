@@ -62,7 +62,6 @@ public class PlayerController : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Mouse0))
         {
-            FindObjectOfType<AudioManager>().Play("Slash"); //sfx
             animator.SetTrigger("BasicAttack");
         }
 
@@ -260,7 +259,7 @@ public class PlayerController : MonoBehaviour
 
         spawnPosition += spriteRenderer.flipX ? transform.right * -1 : transform.right * 1;
         BasicHitbox hitBox = Instantiate(attackHitBox, spawnPosition, Quaternion.identity).GetComponent<BasicHitbox>();
-        
+        FindObjectOfType<AudioManager>().Play("Slash"); //sfx
         hitBox.Initialize("Player", new Vector2(2, 2), new Vector2(0, 0), .1f, 15, 3);
     }
 
