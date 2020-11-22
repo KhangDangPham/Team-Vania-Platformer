@@ -1,31 +1,28 @@
 fileFormatVersion: 2
-guid: d6e21208df6d57f479e41feec2fbe8a0
+guid: b1254b010e7180a4aa49c8763130544b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8647823593821616703
-    second: Bat_0
+      213: 7252605880946258776
+    second: Bat Move_0
   - first:
-      213: 5681806813702538305
-    second: Bat_1
+      213: 2305032597672383136
+    second: Bat Move_1
   - first:
-      213: 697682191857345388
-    second: Bat_2
+      213: -3719706183438290535
+    second: Bat Move_2
   - first:
-      213: 6993031405965254486
-    second: Bat_3
+      213: 9105275779749224080
+    second: Bat Move_3
   - first:
-      213: -8835117555573905559
-    second: Bat_1
+      213: 8134560198699268457
+    second: Bat Move_4
   - first:
-      213: -1477298914128971197
-    second: Bat_5
+      213: 2826292605855206217
+    second: Bat Move_5
   - first:
-      213: -1085711696175172977
-    second: Bat_6
-  - first:
-      213: -650004520372281371
-    second: Bat_7
+      213: 4939952126290658230
+    second: Bat Move_6
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -56,7 +53,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
+    filterMode: 0
     aniso: -1
     mipBias: -100
     wrapU: 1
@@ -113,43 +110,43 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Bat_0
+      name: Bat Move_0
       rect:
         serializedVersion: 2
-        x: 733
-        y: 693
-        width: 632
-        height: 328
+        x: 47
+        y: 508
+        width: 636
+        height: 329
       alignment: 9
-      pivot: {x: 0.41657442, y: 0.27971742}
+      pivot: {x: 0.4172029, y: 0.2783819}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f3abafd8dbd330870800000000000000
-      internalID: 8647823593821616703
+      spriteID: 853f5bd6f9e66a460800000000000000
+      internalID: 7252605880946258776
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bat_1
+      name: Bat Move_1
       rect:
         serializedVersion: 2
-        x: 763
-        y: 196
-        width: 616
-        height: 389
+        x: 146
+        y: 67
+        width: 429
+        height: 345
       alignment: 9
-      pivot: {x: 0.42550284, y: 0.7158595}
+      pivot: {x: 0.38669407, y: 0.6849228}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9672337c46b536580800000000000000
-      internalID: -8835117555573905559
+      spriteID: 0a255fb5fee1dff10800000000000000
+      internalID: 2305032597672383136
       vertices: []
       indices: 
       edges: []
