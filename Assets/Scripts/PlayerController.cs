@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
 
     bool canMove = true;
     bool isJumping = false;
+    bool hasJumped = false;
     int jumps = 2;
     int maxHealth;
 
@@ -138,21 +139,19 @@ public class PlayerController : MonoBehaviour
         if(hit.collider != null)
         {
             float distanceToGround = Mathf.Abs(hit.point.y - transform.position.y);
-            //Debug.Log("Hit: " + hit.collider.gameObject.name + "Distance to ground: " + distanceToGround);
+            Debug.Log("Hit: " + hit.collider.gameObject.name + "Distance to ground: " + distanceToGround);
             if(distanceToGround < .94)
             {
                 jumps = 2;
-                /*if (hasLeftGround)
+                if(hasJumped)
                 {
                     animator.SetBool("IsJumping", false);
-                    isJumping = false;
-                    hasLeftGround = false;
-                }*/
+                    hasJumped = false;
+                }
                 return true;
             }
             else
             {
-                //hasLeftGround = true;
                 return false;
             }
         }
@@ -162,12 +161,18 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void EndJump()
+    {
+        hasJumped = true;
+    }
+
     public void Jump()
     {
         rb.velocity = new Vector2(rb.velocity.x, 0);
         rb.AddForce(new Vector2(0, jumpForce));
         jumps -= 1;
         isJumping = false;
+        animator.SetBool("IsJumping", true);
     }
 
     public void TakeDamage(int damage)
@@ -236,7 +241,6 @@ public class PlayerController : MonoBehaviour
             distanceRight = Mathf.Abs(rightCheck.point.x - transform.position.x);
         }
 
-        Debug.Log("left: " + distanceLeft + " right: " + distanceRight);
         if (xMove < 0)
         {
             return distanceLeft <= .5f;

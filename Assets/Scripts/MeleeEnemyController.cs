@@ -120,7 +120,6 @@ public class MeleeEnemyController : MonoBehaviour
             distanceRight = Mathf.Abs(rightCheck.point.x - transform.position.x);
         }
 
-        Debug.Log("left: " + distanceLeft + " right: " + distanceRight);
         if(xMove < 0)
         {
             return distanceLeft <= .7f;
