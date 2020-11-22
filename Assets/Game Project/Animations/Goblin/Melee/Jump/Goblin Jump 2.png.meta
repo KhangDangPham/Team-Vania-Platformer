@@ -1,28 +1,28 @@
 fileFormatVersion: 2
-guid: d335a52dfe5c0574abd3c0c88c5fa54c
+guid: 3e230bff970181248a6d86814bba2266
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2975447248119954470
-    second: Goblin Jump_0
+      213: 5649913756358249835
+    second: Goblin Jump 2_0
   - first:
-      213: 5008551219483231261
-    second: Goblin Jump_1
+      213: -505624229823176007
+    second: Goblin Jump 2_1
   - first:
-      213: 8460915214110615599
-    second: Goblin Jump_2
+      213: -7643663141690292615
+    second: Goblin Jump 2_2
   - first:
-      213: 7991775308927074628
-    second: Goblin Jump_3
+      213: -978069641144133102
+    second: Goblin Jump 2_3
   - first:
-      213: 3675668162026748015
-    second: Goblin Jump_4
+      213: -3907682867295680105
+    second: Goblin Jump 2_4
   - first:
-      213: -1077105924014778363
-    second: Goblin Jump_5
+      213: 1932367760667120286
+    second: Goblin Jump 2_5
   - first:
-      213: 3672873598744544307
-    second: Goblin Jump_6
+      213: -4340878458627320836
+    second: Goblin Jump 2_6
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Goblin Jump_0
+      name: Goblin Jump 2_0
       rect:
         serializedVersion: 2
         x: 32
@@ -124,14 +124,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ad385ef0e7615b6d0800000000000000
-      internalID: -2975447248119954470
+      spriteID: b6d835b70a6886e40800000000000000
+      internalID: 5649913756358249835
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin Jump_1
+      name: Goblin Jump 2_1
       rect:
         serializedVersion: 2
         x: 349
@@ -145,14 +145,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d14c5a43cc2f18540800000000000000
-      internalID: 5008551219483231261
+      spriteID: 9b22f8f1179abf8f0800000000000000
+      internalID: -505624229823176007
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin Jump_2
+      name: Goblin Jump 2_2
       rect:
         serializedVersion: 2
         x: 642
@@ -166,14 +166,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f28e2c33f853b6570800000000000000
-      internalID: 8460915214110615599
+      spriteID: 976cdc8ded04ce590800000000000000
+      internalID: -7643663141690292615
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin Jump_3
+      name: Goblin Jump 2_3
       rect:
         serializedVersion: 2
         x: 962
@@ -187,20 +187,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 441065d1d4d78ee60800000000000000
-      internalID: 7991775308927074628
+      spriteID: 21a920ae7d23d62f0800000000000000
+      internalID: -978069641144133102
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin Jump_4
+      name: Goblin Jump 2_4
       rect:
         serializedVersion: 2
-        x: 1264
-        y: 702
-        width: 279
-        height: 353
+        x: 1260
+        y: 711
+        width: 283
+        height: 344
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -208,18 +208,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f6831d508b8920330800000000000000
-      internalID: 3675668162026748015
+      spriteID: 79906ffc22f15c9c0800000000000000
+      internalID: -3907682867295680105
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin Jump_5
+      name: Goblin Jump 2_5
       rect:
         serializedVersion: 2
-        x: 1584
-        y: 696
+        x: 1551
+        y: 711
         width: 279
         height: 345
       alignment: 0
@@ -229,14 +229,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 50851ad6ed95d01f0800000000000000
-      internalID: -1077105924014778363
+      spriteID: e921bfd7d3621da10800000000000000
+      internalID: 1932367760667120286
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin Jump_6
+      name: Goblin Jump 2_6
       rect:
         serializedVersion: 2
         x: 32
@@ -250,8 +250,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 334441e041ba8f230800000000000000
-      internalID: 3672873598744544307
+      spriteID: cf39f547a0a12c3c0800000000000000
+      internalID: -4340878458627320836
       vertices: []
       indices: 
       edges: []
