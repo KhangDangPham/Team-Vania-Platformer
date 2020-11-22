@@ -10,7 +10,7 @@ TextureImporter:
     second: Bat Death_1
   - first:
       213: 2987610972767625274
-    second: Bat Death_1
+    second: Bat Death_2
   - first:
       213: 6395232058766666896
     second: Bat Death_3
@@ -19,16 +19,16 @@ TextureImporter:
     second: Bat Death_4
   - first:
       213: 2572256693692002532
-    second: Bat Death_3
+    second: Bat Death_5
   - first:
       213: 2400584709648680989
-    second: Bat Death_0
+    second: Bat Death_6
   - first:
       213: 983631315070302664
     second: Bat Death_7
   - first:
       213: 6047824109023852504
-    second: Bat Death_2
+    second: Bat Death_8
   - first:
       213: 3503439636304090306
     second: Bat Death_9
@@ -40,7 +40,7 @@ TextureImporter:
     second: Bat Death_11
   - first:
       213: 9217726283743057856
-    second: Bat Death_4
+    second: Bat Death_12
   - first:
       213: 8035513123447907224
     second: Bat Death_13
@@ -55,7 +55,7 @@ TextureImporter:
     second: Bat Death_16
   - first:
       213: 192440261804717355
-    second: Bat Death_5
+    second: Bat Death_17
   - first:
       213: 4561297639733718097
     second: Bat Death_18
@@ -100,67 +100,7 @@ TextureImporter:
     second: Bat Death_31
   - first:
       213: -1974029009186914872
-    second: Bat Death_6
-  - first:
-      213: 3765657215283408626
-    second: Bat Death_33
-  - first:
-      213: -5541085176247440179
-    second: Bat Death_34
-  - first:
-      213: 292681008767882149
-    second: Bat Death_35
-  - first:
-      213: -8336115901396870803
-    second: Bat Death_36
-  - first:
-      213: 2960006530146893771
-    second: Bat Death_37
-  - first:
-      213: -4971526291581441214
-    second: Bat Death_38
-  - first:
-      213: -4618841981850081584
-    second: Bat Death_39
-  - first:
-      213: 1835784468063438034
-    second: Bat Death_40
-  - first:
-      213: 3298936986364365972
-    second: Bat Death_41
-  - first:
-      213: -3827886723470385678
-    second: Bat Death_42
-  - first:
-      213: 7906351193413286281
-    second: Bat Death_43
-  - first:
-      213: -9074939781815999139
-    second: Bat Death_44
-  - first:
-      213: -103480014697686195
-    second: Bat Death_45
-  - first:
-      213: 8995861350427734792
-    second: Bat Death_46
-  - first:
-      213: -4895962352523798832
-    second: Bat Death_47
-  - first:
-      213: -6316123737324045841
-    second: Bat Death_48
-  - first:
-      213: -7679278359219769726
-    second: Bat Death_49
-  - first:
-      213: 5880608629853131605
-    second: Bat Death_50
-  - first:
-      213: 4565261123249354310
-    second: Bat Death_51
-  - first:
-      213: -7088571850322215159
-    second: Bat Death_52
+    second: Bat Death_32
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -251,10 +191,31 @@ TextureImporter:
       name: Bat Death_1
       rect:
         serializedVersion: 2
-        x: 500
-        y: 1956
-        width: 419
-        height: 366
+        x: 1442
+        y: 1943
+        width: 420
+        height: 387
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a5a872509d9bb7a0800000000000000
+      internalID: -6360316805546203742
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bat Death_2
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 1940
+        width: 420
+        height: 365
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -272,10 +233,10 @@ TextureImporter:
       name: Bat Death_3
       rect:
         serializedVersion: 2
-        x: 1442
-        y: 1944
-        width: 420
-        height: 367
+        x: 500
+        y: 1956
+        width: 419
+        height: 366
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -283,40 +244,40 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4e0f1a2a5dd72b320800000000000000
-      internalID: 2572256693692002532
+      spriteID: 09c2afe8cad60c850800000000000000
+      internalID: 6395232058766666896
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bat Death_0
-      rect:
-        serializedVersion: 2
-        x: 49
-        y: 1940
-        width: 420
-        height: 365
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d1808d71317905120800000000000000
-      internalID: 2400584709648680989
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bat Death_2
+      name: Bat Death_4
       rect:
         serializedVersion: 2
         x: 967
         y: 1942
         width: 419
+        height: 366
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 452d2eb22a1a06830800000000000000
+      internalID: 4062424581781246548
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bat Death_8
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 1459
+        width: 420
         height: 366
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -332,13 +293,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bat Death_4
+      name: Bat Death_13
       rect:
         serializedVersion: 2
-        x: 21
+        x: 499
         y: 1459
         width: 420
-        height: 366
+        height: 362
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -346,20 +307,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0c7594ba731fbef70800000000000000
-      internalID: 9217726283743057856
+      spriteID: 8932a1f9c90e38f60800000000000000
+      internalID: 8035513123447907224
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bat Death_5
+      name: Bat Death_17
       rect:
         serializedVersion: 2
-        x: 500
+        x: 1072
         y: 1459
-        width: 420
-        height: 358
+        width: 301
+        height: 230
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -374,13 +335,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bat Death_6
+      name: Bat Death_18
       rect:
         serializedVersion: 2
-        x: 1075
-        y: 1459
-        width: 298
-        height: 262
+        x: 112
+        y: 928
+        width: 241
+        height: 167
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -388,20 +349,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8cdf8133317da94e0800000000000000
-      internalID: -1974029009186914872
+      spriteID: 15ce72b590cfc4f30800000000000000
+      internalID: 4561297639733718097
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bat Death_33
+      name: Bat Death_29
       rect:
         serializedVersion: 2
-        x: 111
+        x: 638
         y: 928
-        width: 244
-        height: 169
+        width: 178
+        height: 113
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -409,29 +370,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2feaad6394d424430800000000000000
-      internalID: 3765657215283408626
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bat Death_49
-      rect:
-        serializedVersion: 2
-        x: 637
-        y: 928
-        width: 179
-        height: 118
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 28e6c53d409bd6590800000000000000
-      internalID: -7679278359219769726
+      spriteID: e0abe7ea951e39300800000000000000
+      internalID: 257797378986129934
       vertices: []
       indices: 
       edges: []
