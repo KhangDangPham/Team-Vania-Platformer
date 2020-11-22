@@ -112,7 +112,15 @@ public class PlayerController : MonoBehaviour
 
         Vector2 movement = new Vector2(horizontalMove, verticalMove);
 
-        transform.position += new Vector3(movement.x, movement.y, 0) * speed * Time.deltaTime;
+        if(!CheckSidesWalk(movement.x))
+        {
+            transform.position += new Vector3(movement.x, movement.y, 0) * speed * Time.deltaTime;
+        }
+        else
+        {
+            animator.SetBool("IsWalking", false);
+        }
+        
 
         if(isJumping)
         {
@@ -207,6 +215,36 @@ public class PlayerController : MonoBehaviour
         DisableMovement();
 
         rb.AddForce(kbMovement, ForceMode2D.Impulse);
+    }
+
+    bool CheckSidesWalk(float xMove)
+    {
+        int groundOnlyMask = LayerMask.GetMask("Ground");
+        Vector3 shootPos = transform.position - new Vector3(0, .9f, 0);
+        RaycastHit2D leftCheck = Physics2D.Raycast(shootPos, Vector2.left, 10f, groundOnlyMask);
+        RaycastHit2D rightCheck = Physics2D.Raycast(shootPos, Vector2.right, 10f, groundOnlyMask);
+        float distanceLeft = 100f;
+        float distanceRight = 100f;
+
+        if (leftCheck.collider != null)
+        {
+            distanceLeft = Mathf.Abs(leftCheck.point.x - transform.position.x);
+        }
+
+        if (rightCheck.collider != null)
+        {
+            distanceRight = Mathf.Abs(rightCheck.point.x - transform.position.x);
+        }
+
+        Debug.Log("left: " + distanceLeft + " right: " + distanceRight);
+        if (xMove < 0)
+        {
+            return distanceLeft <= .5f;
+        }
+        else
+        {
+            return distanceRight <= .5f;
+        }
     }
 
     private void HandleBlink()
