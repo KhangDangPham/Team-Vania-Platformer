@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3308930114607066943}
   - component: {fileID: 5546105348997209623}
   m_Layer: 0
-  m_Name: PoisonTrap
+  m_Name: Poison Trap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -123,5 +123,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 536f0e0ec82d54c499ed3150dc81ba4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PoisonCloud: {fileID: 0}
+  PoisonCloud: {fileID: 8238374156494355435, guid: 8f3a044465d4a1f4684549f6880be966,
+    type: 3}
   cooldown: 10

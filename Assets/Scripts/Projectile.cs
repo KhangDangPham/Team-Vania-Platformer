@@ -8,9 +8,9 @@ public class Projectile : MonoBehaviour
 
     public void InitializeProjectile(Vector2 shooterPosition, float speed)
     {
+
         Vector2 direction = (Vector2)transform.position - shooterPosition;
 
-        Debug.Log(direction);
         rb.AddForce(direction * speed, ForceMode2D.Impulse);
     }
 
@@ -20,7 +20,11 @@ public class Projectile : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             collision.gameObject.GetComponent<PlayerController>().TakeDamage(10, transform.position, 3);
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
+        else if(collision.gameObject.tag == "Ground")
+        {
+            Destroy(gameObject);
+        }
     }
 }

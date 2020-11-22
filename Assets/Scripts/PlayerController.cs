@@ -14,21 +14,28 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rb;
     Animator animator;
     SpriteRenderer spriteRenderer;
+    RangedCombat bowScript;
+    HealthBar hpBar;
 
-    float invulnerabilityTimer = 5f;
     bool canMove = true;
     bool isJumping = false;
-    //bool hasLeftGround = false;
     int jumps = 2;
+    int maxHealth;
 
-
+    //used when the player gets hit
+    float invulnerabilityTimer = 0f;
+    int blinkMode = 0; //0 = no blinking, 1 = decreasing opacity, 2 = increasing opacity
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        hpBar = GetComponentInChildren<HealthBar>();
+        bowScript = GetComponentInChildren<RangedCombat>();
+        bowScript.SetPlayerTransform(transform);
 
+        maxHealth = health;
     }
 
     private void Update()
@@ -58,12 +65,17 @@ public class PlayerController : MonoBehaviour
             animator.SetTrigger("BasicAttack");
         }
 
+        if(Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            bowScript.Shoot();
+        }
+
         if(Input.GetKeyDown(KeyCode.X))
         {
             TakeDamage(100);
         }
 
-
+        HandleBlink();
     }
     void FixedUpdate()
     {
@@ -152,21 +164,6 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        if(invulnerabilityTimer > 0)
-        {
-            return;
-        }
-        health -= damage;
-        if(health <= 0)
-        {
-            health = 0;
-            Die();
-        }
-        invulnerabilityTimer = 5;
-    }
-
-    public void TakeDamage(int damage, Vector2 enemyPosition, float force = 6f)
-    {
         if (invulnerabilityTimer > 0)
         {
             return;
@@ -178,6 +175,23 @@ public class PlayerController : MonoBehaviour
             Die();
             return;
         }
+        else
+        {
+            hpBar.UpdateHealth(health, maxHealth);
+        }
+        invulnerabilityTimer = 2;
+        blinkMode = 1;
+        animator.SetTrigger("GetHit");
+    }
+
+    public void TakeDamage(int damage, Vector2 enemyPosition, float force = 6f)
+    {
+        if (invulnerabilityTimer > 0)
+        {
+            return;
+        }
+
+        TakeDamage(damage);       
 
         Vector2 kbMovement = (Vector2)transform.position - enemyPosition;
 
@@ -190,8 +204,44 @@ public class PlayerController : MonoBehaviour
 
         kbMovement *= force;
 
+        DisableMovement();
+
         rb.AddForce(kbMovement, ForceMode2D.Impulse);
-        invulnerabilityTimer = 5;
+    }
+
+    private void HandleBlink()
+    {
+
+        if(blinkMode == 0) //blink mode is 0 so we shouldn't be blinking
+        {
+            return;
+        }
+
+        Color tempColor = spriteRenderer.color;
+        if (blinkMode == 1)
+        {
+            if(tempColor.a > .9)
+            {
+                blinkMode = 2;
+            }
+        }
+        else if(blinkMode == 2)
+        {
+            if (tempColor.a < .2)
+            {
+                blinkMode = 1;
+            }
+        }
+
+        tempColor.a += blinkMode == 1 ? 2*Time.deltaTime : -2*Time.deltaTime; //if blink mode is 1, we are decreasing opacity, if not, we are increasing opacity
+
+        if(invulnerabilityTimer <= 0) //player is done being invulnerable
+        {
+            tempColor.a = 1;
+            blinkMode = 0;
+        }
+
+        spriteRenderer.color = tempColor;
     }
 
     private void Die()
@@ -202,14 +252,18 @@ public class PlayerController : MonoBehaviour
 
     public void BasicMeleeAttack()
     {
-        Vector2 spawnPosition = transform.position + transform.right * 1;
+        Vector3 spawnPosition = transform.position;
+
+        spawnPosition += spriteRenderer.flipX ? transform.right * -1 : transform.right * 1;
         BasicHitbox hitBox = Instantiate(attackHitBox, spawnPosition, Quaternion.identity).GetComponent<BasicHitbox>();
-        hitBox.Initialize("Player", new Vector2(2, 2), new Vector2(0, 0), .25f, 15);
+        
+        hitBox.Initialize("Player", new Vector2(2, 2), new Vector2(0, 0), .1f, 15, 3);
     }
 
     public void DisableMovement()
     {
         canMove = false;
+        
     }
 
     public void EnableMovement()
