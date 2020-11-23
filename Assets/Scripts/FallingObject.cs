@@ -4,27 +4,18 @@ using UnityEngine;
 
 public class FallingObject : MonoBehaviour
 {
-    Rigidbody2D rb;
+    public bool respawn = false;
     public float fallSpeed = 1f;
     public float lifeTime = 2f;
+    float currentLifetime;
     bool falling = false;
+    Vector2 startPos;
+
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-    }
-
-
-    /*private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.name.Equals("Player"))
-            rb.isKinematic = false;
-    }*/
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.name.Equals("Player"))
-            Debug.Log("You Lose");
+        startPos = transform.position;
+        currentLifetime = lifeTime;
     }
 
     // Update is called once per frame
@@ -45,10 +36,20 @@ public class FallingObject : MonoBehaviour
         else
         {
             transform.position += new Vector3(0, -fallSpeed*Time.deltaTime, 0);
-            lifeTime -= Time.deltaTime;
-            if(lifeTime <= 0)
+            currentLifetime -= Time.deltaTime;
+            if(currentLifetime <= 0)
             {
-                Destroy(gameObject);
+                if(respawn)
+                {
+                    transform.position = startPos;
+                    falling = false;
+                    currentLifetime = lifeTime;
+                }
+                else
+                {
+                    Destroy(gameObject);
+                }
+                
             }
         }
     }
