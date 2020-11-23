@@ -9,7 +9,6 @@ public class RangedEnemyController : MeleeEnemyController
 
     protected override void Attack()
     {
-        
         if (!ShotIsClear())
         {
             return;
@@ -27,13 +26,11 @@ public class RangedEnemyController : MeleeEnemyController
             spriteRenderer.flipX = false;
         }
 
-        
         animator.SetTrigger("Attack");
     }
 
     public void Shoot()
     {
-        FindObjectOfType<AudioManager>().Play("GoblinBow");
         Debug.Log("shooting");
         animator.ResetTrigger("Attack");
         currentCooldown = attackCooldown;

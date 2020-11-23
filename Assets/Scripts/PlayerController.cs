@@ -62,7 +62,6 @@ public class PlayerController : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Mouse1))
         {
-            FindObjectOfType<AudioManager>().Play("Bow"); //sfx
             bowScript.Shoot();
         }
 
@@ -111,8 +110,6 @@ public class PlayerController : MonoBehaviour
         if(!CheckSidesWalk(movement.x))
         {
             transform.position += new Vector3(movement.x, movement.y, 0) * speed * Time.deltaTime;
-            FindObjectOfType<AudioManager>().Play("Jump"); //sfx
-            Jump();
         }
         else
         {
@@ -215,7 +212,6 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        FindObjectOfType<AudioManager>().Play("Hurt"); //sfx
         TakeDamage(damage);       
 
         Vector2 kbMovement = (Vector2)transform.position - enemyPosition;
@@ -310,7 +306,7 @@ public class PlayerController : MonoBehaviour
 
         spawnPosition += spriteRenderer.flipX ? transform.right * -1 : transform.right * 1;
         BasicHitbox hitBox = Instantiate(attackHitBox, spawnPosition, Quaternion.identity).GetComponent<BasicHitbox>();
-        FindObjectOfType<AudioManager>().Play("Slash"); //sfx
+        
         hitBox.Initialize("Player", new Vector2(2, 2), new Vector2(0, 0), .1f, 15, 3);
     }
 
