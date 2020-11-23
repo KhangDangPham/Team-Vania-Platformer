@@ -1,31 +1,19 @@
 fileFormatVersion: 2
-guid: d6e21208df6d57f479e41feec2fbe8a0
+guid: ac2f332a28b34b544a44069addfcb4f2
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8647823593821616703
-    second: Bat_0
+      213: -8669224242898826829
+    second: Cave Tile Sheet_0
   - first:
-      213: 5681806813702538305
-    second: Bat_1
+      213: -2503543752835086760
+    second: Cave Tile Sheet_1
   - first:
-      213: 697682191857345388
-    second: Bat_2
+      213: -5817276323050451190
+    second: Cave Tile Sheet_2
   - first:
-      213: 6993031405965254486
-    second: Bat_3
-  - first:
-      213: -8835117555573905559
-    second: Bat_1
-  - first:
-      213: -1477298914128971197
-    second: Bat_5
-  - first:
-      213: -1085711696175172977
-    second: Bat_6
-  - first:
-      213: -650004520372281371
-    second: Bat_7
+      213: 3613188858186322730
+    second: Cave Tile Sheet_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -56,7 +44,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
+    filterMode: 0
     aniso: -1
     mipBias: -100
     wrapU: 1
@@ -70,7 +58,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 64
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -113,43 +101,85 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Bat_0
+      name: Cave Tile Sheet_0
       rect:
         serializedVersion: 2
-        x: 733
-        y: 693
-        width: 632
-        height: 328
-      alignment: 9
-      pivot: {x: 0.41657442, y: 0.27971742}
+        x: 1
+        y: 2
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f3abafd8dbd330870800000000000000
-      internalID: 8647823593821616703
+      spriteID: 3b98fcb8b7ab0b780800000000000000
+      internalID: -8669224242898826829
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bat_1
+      name: Cave Tile Sheet_1
       rect:
         serializedVersion: 2
-        x: 763
-        y: 196
-        width: 616
-        height: 389
-      alignment: 9
-      pivot: {x: 0.42550284, y: 0.7158595}
+        x: 66
+        y: 2
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9672337c46b536580800000000000000
-      internalID: -8835117555573905559
+      spriteID: 856cd9c9830a14dd0800000000000000
+      internalID: -2503543752835086760
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cave Tile Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 2
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0f89446102e44fa0800000000000000
+      internalID: -5817276323050451190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cave Tile Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 2
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a23589e7f10a42230800000000000000
+      internalID: 3613188858186322730
       vertices: []
       indices: 
       edges: []
