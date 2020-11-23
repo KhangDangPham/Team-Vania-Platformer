@@ -19,8 +19,8 @@ public class PlayerController : MonoBehaviour
 
     bool canMove = true;
     bool isJumping = false;
-    bool hasJumped = false;
     int jumps = 2;
+    float jumpTimer = 0f;
     int maxHealth;
 
     //used when the player gets hit
@@ -44,21 +44,15 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && jumps > 0)
         {
-            if (Grounded())
+
+            if (!isJumping) //if not already jumping, call jump animation
             {
-                jumps = 1;
+                animator.SetBool("IsJumping", true);
             }
-            else
-            {
-                jumps = 0;
-            }
-            Debug.Log("Jumping");
-            isJumping = true;
-            /*animator.SetBool("IsJumping", true);
-            if (isJumping)
+            else //if we're already jumping, do double jump
             {
                 animator.SetTrigger("DoubleJump");
-            }*/
+            }
         }
 
         if(Input.GetKeyDown(KeyCode.Mouse0))
@@ -120,34 +114,33 @@ public class PlayerController : MonoBehaviour
         else
         {
             animator.SetBool("IsWalking", false);
+            
         }
         
 
-        if(isJumping)
-        {
-            Jump();
-        }
-
-        Grounded();
+        RobustGrounded();
 
         invulnerabilityTimer -= Time.deltaTime;
+        jumpTimer -= Time.deltaTime;
     }
 
-    bool Grounded()
+    bool Grounded(Vector3 startPos)
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up);
-        if(hit.collider != null)
+        RaycastHit2D hit = Physics2D.Raycast(startPos, -Vector2.up);
+
+        if (hit.collider != null)
         {
-            float distanceToGround = Mathf.Abs(hit.point.y - transform.position.y);
-            Debug.Log("Hit: " + hit.collider.gameObject.name + "Distance to ground: " + distanceToGround);
+            float distanceToGround = Mathf.Abs(hit.point.y - startPos.y);
             if(distanceToGround < .94)
             {
-                jumps = 2;
-                if(hasJumped)
+                if(jumpTimer < 0) //check for grounded after player has jumped
                 {
                     animator.SetBool("IsJumping", false);
-                    hasJumped = false;
+                    animator.ResetTrigger("DoubleJump");
+                    isJumping = false;
+                    jumps = 2;
                 }
+
                 return true;
             }
             else
@@ -161,9 +154,24 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void EndJump()
+    bool RobustGrounded()
     {
-        hasJumped = true;
+        if (Grounded(transform.position + new Vector3(.47f, 0, 0)))
+        {
+            return true;
+        }
+        else if (Grounded(transform.position))
+        {
+            return true;
+        }
+        else if(Grounded(transform.position + new Vector3(-.47f, 0, 0)))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public void Jump()
@@ -171,8 +179,8 @@ public class PlayerController : MonoBehaviour
         rb.velocity = new Vector2(rb.velocity.x, 0);
         rb.AddForce(new Vector2(0, jumpForce));
         jumps -= 1;
-        isJumping = false;
-        animator.SetBool("IsJumping", true);
+        jumpTimer = .4f;
+        isJumping = true;
     }
 
     public void TakeDamage(int damage)
