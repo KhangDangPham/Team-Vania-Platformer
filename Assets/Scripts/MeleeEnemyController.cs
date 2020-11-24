@@ -65,8 +65,16 @@ public class MeleeEnemyController : MonoBehaviour
                 spriteRenderer.flipX = false;
             }
 
-            animator.SetBool("IsWalking", true);
-            transform.position += new Vector3(movement.x, movement.y, 0) * speed * Time.deltaTime;
+            
+            if(!CheckSidesWalk(movement.x)) //only move if the wall is NOT less than min distance away in movement direction
+            {
+                animator.SetBool("IsWalking", true);
+                transform.position += new Vector3(movement.x, movement.y, 0) * speed * Time.deltaTime;
+            } 
+            else
+            {
+                animator.SetBool("IsWalking", false);
+            }
         }
         else if(distance <= attackRange && currentCooldown <= 0 && invulnerabilityTimer <= 0) //attack
         {
@@ -77,7 +85,7 @@ public class MeleeEnemyController : MonoBehaviour
             animator.SetBool("IsWalking", false);
         }
 
-        Vector2 sideDistances = CheckSides();
+        Vector2 sideDistances = CheckSidesJump();
 
         if((positionDifference.x < 0 && sideDistances[0] < 2) && jumpCooldown <= 0)
         {
@@ -94,7 +102,35 @@ public class MeleeEnemyController : MonoBehaviour
         HandleBlink();
     }
 
-    Vector2 CheckSides()
+    bool CheckSidesWalk(float xMove)
+    {
+        int groundOnlyMask = LayerMask.GetMask("Ground");
+        RaycastHit2D leftCheck = Physics2D.Raycast(transform.position, Vector2.left, 10f, groundOnlyMask);
+        RaycastHit2D rightCheck = Physics2D.Raycast(transform.position, Vector2.right, 10f, groundOnlyMask);
+        float distanceLeft = 100f;
+        float distanceRight = 100f;
+
+        if (leftCheck.collider != null)
+        {
+            distanceLeft = Mathf.Abs(leftCheck.point.x - transform.position.x);
+        }
+
+        if (rightCheck.collider != null)
+        {
+            distanceRight = Mathf.Abs(rightCheck.point.x - transform.position.x);
+        }
+
+        if(xMove < 0)
+        {
+            return distanceLeft <= .7f;
+        }
+        else
+        {
+            return distanceRight <= .7f;
+        }
+    }
+
+    Vector2 CheckSidesJump()
     {
         int groundOnlyMask = LayerMask.GetMask("Ground");
         RaycastHit2D leftCheck = Physics2D.Raycast(transform.position, Vector2.left, 10f, groundOnlyMask);
@@ -233,6 +269,7 @@ public class MeleeEnemyController : MonoBehaviour
 
     private void Die()
     {
+        FindObjectOfType<AudioManager>().Play("GoblinDeath");
         animator.SetTrigger("Die");
         invulnerabilityTimer = 100f;
         gameObject.layer = LayerMask.NameToLayer("Background");

@@ -12,6 +12,7 @@ public class PlayerProjectile : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        Debug.Log(transform.rotation.eulerAngles);
     }
 
     void Update()
@@ -19,6 +20,7 @@ public class PlayerProjectile : MonoBehaviour
         float angle = Mathf.Atan2(rb.velocity.y, rb.velocity.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Enemy")
@@ -33,32 +35,4 @@ public class PlayerProjectile : MonoBehaviour
     }
 }
     
-   
-
-/*
-   Could be used for magic projectile 
-
-   public float speed;
-   public float lifetime;
-
-   //public GameObject destroyEffect;
-
-   // Start is called before the first frame update
-   private void Start()
-   {
-       //Invoke("DestroyProjectile", lifetime);
-       Destroy(gameObject, lifetime);
-   }
-
-   // Update is called once per frame
-   void Update()
-   {
-       transform.Translate(Vector2.right * speed * Time.deltaTime);
-   }
-
-   /* void DestroyProjectile()
-   {
-       Instantiate(destroyEffect, transform.position, Quaternion.identity);
-       Destroy(gameObject);
-   } */
 
