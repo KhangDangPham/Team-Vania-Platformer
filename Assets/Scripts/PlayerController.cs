@@ -298,10 +298,17 @@ public class PlayerController : MonoBehaviour
         spriteRenderer.color = tempColor;
     }
 
-    private void Die()
+    private void ReloadScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        health = 100;
+    }
+
+    private void Die()
+    {
+        animator.SetTrigger("Die");
+        canMove = false;
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        //health = 100;
     }
 
     public void BasicMeleeAttack()
