@@ -20,7 +20,6 @@ public class Platform : MonoBehaviour
     {
         if(transform.position == pos1.position)
         {
-            Debug.Log("pos");
             nextPos = pos2.position;
         }
         if(transform.position == pos2.position)

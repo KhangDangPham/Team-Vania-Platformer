@@ -16,10 +16,13 @@ public class PlayerController : MonoBehaviour
     SpriteRenderer spriteRenderer;
     RangedCombat bowScript;
     HealthBar hpBar;
+    RangedVisualController rangedVisual;
 
     bool canMove = true;
+    bool canShoot = false;
     bool isJumping = false;
     int jumps = 2;
+    float jumpTimer = 0f;
     int maxHealth;
 
     //used when the player gets hit
@@ -32,8 +35,7 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         hpBar = GetComponentInChildren<HealthBar>();
-        bowScript = GetComponentInChildren<RangedCombat>();
-        bowScript.SetPlayerTransform(transform);
+        rangedVisual = GetComponentInChildren<RangedVisualController>();
 
         maxHealth = health;
     }
@@ -43,23 +45,18 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && jumps > 0)
         {
-            if (Grounded())
+
+            if (!isJumping) //if not already jumping, call jump animation
             {
-                jumps = 1;
+                animator.SetBool("IsJumping", true);
             }
-            else
-            {
-                jumps = 0;
-            }
-            Debug.Log("Jumping");
-            isJumping = true;
-            /*animator.SetBool("IsJumping", true);
-            if (isJumping)
+            else //if we're already jumping, do double jump
             {
                 animator.SetTrigger("DoubleJump");
-            }*/
+            }
         }
 
+        
         if(Input.GetKeyDown(KeyCode.Mouse0))
         {
             animator.SetTrigger("BasicAttack");
@@ -67,8 +64,11 @@ public class PlayerController : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Mouse1))
         {
-            FindObjectOfType<AudioManager>().Play("Bow"); //sfx
-            bowScript.Shoot();
+            if(!canShoot)
+            {
+                animator.SetBool("IsAiming", true);
+                canShoot = true;
+            }
         }
 
         if(Input.GetKeyDown(KeyCode.X))
@@ -113,42 +113,66 @@ public class PlayerController : MonoBehaviour
 
         Vector2 movement = new Vector2(horizontalMove, verticalMove);
 
-        transform.position += new Vector3(movement.x, movement.y, 0) * speed * Time.deltaTime;
-
-        if(isJumping)
+        if(!CheckSidesWalk(movement.x))
         {
-            FindObjectOfType<AudioManager>().Play("Jump"); //sfx
-            Jump();
+            transform.position += new Vector3(movement.x, movement.y, 0) * speed * Time.deltaTime;
         }
+        else
+        {
+            animator.SetBool("IsWalking", false);
+            
+        }
+        
 
-        Grounded();
+        RobustGrounded();
 
         invulnerabilityTimer -= Time.deltaTime;
+        jumpTimer -= Time.deltaTime;
     }
 
-    bool Grounded()
+    bool Grounded(Vector3 startPos)
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up);
-        if(hit.collider != null)
+        RaycastHit2D hit = Physics2D.Raycast(startPos, -Vector2.up);
+
+        if (hit.collider != null)
         {
-            float distanceToGround = Mathf.Abs(hit.point.y - transform.position.y);
-            //Debug.Log("Hit: " + hit.collider.gameObject.name + "Distance to ground: " + distanceToGround);
+            float distanceToGround = Mathf.Abs(hit.point.y - startPos.y);
             if(distanceToGround < .94)
             {
-                jumps = 2;
-                /*if (hasLeftGround)
+                if(jumpTimer < 0) //check for grounded after player has jumped
                 {
                     animator.SetBool("IsJumping", false);
+                    animator.ResetTrigger("DoubleJump");
                     isJumping = false;
-                    hasLeftGround = false;
-                }*/
+                    jumps = 2;
+                }
+
                 return true;
             }
             else
             {
-                //hasLeftGround = true;
                 return false;
             }
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    bool RobustGrounded()
+    {
+        if (Grounded(transform.position + new Vector3(.47f, 0, 0)))
+        {
+            return true;
+        }
+        else if (Grounded(transform.position))
+        {
+            return true;
+        }
+        else if(Grounded(transform.position + new Vector3(-.47f, 0, 0)))
+        {
+            return true;
         }
         else
         {
@@ -160,8 +184,11 @@ public class PlayerController : MonoBehaviour
     {
         rb.velocity = new Vector2(rb.velocity.x, 0);
         rb.AddForce(new Vector2(0, jumpForce));
+        FindObjectOfType<AudioManager>().Play("Jump"); //sfx
         jumps -= 1;
-        isJumping = false;
+        jumpTimer = .4f;
+        isJumping = true;
+
     }
 
     public void TakeDamage(int damage)
@@ -212,6 +239,35 @@ public class PlayerController : MonoBehaviour
         rb.AddForce(kbMovement, ForceMode2D.Impulse);
     }
 
+    bool CheckSidesWalk(float xMove)
+    {
+        int groundOnlyMask = LayerMask.GetMask("Ground");
+        Vector3 shootPos = transform.position - new Vector3(0, .9f, 0);
+        RaycastHit2D leftCheck = Physics2D.Raycast(shootPos, Vector2.left, 10f, groundOnlyMask);
+        RaycastHit2D rightCheck = Physics2D.Raycast(shootPos, Vector2.right, 10f, groundOnlyMask);
+        float distanceLeft = 100f;
+        float distanceRight = 100f;
+
+        if (leftCheck.collider != null)
+        {
+            distanceLeft = Mathf.Abs(leftCheck.point.x - transform.position.x);
+        }
+
+        if (rightCheck.collider != null)
+        {
+            distanceRight = Mathf.Abs(rightCheck.point.x - transform.position.x);
+        }
+
+        if (xMove < 0)
+        {
+            return distanceLeft <= .5f;
+        }
+        else
+        {
+            return distanceRight <= .5f;
+        }
+    }
+
     private void HandleBlink()
     {
 
@@ -247,10 +303,15 @@ public class PlayerController : MonoBehaviour
         spriteRenderer.color = tempColor;
     }
 
-    private void Die()
+    private void ReloadScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        health = 100;
+    }
+
+    private void Die()
+    {
+        animator.SetTrigger("Die");
+        canMove = false;
     }
 
     public void BasicMeleeAttack()
@@ -263,6 +324,15 @@ public class PlayerController : MonoBehaviour
         hitBox.Initialize("Player", new Vector2(2, 2), new Vector2(0, 0), .1f, 15, 3);
     }
 
+    public void CallShootMode()
+    {
+        if(canShoot)
+        {
+            canMove = false;
+            rangedVisual.EnterShootMode();
+        }
+    }
+
     public void DisableMovement()
     {
         canMove = false;
@@ -273,5 +343,7 @@ public class PlayerController : MonoBehaviour
     {
         canMove = true;
         animator.ResetTrigger("BasicAttack");
+        animator.SetBool("IsAiming", false);
+        canShoot = false;
     }
 }
