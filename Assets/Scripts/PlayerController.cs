@@ -111,8 +111,6 @@ public class PlayerController : MonoBehaviour
         if(!CheckSidesWalk(movement.x))
         {
             transform.position += new Vector3(movement.x, movement.y, 0) * speed * Time.deltaTime;
-            FindObjectOfType<AudioManager>().Play("Jump"); //sfx
-            Jump();
         }
         else
         {
@@ -181,9 +179,11 @@ public class PlayerController : MonoBehaviour
     {
         rb.velocity = new Vector2(rb.velocity.x, 0);
         rb.AddForce(new Vector2(0, jumpForce));
+        FindObjectOfType<AudioManager>().Play("Jump"); //sfx
         jumps -= 1;
         jumpTimer = .4f;
         isJumping = true;
+
     }
 
     public void TakeDamage(int damage)
