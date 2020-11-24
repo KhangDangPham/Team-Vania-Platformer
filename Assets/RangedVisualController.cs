@@ -93,22 +93,19 @@ public class RangedVisualController : MonoBehaviour
     {
         if (fireRate <= 0)
         {
-            if (fireRate <= 0)
-            {
-                Quaternion startRotation = Quaternion.Euler(startPoint.eulerAngles);
-                GameObject arrow = Instantiate(projectile, startPoint.position, startRotation);
+            Quaternion startRotation = Quaternion.Euler(startPoint.eulerAngles);
+            GameObject arrow = Instantiate(projectile, startPoint.position, startRotation);
 
-                if(flipRot)
-                {
-                    arrow.GetComponent<Rigidbody2D>().velocity = -arrow.transform.right * launchForce;
-                }
-                else
-                {
-                    arrow.GetComponent<Rigidbody2D>().velocity = arrow.transform.right * launchForce;
-                }
-                FindObjectOfType<AudioManager>().Play("Bow"); //sfx
-                fireRate = startFireRate;
+            if (flipRot)
+            {
+                arrow.GetComponent<Rigidbody2D>().velocity = -arrow.transform.right * launchForce;
             }
+            else
+            {
+                arrow.GetComponent<Rigidbody2D>().velocity = arrow.transform.right * launchForce;
+            }
+            FindObjectOfType<AudioManager>().Play("Bow"); //sfx
+            fireRate = startFireRate;
         }
         ExitShootMode();
     }

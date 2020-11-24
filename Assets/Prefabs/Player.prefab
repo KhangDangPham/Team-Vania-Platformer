@@ -201,7 +201,7 @@ GameObject:
   - component: {fileID: 8991873274316208826}
   - component: {fileID: 108694369}
   m_Layer: 0
-  m_Name: RangedAnimation
+  m_Name: RangedController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -241,7 +241,8 @@ MonoBehaviour:
   launchForce: 15
   startPoint: {fileID: 8976119475850344461}
   startFireRate: 1
-  hideDelay: 2.5
+  fireDelay: 0.75
+  hideDelay: 0
   playerTransform: {fileID: 2396122623605499294}
   playerController: {fileID: 2396122623605499293}
   playerSprite: {fileID: 2396122623605499295}
