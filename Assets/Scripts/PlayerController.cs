@@ -16,8 +16,10 @@ public class PlayerController : MonoBehaviour
     SpriteRenderer spriteRenderer;
     RangedCombat bowScript;
     HealthBar hpBar;
+    RangedVisualController rangedVisual;
 
     bool canMove = true;
+    bool canShoot = false;
     bool isJumping = false;
     int jumps = 2;
     float jumpTimer = 0f;
@@ -33,8 +35,7 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         hpBar = GetComponentInChildren<HealthBar>();
-        bowScript = GetComponentInChildren<RangedCombat>();
-        bowScript.SetPlayerTransform(transform);
+        rangedVisual = GetComponentInChildren<RangedVisualController>();
 
         maxHealth = health;
     }
@@ -55,6 +56,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        
         if(Input.GetKeyDown(KeyCode.Mouse0))
         {
             animator.SetTrigger("BasicAttack");
@@ -62,8 +64,11 @@ public class PlayerController : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Mouse1))
         {
-            FindObjectOfType<AudioManager>().Play("Bow"); //sfx
-            bowScript.Shoot();
+            if(!canShoot)
+            {
+                animator.SetBool("IsAiming", true);
+                canShoot = true;
+            }
         }
 
         if(Input.GetKeyDown(KeyCode.X))
@@ -307,8 +312,6 @@ public class PlayerController : MonoBehaviour
     {
         animator.SetTrigger("Die");
         canMove = false;
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        //health = 100;
     }
 
     public void BasicMeleeAttack()
@@ -321,6 +324,15 @@ public class PlayerController : MonoBehaviour
         hitBox.Initialize("Player", new Vector2(2, 2), new Vector2(0, 0), .1f, 15, 3);
     }
 
+    public void CallShootMode()
+    {
+        if(canShoot)
+        {
+            canMove = false;
+            rangedVisual.EnterShootMode();
+        }
+    }
+
     public void DisableMovement()
     {
         canMove = false;
@@ -331,5 +343,7 @@ public class PlayerController : MonoBehaviour
     {
         canMove = true;
         animator.ResetTrigger("BasicAttack");
+        animator.SetBool("IsAiming", false);
+        canShoot = false;
     }
 }
