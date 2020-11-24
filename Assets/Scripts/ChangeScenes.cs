@@ -10,6 +10,10 @@ public class ChangeScenes : MonoBehaviour
     public static ChangeScenes instance = null;
     public string nextScene = "Forest";
 
+
+    public Image black;
+    public Animator anim;
+
     private void Awake()
     {
         //Start at Intro Scene
@@ -23,6 +27,7 @@ public class ChangeScenes : MonoBehaviour
    //Scene Changer
    public void ChangeScene(string sceneName)
     {
+        StartCoroutine(Fading());
         SceneManager.LoadScene(sceneName);
     }
     //Load Start - Might be used later
@@ -34,5 +39,12 @@ public class ChangeScenes : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+
+    IEnumerator Fading()
+    {
+        anim.SetBool("Fade", true);
+        yield return new WaitUntil(() => black.color.a == 1);
     }
 }
