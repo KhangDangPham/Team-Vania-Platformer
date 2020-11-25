@@ -12,17 +12,22 @@ public class MagicBurstHitbox : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            gameObject.GetComponent<MeleeEnemyController>().TakeDamage(100, transform.position, 10);
+            collision.gameObject.GetComponent<MeleeEnemyController>().TakeDamage(100, transform.position, 2);
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.localScale *= increaseSpeed * Time.deltaTime;
+        if(lifeSpan <= 0)
+        {
+            Destroy(gameObject);
+        }
+        lifeSpan -= Time.deltaTime;
+        transform.localScale += new Vector3(increaseSpeed * Time.deltaTime, increaseSpeed * Time.deltaTime, 0);
     }
 }

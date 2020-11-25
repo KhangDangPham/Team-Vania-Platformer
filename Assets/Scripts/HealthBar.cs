@@ -6,16 +6,11 @@ using TMPro;
 public class HealthBar : MonoBehaviour
 {
     [SerializeField] GameObject heartPrefab;
+    [SerializeField] Image manaBar;
 
     List<Image> hearts = new List<Image>();
 
     int currentHp;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
 
     public void InitializeHealthBar(int maxHealth)
     {
@@ -64,6 +59,11 @@ public class HealthBar : MonoBehaviour
             }
 
         }
+    }
+
+    public void UpdateMana(float mana)
+    {
+        manaBar.fillAmount = mana / 100;
     }
 
     void ClearHealthBar()
