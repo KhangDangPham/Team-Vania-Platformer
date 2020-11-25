@@ -45,6 +45,7 @@ public class HealthBar : MonoBehaviour
         ClearHealthBar();
         for (int i = currentHp; i > 0;)
         {
+            Debug.Log(i + " cur: " + currentHeart) ;
             if (i >= 20)
             {
                 hearts[currentHeart].fillAmount = 1;
@@ -52,7 +53,7 @@ public class HealthBar : MonoBehaviour
                 i -= 20;
             }
 
-            if (i < 20)
+            if (i < 20 && i > 0)
             {
                 hearts[currentHeart].fillAmount = ((float)i / 5) * (.25f);
                 break;
