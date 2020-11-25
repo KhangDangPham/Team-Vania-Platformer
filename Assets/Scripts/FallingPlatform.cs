@@ -5,12 +5,19 @@ using UnityEngine;
 public class FallingPlatform : MonoBehaviour
 {
     //public float fallSpeed = 1f;
-    public float lifeTime = 2f;
+    public bool respawn = false;
+    public float lifeTime;
     Rigidbody2D rb;
+    float currentLife;
+    Vector2 startPos;
+ 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        startPos = transform.position;
+        currentLife = lifeTime;
+        
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -22,10 +29,19 @@ public class FallingPlatform : MonoBehaviour
     {   if (rb.isKinematic == false)
         {
            // transform.position += new Vector3(0, -fallSpeed * Time.deltaTime, 0);
-            lifeTime -= Time.deltaTime;
-            if (lifeTime <= 0)
+            currentLife -= Time.deltaTime;
+            if (currentLife <= 0)
             {
-                Destroy(gameObject);
+                if (respawn)
+                {
+                    rb.isKinematic = true;
+                    transform.position = startPos;
+                    currentLife = lifeTime;
+                }
+                else
+                {
+                    Destroy(gameObject);
+                }
             }
         }
     }
