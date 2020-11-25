@@ -9,8 +9,10 @@ public class PlayerController : MonoBehaviour
     public float speed = 10;
     public float jumpForce = 10;
     public int health = 100;
+    public int mana = 100;
 
     public GameObject attackHitBox;
+    public GameObject magicBurstPrefab;
     Rigidbody2D rb;
     Animator animator;
     SpriteRenderer spriteRenderer;
@@ -45,7 +47,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
 
-        if (Input.GetButtonDown("Jump") && jumps > 0)
+        if (Input.GetButtonDown("Jump") && jumps > 0 && canMove)
         {
 
             if (!isJumping) //if not already jumping, call jump animation
@@ -58,6 +60,10 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        if(Input.GetKeyDown(KeyCode.Q) && mana >= 100)
+        {
+            animator.SetBool("Magic", true);
+        }
         
         if(Input.GetKeyDown(KeyCode.Mouse0))
         {
@@ -327,6 +333,12 @@ public class PlayerController : MonoBehaviour
         BasicHitbox hitBox = Instantiate(attackHitBox, spawnPosition, Quaternion.identity).GetComponent<BasicHitbox>();
         FindObjectOfType<AudioManager>().Play("Slash"); //sfx
         hitBox.Initialize("Player", new Vector2(2, 2), new Vector2(0, 0), .1f, 15, 3);
+    }
+
+    public void MagicBurstAttack()
+    {
+        canMove = false;
+        Instantiate(magicBurstPrefab, transform);
     }
 
     public void CallShootMode()

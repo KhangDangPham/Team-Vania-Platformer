@@ -555,8 +555,10 @@ MonoBehaviour:
   speed: 10
   jumpForce: 435
   health: 100
+  mana: 100
   attackHitBox: {fileID: 9177505655542393021, guid: 606ff7b029ad5a2419e37749eb402cae,
     type: 3}
+  magicBurstPrefab: {fileID: 0}
 --- !u!61 &2396122623605499289
 BoxCollider2D:
   m_ObjectHideFlags: 0
