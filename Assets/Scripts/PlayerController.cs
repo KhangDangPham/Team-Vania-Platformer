@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     bool canMove = true;
     bool canShoot = false;
     bool isJumping = false;
+    bool hasJumped = false;
     int jumps = 2;
     float jumpTimer = 0f;
     int maxHealth;
@@ -139,11 +140,13 @@ public class PlayerController : MonoBehaviour
             float distanceToGround = Mathf.Abs(hit.point.y - startPos.y);
             if(distanceToGround < .94)
             {
-                if(jumpTimer < 0) //check for grounded after player has jumped
+                if(hasJumped && jumpTimer < 0) //check for grounded after player has jumped
                 {
                     animator.SetBool("IsJumping", false);
+                    Debug.Log("isJumping False");
                     animator.ResetTrigger("DoubleJump");
                     isJumping = false;
+                    hasJumped = false;
                     jumps = 2;
                 }
 
@@ -187,6 +190,7 @@ public class PlayerController : MonoBehaviour
         FindObjectOfType<AudioManager>().Play("Jump"); //sfx
         jumps -= 1;
         jumpTimer = .4f;
+        hasJumped = true;
         isJumping = true;
 
     }
