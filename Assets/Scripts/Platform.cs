@@ -12,7 +12,7 @@ public class Platform : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        nextPos = pos1.position;
+        nextPos = startPos.position;
     }
 
     // Update is called once per frame
@@ -20,7 +20,6 @@ public class Platform : MonoBehaviour
     {
         if(transform.position == pos1.position)
         {
-            Debug.Log("pos");
             nextPos = pos2.position;
         }
         if(transform.position == pos2.position)
