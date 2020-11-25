@@ -240,9 +240,9 @@ MonoBehaviour:
     type: 3}
   launchForce: 15
   startPoint: {fileID: 8976119475850344461}
-  startFireRate: 1
-  fireDelay: 0.75
-  hideDelay: 0
+  startFireRate: 0.6
+  fireDelay: 0.6
+  hideDelay: 0.05
   playerTransform: {fileID: 2396122623605499294}
   playerController: {fileID: 2396122623605499293}
   playerSprite: {fileID: 2396122623605499295}
