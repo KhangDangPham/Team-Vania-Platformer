@@ -9,8 +9,10 @@ public class PlayerController : MonoBehaviour
     public float speed = 10;
     public float jumpForce = 10;
     public int health = 100;
+    public float mana = 100;
 
     public GameObject attackHitBox;
+    public GameObject magicBurstPrefab;
     Rigidbody2D rb;
     Animator animator;
     SpriteRenderer spriteRenderer;
@@ -45,7 +47,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
 
-        if (Input.GetButtonDown("Jump") && jumps > 0)
+        if (Input.GetButtonDown("Jump") && jumps > 0 && canMove)
         {
 
             if (!isJumping) //if not already jumping, call jump animation
@@ -58,6 +60,11 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        if(Input.GetKeyDown(KeyCode.Q) && mana >= 100)
+        {
+            invulnerabilityTimer = 4f;
+            animator.SetTrigger("Magic");
+        }
         
         if(Input.GetKeyDown(KeyCode.Mouse0))
         {
@@ -130,6 +137,8 @@ public class PlayerController : MonoBehaviour
 
         invulnerabilityTimer -= Time.deltaTime;
         jumpTimer -= Time.deltaTime;
+        mana = mana >= 100 ? 100 : mana + Time.deltaTime;
+        hpBar.UpdateMana(mana);
     }
 
     bool Grounded(Vector3 startPos)
@@ -203,16 +212,16 @@ public class PlayerController : MonoBehaviour
             return;
         }
         health -= damage;
+
+        hpBar.UpdateHealth(health);
+
         if (health <= 0)
         {
             health = 0;
             Die();
             return;
         }
-        else
-        {
-            hpBar.UpdateHealth(health);
-        }
+
         invulnerabilityTimer = 2;
         blinkMode = 1;
         animator.SetTrigger("GetHit");
@@ -329,6 +338,14 @@ public class PlayerController : MonoBehaviour
         hitBox.Initialize("Player", new Vector2(2, 2), new Vector2(0, 0), .1f, 15, 3);
     }
 
+    public void MagicBurstAttack()
+    {
+        canMove = false;
+        mana = 0;
+        Instantiate(magicBurstPrefab, transform);
+        animator.ResetTrigger("Magic");
+    }
+
     public void CallShootMode()
     {
         if(canShoot)
@@ -349,6 +366,7 @@ public class PlayerController : MonoBehaviour
         canMove = true;
         animator.ResetTrigger("BasicAttack");
         animator.SetBool("IsAiming", false);
+        animator.ResetTrigger("Magic");
         canShoot = false;
     }
 }
