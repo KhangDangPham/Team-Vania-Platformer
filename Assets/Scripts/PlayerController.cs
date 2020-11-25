@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour
         hpBar = GetComponentInChildren<HealthBar>();
         rangedVisual = GetComponentInChildren<RangedVisualController>();
 
+        hpBar.InitializeHealthBar(health);
         maxHealth = health;
     }
 
@@ -74,7 +75,7 @@ public class PlayerController : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.X))
         {
-            TakeDamage(100);
+            TakeDamage(15);
         }
 
         HandleBlink();
@@ -210,7 +211,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            hpBar.UpdateHealth(health, maxHealth);
+            hpBar.UpdateHealth(health);
         }
         invulnerabilityTimer = 2;
         blinkMode = 1;
