@@ -153,7 +153,6 @@ public class PlayerController : MonoBehaviour
                 if(hasJumped && jumpTimer < 0) //check for grounded after player has jumped
                 {
                     animator.SetBool("IsJumping", false);
-                    Debug.Log("isJumping False");
                     animator.ResetTrigger("DoubleJump");
                     isJumping = false;
                     hasJumped = false;

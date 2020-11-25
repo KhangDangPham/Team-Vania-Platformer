@@ -45,7 +45,6 @@ public class HealthBar : MonoBehaviour
         ClearHealthBar();
         for (int i = currentHp; i > 0;)
         {
-            Debug.Log(i + " cur: " + currentHeart) ;
             if (i >= 20)
             {
                 hearts[currentHeart].fillAmount = 1;

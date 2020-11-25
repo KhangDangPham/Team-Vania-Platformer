@@ -12,7 +12,6 @@ public class PlayerProjectile : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        Debug.Log(transform.rotation.eulerAngles);
     }
 
     void Update()
