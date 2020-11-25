@@ -12,7 +12,7 @@ public class Platform : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        nextPos = pos1.position;
+        nextPos = startPos.position;
     }
 
     // Update is called once per frame
