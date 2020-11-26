@@ -26,7 +26,7 @@ public class MeleeEnemyController : MonoBehaviour
     protected int blinkMode = 0;
     protected int maxHealth;
 
-    void Start()
+    protected void Start()
     {
         //Looks for a gameobject with the tag "Player", and gets the PlayerController script
         player = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<PlayerController>();
@@ -275,6 +275,5 @@ public class MeleeEnemyController : MonoBehaviour
         gameObject.layer = LayerMask.NameToLayer("Background");
         spriteRenderer.sortingOrder = -1;
         Destroy(hpBar.gameObject);
-        //Destroy(gameObject);
     }
 }
