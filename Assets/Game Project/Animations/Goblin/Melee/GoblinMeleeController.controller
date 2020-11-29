@@ -107,14 +107,14 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
---- !u!1102 &-3741814514220206486
+--- !u!1102 &-1186782103291095058
 AnimatorState:
   serializedVersion: 5
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Bat_Death
+  m_Name: Golem_Attack
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -127,7 +127,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: eac6125c5d4fbbf4eba0f6f81dcae4e0, type: 2}
+  m_Motion: {fileID: 7400000, guid: ae14667fadfe52e42a8022794e8eb45f, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -158,8 +158,8 @@ AnimatorStateMachine:
     m_State: {fileID: 4138803699320896850}
     m_Position: {x: 170, y: 290, z: 0}
   - serializedVersion: 1
-    m_State: {fileID: -3741814514220206486}
-    m_Position: {x: 471.3817, y: 404.01636, z: 0}
+    m_State: {fileID: -1186782103291095058}
+    m_Position: {x: 205, y: 355, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: 2331907262861916264}
