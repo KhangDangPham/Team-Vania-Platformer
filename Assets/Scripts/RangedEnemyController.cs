@@ -34,7 +34,6 @@ public class RangedEnemyController : MeleeEnemyController
     public void Shoot()
     {
         FindObjectOfType<AudioManager>().Play("GoblinBow");
-        Debug.Log("shooting");
         animator.ResetTrigger("Attack");
         currentCooldown = attackCooldown;
 

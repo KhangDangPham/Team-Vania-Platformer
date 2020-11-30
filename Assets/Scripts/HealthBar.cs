@@ -52,7 +52,7 @@ public class HealthBar : MonoBehaviour
                 i -= 20;
             }
 
-            if (i < 20)
+            if (i < 20 && i > 0)
             {
                 hearts[currentHeart].fillAmount = ((float)i / 5) * (.25f);
                 break;
