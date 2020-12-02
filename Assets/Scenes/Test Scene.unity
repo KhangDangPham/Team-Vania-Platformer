@@ -751,33 +751,6 @@ Transform:
   m_Father: {fileID: 1651292948}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &649741860 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 725668362517993570, guid: 725fab4c270db4d4eacdf583e6128aed,
-    type: 3}
-  m_PrefabInstance: {fileID: 725668360728128144}
-  m_PrefabAsset: {fileID: 0}
---- !u!50 &649741861
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 649741860}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
 --- !u!1 &816158417
 GameObject:
   m_ObjectHideFlags: 0
@@ -5166,26 +5139,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 725668362517993575, guid: 725fab4c270db4d4eacdf583e6128aed,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.pivot.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 725668362517993575, guid: 725fab4c270db4d4eacdf583e6128aed,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.pivot.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 725668362517993575, guid: 725fab4c270db4d4eacdf583e6128aed,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 1.8204442
-      objectReference: {fileID: 0}
-    - target: {fileID: 725668362517993575, guid: 725fab4c270db4d4eacdf583e6128aed,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 1.15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 725fab4c270db4d4eacdf583e6128aed, type: 3}

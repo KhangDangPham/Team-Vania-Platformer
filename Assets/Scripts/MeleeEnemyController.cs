@@ -216,7 +216,7 @@ public class MeleeEnemyController : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void HandleBlink()
+    protected void HandleBlink()
     {
 
         if (blinkMode == 0) //blink mode is 0 so we shouldn't be blinking

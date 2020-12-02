@@ -44,7 +44,7 @@ public class FlyingEnemyController : MeleeEnemyController
         currentCooldown -= Time.deltaTime;
         invulnerabilityTimer -= Time.deltaTime;
         currentWaitTime -= Time.deltaTime;
-
+        HandleBlink();
         if (invulnerabilityTimer <= 0)
         {
             rb.velocity = Vector2.zero;
