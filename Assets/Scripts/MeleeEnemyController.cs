@@ -26,7 +26,7 @@ public class MeleeEnemyController : MonoBehaviour
     protected int blinkMode = 0;
     protected int maxHealth;
 
-    void Start()
+    protected void Start()
     {
         //Looks for a gameobject with the tag "Player", and gets the PlayerController script
         player = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<PlayerController>();
@@ -205,16 +205,18 @@ public class MeleeEnemyController : MonoBehaviour
 
         kbMovement *= force;
 
+        animator.SetTrigger("Hit");
+
         rb.AddForce(kbMovement, ForceMode2D.Impulse);
-        
-       
+
     }
 
     public void DestroyMob()
     {
         Destroy(gameObject);
     }
-    private void HandleBlink()
+
+    protected void HandleBlink()
     {
 
         if (blinkMode == 0) //blink mode is 0 so we shouldn't be blinking
@@ -275,6 +277,5 @@ public class MeleeEnemyController : MonoBehaviour
         gameObject.layer = LayerMask.NameToLayer("Background");
         spriteRenderer.sortingOrder = -1;
         Destroy(hpBar.gameObject);
-        //Destroy(gameObject);
     }
 }
