@@ -205,15 +205,17 @@ public class MeleeEnemyController : MonoBehaviour
 
         kbMovement *= force;
 
+        animator.SetTrigger("Hit");
+
         rb.AddForce(kbMovement, ForceMode2D.Impulse);
-        
-       
+
     }
 
     public void DestroyMob()
     {
         Destroy(gameObject);
     }
+
     private void HandleBlink()
     {
 
