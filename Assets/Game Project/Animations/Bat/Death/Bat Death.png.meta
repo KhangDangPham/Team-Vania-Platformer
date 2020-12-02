@@ -101,6 +101,36 @@ TextureImporter:
   - first:
       213: -1974029009186914872
     second: Bat Death_32
+  - first:
+      213: -6385013088523357212
+    second: Bat Death_1
+  - first:
+      213: -2254603596849117387
+    second: Bat Death_2
+  - first:
+      213: -6948353060447591594
+    second: Bat Death_3
+  - first:
+      213: 9143017649512993261
+    second: Bat Death_4
+  - first:
+      213: 8442844195859919141
+    second: Bat Death_8
+  - first:
+      213: 8711468158899424041
+    second: Bat Death_13
+  - first:
+      213: 3818157175559441803
+    second: Bat Death_17
+  - first:
+      213: -1680232612701113580
+    second: Bat Death_18
+  - first:
+      213: -6990754114243852672
+    second: Bat Death_29
+  - first:
+      213: 3765657215283408626
+    second: Bat Death_33
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -196,14 +226,14 @@ TextureImporter:
         width: 420
         height: 387
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2a5a872509d9bb7a0800000000000000
-      internalID: -6360316805546203742
+      spriteID: 4e3785cdc60e367a0800000000000000
+      internalID: -6385013088523357212
       vertices: []
       indices: 
       edges: []
@@ -217,14 +247,14 @@ TextureImporter:
         width: 420
         height: 365
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a30afd6c950267920800000000000000
-      internalID: 2987610972767625274
+      spriteID: 5378d7c59f906b0e0800000000000000
+      internalID: -2254603596849117387
       vertices: []
       indices: 
       edges: []
@@ -238,14 +268,14 @@ TextureImporter:
         width: 419
         height: 366
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 09c2afe8cad60c850800000000000000
-      internalID: 6395232058766666896
+      spriteID: 653e50a94bd729f90800000000000000
+      internalID: -6948353060447591594
       vertices: []
       indices: 
       edges: []
@@ -259,14 +289,35 @@ TextureImporter:
         width: 419
         height: 366
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 452d2eb22a1a06830800000000000000
-      internalID: 4062424581781246548
+      spriteID: de159564c1682ee70800000000000000
+      internalID: 9143017649512993261
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bat Death_6
+      rect:
+        serializedVersion: 2
+        x: 1814
+        y: 2299
+        width: 7
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1808d71317905120800000000000000
+      internalID: 2400584709648680989
       vertices: []
       indices: 
       edges: []
@@ -280,14 +331,14 @@ TextureImporter:
         width: 420
         height: 366
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8d7f8620cff2ee350800000000000000
-      internalID: 6047824109023852504
+      spriteID: 521f23460120b2570800000000000000
+      internalID: 8442844195859919141
       vertices: []
       indices: 
       edges: []
@@ -299,16 +350,16 @@ TextureImporter:
         x: 499
         y: 1459
         width: 420
-        height: 362
+        height: 350
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8932a1f9c90e38f60800000000000000
-      internalID: 8035513123447907224
+      spriteID: 92b835b922a55e870800000000000000
+      internalID: 8711468158899424041
       vertices: []
       indices: 
       edges: []
@@ -317,19 +368,19 @@ TextureImporter:
       name: Bat Death_17
       rect:
         serializedVersion: 2
-        x: 1072
+        x: 1075
         y: 1459
-        width: 301
-        height: 230
+        width: 298
+        height: 227
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b257a55066faba200800000000000000
-      internalID: 192440261804717355
+      spriteID: b8d44d1c8b1dcf430800000000000000
+      internalID: 3818157175559441803
       vertices: []
       indices: 
       edges: []
@@ -340,17 +391,17 @@ TextureImporter:
         serializedVersion: 2
         x: 112
         y: 928
-        width: 241
-        height: 167
+        width: 203
+        height: 162
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 15ce72b590cfc4f30800000000000000
-      internalID: 4561297639733718097
+      spriteID: 4137ceb475d9ea8e0800000000000000
+      internalID: -1680232612701113580
       vertices: []
       indices: 
       edges: []
@@ -359,19 +410,19 @@ TextureImporter:
       name: Bat Death_29
       rect:
         serializedVersion: 2
-        x: 638
-        y: 928
-        width: 178
-        height: 113
+        x: 636
+        y: 926
+        width: 182
+        height: 115
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e0abe7ea951e39300800000000000000
-      internalID: 257797378986129934
+      spriteID: 0860564fb2adbfe90800000000000000
+      internalID: -6990754114243852672
       vertices: []
       indices: 
       edges: []
