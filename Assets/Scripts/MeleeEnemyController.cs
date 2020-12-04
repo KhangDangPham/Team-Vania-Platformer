@@ -54,19 +54,25 @@ public class MeleeEnemyController : MonoBehaviour
             //move towards player
             Vector2 movement = Vector2.zero;
 
-            if(positionDifference.x > 0)
+            if(Mathf.Abs(positionDifference.x) > 0.5f)
             {
-                movement.x = 1;
-                spriteRenderer.flipX = true;
+                if (positionDifference.x > 0.5f)
+                {
+                    movement.x = 1;
+                    spriteRenderer.flipX = true;
+                }
+                else if (positionDifference.x < 0.5f)
+                {
+                    movement.x = -1;
+                    spriteRenderer.flipX = false;
+                }
             }
             else
             {
-                movement.x = -1;
-                spriteRenderer.flipX = false;
+                movement.x = 0;
             }
-
             
-            if(!CheckSidesWalk(movement.x)) //only move if the wall is NOT less than min distance away in movement direction
+            if(!CheckSidesWalk(movement.x) && Mathf.Abs(movement.x) > 0) //only move if the wall is NOT less than min distance away in movement direction
             {
                 animator.SetBool("IsWalking", true);
                 transform.position += new Vector3(movement.x, movement.y, 0) * speed * Time.deltaTime;

@@ -99,7 +99,6 @@ public class FlyingEnemyController : MeleeEnemyController
             newPoint.x = Random.Range(-movementRange, movementRange);
             newPoint.y = Random.Range(-movementRange, movementRange);
 
-            Debug.Log("New Point: " + newPoint);
             newPoint += initialPoint;
 
             direction = ((Vector2)transform.position - newPoint).normalized;
@@ -124,40 +123,6 @@ public class FlyingEnemyController : MeleeEnemyController
             return targetPosition;
         }
         
-    }
-
-    new public void TakeDamage(int damage, Vector2 enemyPosition, float force = 6f)
-    {
-
-        if (invulnerabilityTimer > 0f)
-        {
-            return;
-        }
-
-        TakeDamage(damage);
-
-        if (health > 0)
-        {
-            invulnerabilityTimer = 1f;
-            blinkMode = 1;
-        }
-
-
-        Vector2 kbMovement = (Vector2)transform.position - enemyPosition;
-
-        if (kbMovement.x < 0)
-        {
-            kbMovement.x = -1;
-        }
-
-        kbMovement.y = 1;
-
-        kbMovement *= force;
-
-        rb.AddForce(kbMovement, ForceMode2D.Impulse);
-
-        Debug.Log("setting trigger");
-        animator.SetTrigger("Hit");
     }
 
 }
