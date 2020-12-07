@@ -211,6 +211,7 @@ public class MeleeEnemyController : MonoBehaviour
 
         kbMovement *= force;
 
+        animator.ResetTrigger("Attack");
         animator.SetTrigger("Hit");
 
         rb.AddForce(kbMovement, ForceMode2D.Impulse);
@@ -278,7 +279,11 @@ public class MeleeEnemyController : MonoBehaviour
     private void Die()
     {
         FindObjectOfType<AudioManager>().Play("GoblinDeath");
+
+        animator.ResetTrigger("Attack");
+        animator.ResetTrigger("Hit");
         animator.SetTrigger("Die");
+
         invulnerabilityTimer = 100f;
         gameObject.layer = LayerMask.NameToLayer("Background");
         spriteRenderer.sortingOrder = -1;
