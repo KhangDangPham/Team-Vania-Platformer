@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SpikeTrap : MonoBehaviour
 {
+    [SerializeField]
+    public int damage = 100;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,7 +16,7 @@ public class SpikeTrap : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            collision.gameObject.GetComponent<PlayerController>().TakeDamage(100);
+            collision.gameObject.GetComponent<PlayerController>().TakeDamage(damage);
         }
         else if (collision.gameObject.tag == "Enemy")
         {
