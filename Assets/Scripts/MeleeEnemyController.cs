@@ -26,7 +26,7 @@ public class MeleeEnemyController : MonoBehaviour
     protected int blinkMode = 0;
     protected int maxHealth;
 
-    void Start()
+    protected void Start()
     {
         //Looks for a gameobject with the tag "Player", and gets the PlayerController script
         player = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<PlayerController>();
@@ -54,19 +54,25 @@ public class MeleeEnemyController : MonoBehaviour
             //move towards player
             Vector2 movement = Vector2.zero;
 
-            if(positionDifference.x > 0)
+            if(Mathf.Abs(positionDifference.x) > 0.5f)
             {
-                movement.x = 1;
-                spriteRenderer.flipX = true;
+                if (positionDifference.x > 0.5f)
+                {
+                    movement.x = 1;
+                    spriteRenderer.flipX = true;
+                }
+                else if (positionDifference.x < 0.5f)
+                {
+                    movement.x = -1;
+                    spriteRenderer.flipX = false;
+                }
             }
             else
             {
-                movement.x = -1;
-                spriteRenderer.flipX = false;
+                movement.x = 0;
             }
-
             
-            if(!CheckSidesWalk(movement.x)) //only move if the wall is NOT less than min distance away in movement direction
+            if(!CheckSidesWalk(movement.x) && Mathf.Abs(movement.x) > 0) //only move if the wall is NOT less than min distance away in movement direction
             {
                 animator.SetBool("IsWalking", true);
                 transform.position += new Vector3(movement.x, movement.y, 0) * speed * Time.deltaTime;
@@ -205,16 +211,19 @@ public class MeleeEnemyController : MonoBehaviour
 
         kbMovement *= force;
 
+        animator.ResetTrigger("Attack");
+        animator.SetTrigger("Hit");
+
         rb.AddForce(kbMovement, ForceMode2D.Impulse);
-        
-       
+
     }
 
     public void DestroyMob()
     {
         Destroy(gameObject);
     }
-    private void HandleBlink()
+
+    protected void HandleBlink()
     {
 
         if (blinkMode == 0) //blink mode is 0 so we shouldn't be blinking
@@ -270,11 +279,14 @@ public class MeleeEnemyController : MonoBehaviour
     private void Die()
     {
         FindObjectOfType<AudioManager>().Play("GoblinDeath");
+
+        animator.ResetTrigger("Attack");
+        animator.ResetTrigger("Hit");
         animator.SetTrigger("Die");
+
         invulnerabilityTimer = 100f;
         gameObject.layer = LayerMask.NameToLayer("Background");
         spriteRenderer.sortingOrder = -1;
         Destroy(hpBar.gameObject);
-        //Destroy(gameObject);
     }
 }
