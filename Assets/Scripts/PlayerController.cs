@@ -252,6 +252,17 @@ public class PlayerController : MonoBehaviour
         rb.AddForce(kbMovement, ForceMode2D.Impulse);
     }
 
+    public void Heal(int amountHealed)
+    {
+        health += amountHealed;
+        if(health > maxHealth)
+        {
+            health = maxHealth;
+        }
+
+        hpBar.UpdateHealth(health);
+    }
+
     bool CheckSidesWalk(float xMove)
     {
         int groundOnlyMask = LayerMask.GetMask("Ground");
