@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 224327443678889184}
   - component: {fileID: 806290561523508913}
   - component: {fileID: 1001825541983292253}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SmallForestPlatform
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

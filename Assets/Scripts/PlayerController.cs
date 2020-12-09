@@ -68,7 +68,12 @@ public class PlayerController : MonoBehaviour
         
         if(Input.GetKeyDown(KeyCode.Mouse0))
         {
-            animator.SetTrigger("BasicAttack");
+            string clipName = animator.GetCurrentAnimatorClipInfo(0)[0].clip.name;
+            Debug.Log(clipName);
+            if (clipName != "slash" && clipName != "SpinAttack")
+            {
+                animator.SetTrigger("BasicAttack");
+            }
         }
 
         if(Input.GetKeyDown(KeyCode.Mouse1))
@@ -345,7 +350,21 @@ public class PlayerController : MonoBehaviour
         spawnPosition += spriteRenderer.flipX ? transform.right * -1 : transform.right * 1;
         BasicHitbox hitBox = Instantiate(attackHitBox, spawnPosition, Quaternion.identity).GetComponent<BasicHitbox>();
         FindObjectOfType<AudioManager>().Play("Slash"); //sfx
-        hitBox.Initialize("Player", new Vector2(2, 2), new Vector2(0, 0), .1f, 15, 3);
+        hitBox.Initialize("Player", new Vector2(2, 2), new Vector2(0, 0), .1f, 20, 3);
+    }
+
+    public void SpinAttack()
+    {
+        Vector3 spawnPosition = transform.position;
+
+        BasicHitbox hitBox = Instantiate(attackHitBox, transform).GetComponent<BasicHitbox>();
+        FindObjectOfType<AudioManager>().Play("Slash"); //sfx
+        hitBox.Initialize("Player", new Vector2(10, 7.5f), new Vector2(0, 0), .3f, 30, 5);
+    }
+    
+    public void ResetAttack()
+    {
+        animator.ResetTrigger("BasicAttack");
     }
 
     public void MagicBurstAttack()

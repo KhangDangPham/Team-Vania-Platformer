@@ -285,7 +285,7 @@ public class MeleeEnemyController : MonoBehaviour
             tempColor.g = 1;
             tempColor.b = 1;
         }
-        Debug.Log(tempColor);
+
         spriteRenderer.color = tempColor;
     }
 
