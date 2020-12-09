@@ -57,7 +57,7 @@ public class MeleeEnemyController : MonoBehaviour
             //move towards player
             Vector2 movement = Vector2.zero;
 
-            if(Mathf.Abs(positionDifference.x) > 0.5f)
+            if (Mathf.Abs(positionDifference.x) > 0.5f)
             {
                 if (positionDifference.x > 0.5f)
                 {
@@ -74,18 +74,18 @@ public class MeleeEnemyController : MonoBehaviour
             {
                 movement.x = 0;
             }
-            
-            if(!CheckSidesWalk(movement.x) && Mathf.Abs(movement.x) > 0) //only move if the wall is NOT less than min distance away in movement direction
+
+            if (!CheckSidesWalk(movement.x) && Mathf.Abs(movement.x) > 0) //only move if the wall is NOT less than min distance away in movement direction
             {
                 animator.SetBool("IsWalking", true);
                 transform.position += new Vector3(movement.x, movement.y, 0) * speed * Time.deltaTime;
-            } 
+            }
             else
             {
                 animator.SetBool("IsWalking", false);
             }
         }
-        else if(distance <= attackRange && currentCooldown <= 0 && invulnerabilityTimer <= 0) //attack
+        else if (distance <= attackRange && currentCooldown <= 0 && invulnerabilityTimer <= 0) //attack
         {
             Attack();
         }
@@ -96,11 +96,11 @@ public class MeleeEnemyController : MonoBehaviour
 
         Vector2 sideDistances = CheckSidesJump();
 
-        if((positionDifference.x < 0 && sideDistances[0] < 2) && jumpCooldown <= 0)
+        if ((positionDifference.x < 0 && sideDistances[0] < 2) && jumpCooldown <= 0)
         {
             Jump();
         }
-        else if((positionDifference.x > 0 && sideDistances[1] < 2) && jumpCooldown <= 0)
+        else if ((positionDifference.x > 0 && sideDistances[1] < 2) && jumpCooldown <= 0)
         {
             Jump();
         }
@@ -130,7 +130,7 @@ public class MeleeEnemyController : MonoBehaviour
             distanceRight = Mathf.Abs(rightCheck.point.x - transform.position.x);
         }
 
-        if(xMove < 0)
+        if (xMove < 0)
         {
             return distanceLeft <= .7f;
         }
@@ -149,12 +149,12 @@ public class MeleeEnemyController : MonoBehaviour
         float distanceLeft = 100f;
         float distanceRight = 100f;
 
-        if(leftCheck.collider != null)
+        if (leftCheck.collider != null)
         {
             distanceLeft = Mathf.Abs(leftCheck.point.x - transform.position.x);
         }
 
-        if(rightCheck.collider != null)
+        if (rightCheck.collider != null)
         {
             distanceRight = Mathf.Abs(rightCheck.point.x - transform.position.x);
         }
@@ -191,19 +191,19 @@ public class MeleeEnemyController : MonoBehaviour
     public void TakeDamage(int damage, Vector2 enemyPosition, float force = 6f)
     {
 
-        if(invulnerabilityTimer > 0f)
+        if (invulnerabilityTimer > 0f)
         {
             return;
         }
 
         TakeDamage(damage);
 
-        if(health > 0)
+        if (health > 0)
         {
             invulnerabilityTimer = 1f;
             blinkMode = 1;
         }
-        
+
 
         Vector2 kbMovement = (Vector2)transform.position - enemyPosition;
 
@@ -269,7 +269,7 @@ public class MeleeEnemyController : MonoBehaviour
         currentRedTime += Time.deltaTime;
         if (turnRed)
         {
-            if(currentRedTime > 0.5f)
+            if (currentRedTime > 0.5f)
             {
                 turnRed = false;
             }
@@ -305,6 +305,18 @@ public class MeleeEnemyController : MonoBehaviour
         BasicHitbox hitBox = Instantiate(attackHitBox, spawnPosition, Quaternion.identity).GetComponent<BasicHitbox>();
 
         hitBox.Initialize("Enemy", new Vector2(1.5f, 1.5f), new Vector2(0, 0), .1f, 25, 2.5f);
+    }
+
+    public void GolemAttack()
+    {
+        animator.ResetTrigger("Attack");
+        currentCooldown = attackCooldown;
+        Vector3 spawnPosition = transform.position;
+
+        spawnPosition += spriteRenderer.flipX ? transform.right * 1 : transform.right * -1;
+        BasicHitbox hitBox = Instantiate(attackHitBox, spawnPosition, Quaternion.identity).GetComponent<BasicHitbox>();
+
+        hitBox.Initialize("Enemy", new Vector2(3f, 3.5f), new Vector2(-1, 1.6f), .2f, 40, 4f);
     }
 
     private void Die()
