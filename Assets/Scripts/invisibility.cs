@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class invisibility : MonoBehaviour
 {
-   // BoxCollider2D box;
+    //BoxCollider2D box;
     SpriteRenderer rend;
-    //bool pass = false;
+    [SerializeField]
+    private bool pass = false;
     // Start is called before the first frame update
     void Start()
     {
-       // box = this.gameObject.GetComponent<BoxCollider2D>();
+        //box = this.gameObject.GetComponent<BoxCollider2D>();
         rend = this.gameObject.GetComponent<SpriteRenderer>();
     }
 
@@ -19,11 +20,11 @@ public class invisibility : MonoBehaviour
         if (collision.gameObject.name.Equals("Player"))
         {
             //pass = true;
-            //if (pass)
-            //{
-                rend.enabled = !rend.enabled;
-               // box.enabled = !box.enabled;
-          //  }
+            if (pass)
+            {
+                rend.enabled = false;
+                //box.enabled = true;
+            }
         }
     }
 

@@ -60,6 +60,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heartPrefab: {fileID: 984708270222898291, guid: 96ef72c27f111564c939a9b9a8a100ed,
     type: 3}
+  manaBar: {fileID: 0}
 --- !u!114 &8683152283550103367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -348,7 +349,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91f933cf8618967469af838542850c6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 30
+  health: 40
   damage: 25
   aggroRange: 10
   speed: 2

@@ -8,11 +8,11 @@ using UnityEngine.UI;
 public class ChangeScenes : MonoBehaviour
 {
     public static ChangeScenes instance = null;
-    public string nextScene = "Forest";
 
 
     public Image black;
     public Animator anim;
+    public string nextScene;
 
     private void Awake()
     {
@@ -20,19 +20,22 @@ public class ChangeScenes : MonoBehaviour
         instance = this;
         if(SceneManager.GetActiveScene().name == "Team Intro Scene")
         {
-            Invoke("loadStart", 5f);
+            anim.SetTrigger("FadeOut");
+            Invoke("loadStart", 2f);
+         
         }
     }
-   
+  
    //Scene Changer
    public void ChangeScene(string sceneName)
     {
-        StartCoroutine(Fading());
+        anim.SetTrigger("FadeOut");
         SceneManager.LoadScene(sceneName);
     }
     //Load Start - Might be used later
     void loadStart()
     {
+        anim.SetTrigger("FadeOut");
         ChangeScene(nextScene);
     }
     //Exit Game
@@ -41,10 +44,4 @@ public class ChangeScenes : MonoBehaviour
         Application.Quit();
     }
 
-
-    IEnumerator Fading()
-    {
-        anim.SetBool("Fade", true);
-        yield return new WaitUntil(() => black.color.a == 1);
-    }
 }
