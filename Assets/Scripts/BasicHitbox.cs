@@ -19,6 +19,7 @@ public class BasicHitbox : MonoBehaviour
             lifespan -= Time.deltaTime;
             if(lifespan <= 0)
             {
+                Debug.Log("Destroying");
                 Destroy(gameObject);
             }
         }
