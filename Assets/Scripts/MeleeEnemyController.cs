@@ -275,22 +275,17 @@ public class MeleeEnemyController : MonoBehaviour
             }
             else
             {
-                tempColor.r += 10 * Time.deltaTime;
+                tempColor.g = 0;
+                tempColor.b = 0; ;
             }
         }
         else
         {
-            if(tempColor.r >= defaultR)
-            {
-                tempColor.r -= 2 * Time.deltaTime;
-            }
-            else
-            {
-                tempColor.r = defaultR;
-                currentRedTime = 0;
-            }
+            currentRedTime = 0;
+            tempColor.g = 1;
+            tempColor.b = 1;
         }
-
+        Debug.Log(tempColor);
         spriteRenderer.color = tempColor;
     }
 
