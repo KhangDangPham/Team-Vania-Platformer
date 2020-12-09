@@ -25,7 +25,9 @@ public class MeleeEnemyController : MonoBehaviour
     protected float invulnerabilityTimer = 0f;
     protected int blinkMode = 0;
     protected int maxHealth;
-
+    protected bool turnRed = false;
+    protected float currentRedTime = 0;
+    protected float defaultR;
     protected void Start()
     {
         //Looks for a gameobject with the tag "Player", and gets the PlayerController script
@@ -37,6 +39,7 @@ public class MeleeEnemyController : MonoBehaviour
 
         hpBar.InitializeHealthBar(health);
         maxHealth = health;
+        defaultR = spriteRenderer.color.r;
     }
 
     // Update is called once per frame
@@ -106,6 +109,7 @@ public class MeleeEnemyController : MonoBehaviour
         jumpCooldown -= Time.deltaTime;
         invulnerabilityTimer -= Time.deltaTime;
         HandleBlink();
+        TurnRed();
     }
 
     bool CheckSidesWalk(float xMove)
@@ -179,6 +183,7 @@ public class MeleeEnemyController : MonoBehaviour
         else
         {
             hpBar.UpdateHealth(health);
+            turnRed = true;
         }
 
     }
@@ -255,6 +260,32 @@ public class MeleeEnemyController : MonoBehaviour
             blinkMode = 0;
         }
 
+        spriteRenderer.color = tempColor;
+    }
+
+    protected void TurnRed()
+    {
+        Color tempColor = spriteRenderer.color;
+        currentRedTime += Time.deltaTime;
+        if (turnRed)
+        {
+            if(currentRedTime > 0.5f)
+            {
+                turnRed = false;
+            }
+            else
+            {
+                tempColor.g = 0;
+                tempColor.b = 0; ;
+            }
+        }
+        else
+        {
+            currentRedTime = 0;
+            tempColor.g = 1;
+            tempColor.b = 1;
+        }
+        Debug.Log(tempColor);
         spriteRenderer.color = tempColor;
     }
 
