@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 7241705394329991547}
   - component: {fileID: 4926171613069351064}
   - component: {fileID: 8277470358455836206}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SmallForestPlatformWither
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
