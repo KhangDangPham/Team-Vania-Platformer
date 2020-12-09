@@ -21,6 +21,11 @@ public class LevelChanger : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        anim.SetTrigger("FadeOut");
+        SceneManager.LoadScene(sceneToLoad);
+    }
 
     //Used to fade between scenes
     public void FadeToLevel(string sceneName)
