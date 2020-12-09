@@ -4698,6 +4698,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextScene: Test Scene
+  anim: {fileID: 0}
 --- !u!61 &1532691413
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5554,6 +5555,7 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+
     - target: {fileID: 8189581520682813400, guid: 2dd861c17ed92f14bbd9265842fd25a5,
         type: 3}
       propertyPath: m_Name
@@ -5594,6 +5596,7 @@ PrefabInstance:
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
+
     - target: {fileID: 8189581520682813405, guid: 2dd861c17ed92f14bbd9265842fd25a5,
         type: 3}
       propertyPath: m_RootOrder
@@ -5615,4 +5618,5 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    
   m_SourcePrefab: {fileID: 100100000, guid: 2dd861c17ed92f14bbd9265842fd25a5, type: 3}
