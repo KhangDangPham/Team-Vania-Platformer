@@ -9,22 +9,29 @@ public class LevelChanger : MonoBehaviour
 
     public Animator anim;
     public string sceneToLoad;
+    Collider2D collider;
 
     void Update()
     {
-        if(SceneManager.GetActiveScene().name == "Team Intro Scene")
+        if (SceneManager.GetActiveScene().name == "Team Intro Scene")
         {
             if (Input.GetMouseButtonDown(0))
             {
                 FadeToLevel(sceneToLoad);
             }
         }
+        else if (Input.GetKeyDown(KeyCode.U))
+        {
+            FadeToLevel(sceneToLoad);
+        }
+       
+
+       
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        anim.SetTrigger("FadeOut");
-        SceneManager.LoadScene(sceneToLoad);
+        FadeToLevel(sceneToLoad);
     }
 
     //Used to fade between scenes
