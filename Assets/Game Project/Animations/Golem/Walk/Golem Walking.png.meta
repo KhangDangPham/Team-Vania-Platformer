@@ -1,22 +1,22 @@
 fileFormatVersion: 2
-guid: ff5fd9a42c2e55a4e956f74fb9613413
+guid: 2e2387221b3d96744a2baef73c5e3848
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3030794605390870092
-    second: Golem_0
+      213: 8635078883649187771
+    second: Golem Walking_0
   - first:
-      213: -4890351225413243827
-    second: Golem_1
+      213: 8005087764664402314
+    second: Golem Walking_1
   - first:
-      213: 2258720731076752970
-    second: Golem_2
+      213: -1156547673358573222
+    second: Golem Walking_2
   - first:
-      213: -8558182943265400422
-    second: Golem_3
+      213: -1966703974485950878
+    second: Golem Walking_3
   - first:
-      213: -8234283073180859218
-    second: Golem_4
+      213: -2388026115200945922
+    second: Golem Walking_4
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -100,110 +100,122 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Golem_0
+      name: Golem Walking_0
       rect:
         serializedVersion: 2
-        x: 34
+        x: 29
         y: 1298
-        width: 523
+        width: 522
         height: 668
       alignment: 9
-      pivot: {x: 0.5173075, y: 0.516938}
+      pivot: {x: 0.5152421, y: 0.05334564}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4b9c18e3d5470f5d0800000000000000
-      internalID: -3030794605390870092
+      spriteID: bbfe26b7e76f5d770800000000000000
+      internalID: 8635078883649187771
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Golem_1
+      name: Golem Walking_1
       rect:
         serializedVersion: 2
         x: 587
         y: 1298
-        width: 604
+        width: 605
         height: 674
       alignment: 9
-      pivot: {x: 0.5899186, y: 0.53693223}
+      pivot: {x: 0.41451788, y: 0.08388259}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d4ce85e787bf12cb0800000000000000
-      internalID: -4890351225413243827
+      spriteID: a81c5a0c8e8c71f60800000000000000
+      internalID: 8005087764664402314
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Golem_2
+      name: Golem Walking_2
       rect:
         serializedVersion: 2
-        x: 1264
+        x: 1254
         y: 1278
         width: 702
         height: 681
       alignment: 9
-      pivot: {x: 0.6450611, y: 0.54319835}
+      pivot: {x: 0.3668265, y: 0.10860583}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a46f3a6a986985f10800000000000000
-      internalID: 2258720731076752970
+      spriteID: a5168abc40e13ffe0800000000000000
+      internalID: -1156547673358573222
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Golem_3
+      name: Golem Walking_3
       rect:
         serializedVersion: 2
-        x: 2039
+        x: 2115
         y: 1254
         width: 674
         height: 692
       alignment: 9
-      pivot: {x: 0.63094234, y: 0.5457822}
+      pivot: {x: 0.36129406, y: 0.09470645}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a99dbdfc4f93b3980800000000000000
-      internalID: -8558182943265400422
+      spriteID: 26e7a6eb72dd4b4e0800000000000000
+      internalID: -1966703974485950878
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Golem_4
+      name: Golem Walking_4
       rect:
         serializedVersion: 2
-        x: 299
+        x: 337
         y: 482
-        width: 701
+        width: 702
         height: 695
       alignment: 9
-      pivot: {x: 0.6484963, y: 0.5520964}
+      pivot: {x: 0.38099396, y: 0.10217997}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ea40b0b0c23f9bd80800000000000000
-      internalID: -8234283073180859218
+      spriteID: ef0771986e60cded0800000000000000
+      internalID: -2388026115200945922
       vertices: []
       indices: 
       edges: []
