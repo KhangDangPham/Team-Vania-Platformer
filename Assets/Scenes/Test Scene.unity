@@ -5553,7 +5553,7 @@ GameObject:
   - component: {fileID: 1999906705503278292}
   - component: {fileID: 1999906705503278295}
   - component: {fileID: 1999906705503278296}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Boss
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -5570,7 +5570,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -5638,7 +5638,7 @@ PrefabInstance:
     - target: {fileID: 2396122623605499294, guid: 0b46e8b52a30d9d439f43f5acd45e7dc,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -31.58
+      value: -30.4
       objectReference: {fileID: 0}
     - target: {fileID: 2396122623605499294, guid: 0b46e8b52a30d9d439f43f5acd45e7dc,
         type: 3}
@@ -5704,7 +5704,7 @@ GameObject:
   - component: {fileID: 7708008863624204223}
   - component: {fileID: 5970437030367782845}
   - component: {fileID: 6212623958778752534}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5811,7 +5811,7 @@ GameObject:
   - component: {fileID: 9134927701725731359}
   - component: {fileID: 7495530523213021616}
   - component: {fileID: 5606897160420241840}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: EnemyHUD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
