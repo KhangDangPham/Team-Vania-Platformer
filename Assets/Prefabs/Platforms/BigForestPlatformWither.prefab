@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 2576048534424245685}
   - component: {fileID: 8497002718380688751}
   - component: {fileID: 5822044378995118421}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BigForestPlatformWither
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
