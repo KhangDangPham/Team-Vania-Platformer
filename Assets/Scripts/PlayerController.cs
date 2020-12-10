@@ -149,7 +149,9 @@ public class PlayerController : MonoBehaviour
 
     bool Grounded(Vector3 startPos)
     {
-        RaycastHit2D hit = Physics2D.Raycast(startPos, -Vector2.up);
+
+        int groundOnlyLayer = LayerMask.NameToLayer("Ground"); //remove this if problems caused
+        RaycastHit2D hit = Physics2D.Raycast(startPos, -Vector2.up, 100, 1 << groundOnlyLayer);
 
         if (hit.collider != null)
         {

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    public int damage = 10;
     public Rigidbody2D rb;
 
     public void InitializeProjectile(Vector2 shooterPosition, float speed)
@@ -19,7 +20,7 @@ public class Projectile : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            collision.gameObject.GetComponent<PlayerController>().TakeDamage(10, transform.position, 3);
+            collision.gameObject.GetComponent<PlayerController>().TakeDamage(damage, transform.position, 3);
             Destroy(gameObject);
         }
         else if(collision.gameObject.tag == "Ground")
