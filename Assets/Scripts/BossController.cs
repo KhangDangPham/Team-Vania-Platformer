@@ -5,6 +5,9 @@ using UnityEngine;
 public class BossController : MeleeEnemyController
 {
     public GameObject fireball;
+    public GameObject normalParticles;
+    public GameObject enragedParticles;
+    public GameObject heartPrefab;
     public float slashSpeed = 15f;
     Vector2 targetPosition;
 
@@ -12,6 +15,7 @@ public class BossController : MeleeEnemyController
     string mode = "Idle";
 
     float idleTime = 0f;
+    float heartSpawnTime = 15f;
     float comboCd = 10f;
     bool enraged = false;
     bool comboing = false;
@@ -20,6 +24,17 @@ public class BossController : MeleeEnemyController
     // Update is called once per frame
     void Update()
     { 
+        if (comboing)
+        {
+            normalParticles.SetActive(false);
+            enragedParticles.SetActive(true);
+        }
+        else
+        {
+            normalParticles.SetActive(true);
+            enragedParticles.SetActive(false);
+        }
+
         if(health <= 0)
         {
             return;
@@ -31,6 +46,11 @@ public class BossController : MeleeEnemyController
             if(comboQueue.Count == 0)
             {
                 GenerateCombo();
+                if(heartSpawnTime <= 0)
+                {
+                    DropHeart();
+                    heartSpawnTime = 15f;
+                }
             }
         }
 
@@ -108,6 +128,7 @@ public class BossController : MeleeEnemyController
         invulnerabilityTimer -= Time.deltaTime;
         idleTime -= Time.deltaTime;
         comboCd -= Time.deltaTime;
+        heartSpawnTime -= Time.deltaTime;
 
     }
 
@@ -178,12 +199,12 @@ public class BossController : MeleeEnemyController
     {
         if (enraged)
         {
-            comboCd = 10f;
+            comboCd = 15f * (health)/(maxHealth/2);
         }
 
         enraged = true;
 
-        int action = Random.Range(0, 4);
+        int action = Random.Range(0, 5);
 
         if (action == 0) 
         {
@@ -201,13 +222,19 @@ public class BossController : MeleeEnemyController
         {
             comboQueue.Add("Magic");
             comboQueue.Add("Magic");
-            comboQueue.Add("Magic");
+            comboQueue.Add("Spinning");
         }
         else if (action == 3)
         {
             comboQueue.Add("Magic");
             comboQueue.Add("Spinning");
             comboQueue.Add("Slash");
+        }
+        else if (action == 4)
+        {
+            comboQueue.Add("Spinning");
+            comboQueue.Add("Slash");
+            comboQueue.Add("Spinning");
         }
     }
 
@@ -252,14 +279,12 @@ public class BossController : MeleeEnemyController
             targetPosition = hit.point;
         }
 
-        //Debug.DrawLine(transform.position, targetPosition, Color.red, 2f);
         mode = "Spinning";
         animator.SetBool("Spinning", true);
 
         BasicHitbox hitBox = Instantiate(attackHitBox, transform).GetComponent<BasicHitbox>();
         spinHitBox = hitBox.gameObject;
         hitBox.Initialize("Enemy", new Vector2(8f, 5f), new Vector2(0, 0), 100f, 20, 4f);
-
     }
 
     public void MagicAttack()
@@ -298,8 +323,16 @@ public class BossController : MeleeEnemyController
         }
     }
 
+    void DropHeart()
+    {
+        Instantiate(heartPrefab, transform.position, Quaternion.identity);
+    }
+
     public void BossDeath()
     {
+        LevelChanger levelChanger = GameObject.Find("LevelChanger").GetComponent<LevelChanger>();
+        levelChanger.GoToScene("Start Menu"); //Change this text to the name of the epilogue scene
+        levelChanger.FadeToLevel("Start Menu");
         DestroyMob();
     }
 }
