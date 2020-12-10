@@ -14,7 +14,7 @@ public class BossController : MeleeEnemyController
     GameObject spinHitBox;
     string mode = "Idle";
 
-    float idleTime = 0f;
+    float idleTime = 5f;
     float heartSpawnTime = 15f;
     float comboCd = 10f;
     bool enraged = false;
@@ -92,18 +92,21 @@ public class BossController : MeleeEnemyController
                 animator.SetBool("Spinning", false);
                 animator.ResetTrigger("Hit");
 
+                Debug.Log("destroying spinbox");
+
                 Destroy(spinHitBox);
 
-                mode = "Idle";
-                mode = "Idle";
+               
                 if (comboing)
                 {
-                    idleTime = 0f;
+                    idleTime = 1f;
                 }
                 else
                 {
-                    idleTime = 2f;
+                    idleTime = 3f;
                 }
+
+                mode = "Idle";
             }
             else //we still have to move closer
             {
@@ -150,7 +153,6 @@ public class BossController : MeleeEnemyController
     {
         comboing = false;
         int action = Random.Range(0, 3);
-        Debug.Log("Chose: " + action);
         rb.velocity = Vector2.zero;
         animator.ResetTrigger("Hit");
 
@@ -160,17 +162,14 @@ public class BossController : MeleeEnemyController
         }
         else if (action == 1)
         {
-            mode = "Spinning";
             animator.SetBool("Spinning", true);
-            targetPosition = player.transform.position;
-
         }
         else if (action == 2)
         {
             mode = "Magic";
             animator.SetTrigger("Magic");
         }
-        
+        Debug.Log("Chose: " + mode);
     }
 
     void ChooseComboAction()
@@ -184,13 +183,10 @@ public class BossController : MeleeEnemyController
         }
         else if (mode == "Spinning")
         {
-            mode = "Spinning";
             animator.SetBool("Spinning", true);
-            targetPosition = player.transform.position;
         }
         else if (mode == "Magic")
         {
-            mode = "Magic";
             animator.SetTrigger("Magic");
         }
     }
@@ -265,6 +261,14 @@ public class BossController : MeleeEnemyController
 
     public void SpinAttack() //boss targets where player currently is and twirls scythe moving towards that location
     {
+        if(mode == "Spinning")
+        {
+            return;
+        }
+
+        animator.ResetTrigger("Hit");
+        animator.ResetTrigger("Slash");
+
         targetPosition = player.transform.position; //simply pick where the player is
 
         int bossBorderLayer = LayerMask.NameToLayer("BossRoomBorder");
@@ -272,17 +276,22 @@ public class BossController : MeleeEnemyController
         relativePosition = relativePosition.normalized; //get vector for direction
         RaycastHit2D hit = Physics2D.Raycast(transform.position, relativePosition, 100, 1 << bossBorderLayer);
 
-        Debug.DrawRay(transform.position, relativePosition, Color.green, 2f);
-
         if (hit.collider != null)
         {
             targetPosition = hit.point;
+            Debug.DrawRay(transform.position, relativePosition, Color.green, 2f);
         }
 
         mode = "Spinning";
-        animator.SetBool("Spinning", true);
+
+        if(spinHitBox != null)
+        {
+            Destroy(spinHitBox);
+            Debug.Log("destroyed hitbox");
+        }
 
         BasicHitbox hitBox = Instantiate(attackHitBox, transform).GetComponent<BasicHitbox>();
+        Debug.Log("Spawned Hitbox");
         spinHitBox = hitBox.gameObject;
         hitBox.Initialize("Enemy", new Vector2(8f, 5f), new Vector2(0, 0), 100f, 20, 4f);
     }
@@ -315,11 +324,11 @@ public class BossController : MeleeEnemyController
         mode = "Idle";
         if(comboing)
         {
-            idleTime = 1f;
+            idleTime = 2f;
         }
         else
         {
-            idleTime = 3f;
+            idleTime = 4f;
         }
     }
 
