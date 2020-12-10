@@ -44,6 +44,8 @@ public class BossController : MeleeEnemyController
             if (distance <= attackRange) //we're close enough to the target position, so stop the attack
             {
                 animator.SetTrigger("Slash");
+                mode = "Idle";
+                idleTime = 2f;
             }
             else
             {
@@ -107,7 +109,7 @@ public class BossController : MeleeEnemyController
 
     void ChooseAction()
     {
-        int action = Random.Range(1, 1);
+        int action = Random.Range(0, 3);
         Debug.Log("Chose: " + action);
         rb.velocity = Vector2.zero;
         animator.ResetTrigger("Hit");
@@ -133,8 +135,6 @@ public class BossController : MeleeEnemyController
 
     public void SlashAttack()
     {
-        mode = "Idle";
-        idleTime = 1f;
         animator.ResetTrigger("Hit");
 
 
