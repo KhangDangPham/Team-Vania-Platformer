@@ -291,6 +291,8 @@ MonoBehaviour:
   attackRange: 1.1
   attackCooldown: 1
   attackHitBox: {fileID: 0}
+  deathSound: BatDeath
+  hurtSound: BatHurt
   movementRange: 4
   waitTime: 0
 --- !u!61 &725668362517993575

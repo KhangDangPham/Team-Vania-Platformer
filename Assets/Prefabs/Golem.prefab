@@ -358,3 +358,5 @@ MonoBehaviour:
   attackCooldown: 4
   attackHitBox: {fileID: 9177505655542393021, guid: 606ff7b029ad5a2419e37749eb402cae,
     type: 3}
+  deathSound: GolemDeath
+  hurtSound: GolemHurt

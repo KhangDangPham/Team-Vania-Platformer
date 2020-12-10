@@ -486,6 +486,8 @@ MonoBehaviour:
   attackCooldown: 1
   attackHitBox: {fileID: 9177505655542393021, guid: 606ff7b029ad5a2419e37749eb402cae,
     type: 3}
+  deathSound: BossDeath
+  hurtSound: BossHurt
   fireball: {fileID: 6668560351099667932, guid: d8a789e5debb7b74fb4df2721ba5354d,
     type: 3}
   normalParticles: {fileID: 9079979278016632269}
