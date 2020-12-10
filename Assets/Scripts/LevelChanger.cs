@@ -47,6 +47,7 @@ public class LevelChanger : MonoBehaviour
     {
         sceneToLoad = sceneName;
     }
+
     public void OnFadeComplete()
     {
         SceneManager.LoadScene(sceneToLoad);
