@@ -158,7 +158,7 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
   - name: GoblinHurt
-    clip: {fileID: 8300000, guid: 9a2be8d9cfad3ae4db9abb2409e1ddc6, type: 3}
+    clip: {fileID: 8300000, guid: 8832169e6a59501419070cf9e9d6fbcf, type: 3}
     group: {fileID: 1135090590598842475, guid: b3e2fed9ab03ff14ca984155fac0575f, type: 2}
     volume: 1
     pitch: 1

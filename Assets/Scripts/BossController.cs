@@ -159,6 +159,7 @@ public class BossController : MeleeEnemyController
         if(action == 0)
         {
             mode = "Slash";
+            FindObjectOfType<AudioManager>().Play("BossLaugh"); //sfx
         }
         else if (action == 1)
         {
@@ -180,7 +181,7 @@ public class BossController : MeleeEnemyController
         comboing = true;
         if (mode == "Slash")
         {
-            //nothing
+            FindObjectOfType<AudioManager>().Play("BossLaugh");
         }
         else if (mode == "Spinning")
         {
@@ -250,6 +251,7 @@ public class BossController : MeleeEnemyController
         mode = "Idle";
         idleTime = 2f;
 
+        FindObjectOfType<AudioManager>().Play("BossAtk");
         Vector3 spawnPosition = transform.position;
 
         spawnPosition += spriteRenderer.flipX ? transform.right * -1 : transform.right * 1;
@@ -273,6 +275,7 @@ public class BossController : MeleeEnemyController
         animator.ResetTrigger("Slash");
         animator.SetBool("Spinning", true);
 
+        FindObjectOfType<AudioManager>().Play("BossSpinAtk");
         mode = "Spinning";
 
         targetPosition = player.transform.position; //simply pick where the player is
@@ -301,6 +304,7 @@ public class BossController : MeleeEnemyController
 
     public void MagicAttack()
     {
+        FindObjectOfType<AudioManager>().Play("BossMagic");
         //Calculate relative position in order to spawn the projectile between the player and the enemy
         Vector2 spawnPosition = (Vector2)transform.position;
         Vector2 relativePosition = player.transform.position - transform.position;
