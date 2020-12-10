@@ -10,16 +10,16 @@ TextureImporter:
     second: Golem Attack_1
   - first:
       213: 3789912929512638488
-    second: Golem Attack_0
+    second: Golem Attack_2
   - first:
       213: 1162366830669712434
-    second: Golem Attack_1
+    second: Golem Attack_3
   - first:
       213: -3261906012465124244
     second: Golem Attack_4
   - first:
       213: 6189228992750963854
-    second: Golem Attack_3
+    second: Golem Attack_5
   - first:
       213: 9049226699534887754
     second: Golem Attack_6
@@ -58,13 +58,13 @@ TextureImporter:
     second: Golem Attack_17
   - first:
       213: 6038494060597308091
-    second: Golem Attack_4
+    second: Golem Attack_18
   - first:
       213: -8903374078106176567
-    second: Golem Attack_5
+    second: Golem Attack_19
   - first:
       213: 5789591869936020274
-    second: Golem Attack_6
+    second: Golem Attack_20
   - first:
       213: 566432348034046093
     second: Golem Attack_21
@@ -115,10 +115,10 @@ TextureImporter:
     second: Golem Attack_36
   - first:
       213: -5805083846456252021
-    second: Golem Attack_7
+    second: Golem Attack_37
   - first:
       213: -5581611113560079901
-    second: Golem Attack_8
+    second: Golem Attack_38
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -218,15 +218,15 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Golem Attack_2
+      name: Golem Attack_0
       rect:
         serializedVersion: 2
-        x: 1572
-        y: 2020
-        width: 586
-        height: 929
+        x: 1733
+        y: 2018
+        width: 587
+        height: 931
       alignment: 9
-      pivot: {x: 0.29861358, y: 0.019178968}
+      pivot: {x: 0.70783395, y: 0.020478573}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -239,15 +239,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Golem Attack_0
+      name: Golem Attack_2
       rect:
         serializedVersion: 2
-        x: 126
+        x: 113
         y: 2000
         width: 521
         height: 667
       alignment: 9
-      pivot: {x: 0.5217953, y: 0.04763451}
+      pivot: {x: 0.47941422, y: 0.049768817}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -260,15 +260,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Golem Attack_1
+      name: Golem Attack_3
       rect:
         serializedVersion: 2
-        x: 797
+        x: 800
         y: 2005
         width: 763
         height: 657
       alignment: 9
-      pivot: {x: 0.2566438, y: 0.03259166}
+      pivot: {x: 0.74950355, y: 0.024550997}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -281,15 +281,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Golem Attack_3
+      name: Golem Attack_5
       rect:
         serializedVersion: 2
-        x: 2343
-        y: 2002
-        width: 500
-        height: 844
+        x: 2482
+        y: 2005
+        width: 498
+        height: 841
       alignment: 9
-      pivot: {x: 0.52647024, y: 0.024333067}
+      pivot: {x: 0.48653942, y: 0.023362022}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -302,36 +302,36 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Golem Attack_4
+      name: Golem Attack_17
       rect:
         serializedVersion: 2
-        x: 136
-        y: 1038
-        width: 525
-        height: 860
+        x: 182
+        y: 1041
+        width: 521
+        height: 858
       alignment: 9
-      pivot: {x: 0.806122, y: 0.022026736}
+      pivot: {x: 0.18864134, y: 0.023430813}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bba6534da5a0dc350800000000000000
-      internalID: 6038494060597308091
+      spriteID: d0d7c6974d95af060800000000000000
+      internalID: 6987996540923837709
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Golem Attack_5
+      name: Golem Attack_19
       rect:
         serializedVersion: 2
-        x: 955
-        y: 1032
+        x: 1222
+        y: 1033
         width: 555
-        height: 938
+        height: 936
       alignment: 9
-      pivot: {x: 0.557619, y: 0.022706639}
+      pivot: {x: 0.45168832, y: 0.02160788}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -344,15 +344,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Golem Attack_6
+      name: Golem Attack_20
       rect:
         serializedVersion: 2
-        x: 1671
-        y: 1007
-        width: 725
-        height: 796
+        x: 2094
+        y: 995
+        width: 724
+        height: 795
       alignment: 9
-      pivot: {x: 0.39276907, y: 0.024690408}
+      pivot: {x: 0.61227465, y: 0.030492702}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -365,15 +365,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Golem Attack_7
+      name: Golem Attack_37
       rect:
         serializedVersion: 2
         x: 139
         y: 229
-        width: 715
+        width: 714
         height: 575
       alignment: 9
-      pivot: {x: 0.31549072, y: 0.07698237}
+      pivot: {x: 0.68587375, y: 0.06723665}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -386,7 +386,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Golem Attack_8
+      name: Golem Attack_38
       rect:
         serializedVersion: 2
         x: 1027
@@ -394,7 +394,7 @@ TextureImporter:
         width: 811
         height: 680
       alignment: 9
-      pivot: {x: 0.3383482, y: 0.071974}
+      pivot: {x: 0.65341437, y: 0.075510316}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

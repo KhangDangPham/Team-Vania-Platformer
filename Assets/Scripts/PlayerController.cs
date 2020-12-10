@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 //This script will handle all of the player's movement
@@ -197,6 +198,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void SetGrounded()
+    {
+        animator.SetBool("IsJumping", false);
+        animator.ResetTrigger("DoubleJump");
+        isJumping = false;
+        hasJumped = false;
+        jumps = 2;
+    }
+
     public void Jump()
     {
         rb.velocity = new Vector2(rb.velocity.x, 0);
@@ -337,9 +347,21 @@ public class PlayerController : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    public IEnumerator playerDied()
+    {
+        Image faderImage = GameObject.Find("Fader").GetComponent<Image>();
+
+        for (int i = 0; i <= 100; i++)
+        {
+            faderImage.color = new Color(0, 0, 0, (float)i / 100.0f);
+            yield return new WaitForSeconds(0.015f);
+        }
+    }
+
     private void Die()
     {
         animator.SetTrigger("Die");
+        StartCoroutine(playerDied());
         canMove = false;
     }
 
