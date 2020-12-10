@@ -15,7 +15,7 @@ public class BossController : MeleeEnemyController
     string mode = "Idle";
 
     float idleTime = 3f;
-    float heartSpawnTime = 30f;
+    float heartSpawnTime = 20f;
     float comboCd = 10f;
     bool enraged = false;
     bool comboing = false;
@@ -49,7 +49,7 @@ public class BossController : MeleeEnemyController
                 if(heartSpawnTime <= 0)
                 {
                     DropHeart();
-                    heartSpawnTime = 30f;
+                    heartSpawnTime = 20f;
                 }
             }
         }

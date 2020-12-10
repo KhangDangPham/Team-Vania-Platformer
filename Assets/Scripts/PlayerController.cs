@@ -92,6 +92,12 @@ public class PlayerController : MonoBehaviour
             TakeDamage(15);
         }
 
+        if(Input.GetKeyDown(KeyCode.C))
+        {
+            health = maxHealth;
+            hpBar.UpdateHealth(health);
+        }
+
         HandleBlink();
     }
     void FixedUpdate()
