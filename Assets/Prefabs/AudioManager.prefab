@@ -87,6 +87,125 @@ MonoBehaviour:
     pitch: 3
     loop: 0
     source: {fileID: 0}
+  - name: MagicBurst
+    clip: {fileID: 8300000, guid: 2bf4aad4d44d7f04eadf60bcf9da1a27, type: 3}
+    group: {fileID: 1135090590598842475, guid: b3e2fed9ab03ff14ca984155fac0575f, type: 2}
+    volume: 1
+    pitch: 0.83
+    loop: 0
+    source: {fileID: 0}
+  - name: SpinAtk
+    clip: {fileID: 8300000, guid: 28616eac3850226428aa6a3e027322db, type: 3}
+    group: {fileID: 1135090590598842475, guid: b3e2fed9ab03ff14ca984155fac0575f, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Death
+    clip: {fileID: 8300000, guid: 748cf36603e94f94692ac36bb2a74c31, type: 3}
+    group: {fileID: 1135090590598842475, guid: b3e2fed9ab03ff14ca984155fac0575f, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: BatHurt
+    clip: {fileID: 8300000, guid: 784b2a05710b6fa42a2da9b2e156314e, type: 3}
+    group: {fileID: 1135090590598842475, guid: b3e2fed9ab03ff14ca984155fac0575f, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: BatAtk
+    clip: {fileID: 8300000, guid: 78c55cc72ce5a704284e5e00ac7a4598, type: 3}
+    group: {fileID: 1135090590598842475, guid: b3e2fed9ab03ff14ca984155fac0575f, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: BatDeath
+    clip: {fileID: 8300000, guid: b835bf018aa77aa4385a2013db0324d6, type: 3}
+    group: {fileID: 1135090590598842475, guid: b3e2fed9ab03ff14ca984155fac0575f, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: GolemDeath
+    clip: {fileID: 8300000, guid: 16215355247892a44b4bff8670355a95, type: 3}
+    group: {fileID: 1135090590598842475, guid: b3e2fed9ab03ff14ca984155fac0575f, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: GolemHurt
+    clip: {fileID: 8300000, guid: 9a2be8d9cfad3ae4db9abb2409e1ddc6, type: 3}
+    group: {fileID: 1135090590598842475, guid: b3e2fed9ab03ff14ca984155fac0575f, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: GolemAtk
+    clip: {fileID: 8300000, guid: 214b6acf06833b245b180f57008da978, type: 3}
+    group: {fileID: 1135090590598842475, guid: b3e2fed9ab03ff14ca984155fac0575f, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: GoblinSwing
+    clip: {fileID: 8300000, guid: 9d08a0c9da331b940ae235a43aa20b40, type: 3}
+    group: {fileID: 1135090590598842475, guid: b3e2fed9ab03ff14ca984155fac0575f, type: 2}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: GoblinHurt
+    clip: {fileID: 8300000, guid: 9a2be8d9cfad3ae4db9abb2409e1ddc6, type: 3}
+    group: {fileID: 1135090590598842475, guid: b3e2fed9ab03ff14ca984155fac0575f, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: BossAtk
+    clip: {fileID: 8300000, guid: 9edffe1cf3593ec4a857bcdfe7d74705, type: 3}
+    group: {fileID: 1135090590598842475, guid: b3e2fed9ab03ff14ca984155fac0575f, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: BossSpinAtk
+    clip: {fileID: 8300000, guid: ed685a62d539acd478deed7866e4eb62, type: 3}
+    group: {fileID: 1135090590598842475, guid: b3e2fed9ab03ff14ca984155fac0575f, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: BossHurt
+    clip: {fileID: 8300000, guid: ad608c527d2924f4fb39f75e0bedb090, type: 3}
+    group: {fileID: 1135090590598842475, guid: b3e2fed9ab03ff14ca984155fac0575f, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: BossDeath
+    clip: {fileID: 8300000, guid: ac429fc4fb203954283aee6a0be9b3f7, type: 3}
+    group: {fileID: 1135090590598842475, guid: b3e2fed9ab03ff14ca984155fac0575f, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: BossMagic
+    clip: {fileID: 8300000, guid: d4bde282ec1c0b34b9840b4021e7190a, type: 3}
+    group: {fileID: 1135090590598842475, guid: b3e2fed9ab03ff14ca984155fac0575f, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: BossLaugh
+    clip: {fileID: 8300000, guid: 2bb93fca27c9a7c4793c04b213b16e99, type: 3}
+    group: {fileID: 1135090590598842475, guid: b3e2fed9ab03ff14ca984155fac0575f, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
   musicSource: {fileID: 6417019153057629361}
   mixer: {fileID: 24100000, guid: b3e2fed9ab03ff14ca984155fac0575f, type: 2}
   defaultMasterVol: 1

@@ -64,6 +64,7 @@ public class PlayerController : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Q) && mana >= 100)
         {
             invulnerabilityTimer = 4f;
+            FindObjectOfType<AudioManager>().Play("MagicBurst"); //sfx
             animator.SetTrigger("Magic");
         }
         
@@ -362,6 +363,7 @@ public class PlayerController : MonoBehaviour
 
     private void Die()
     {
+        FindObjectOfType<AudioManager>().Play("Death"); //sfx
         animator.SetTrigger("Die");
         StartCoroutine(playerDied());
         canMove = false;
@@ -382,7 +384,7 @@ public class PlayerController : MonoBehaviour
         Vector3 spawnPosition = transform.position;
 
         BasicHitbox hitBox = Instantiate(attackHitBox, transform).GetComponent<BasicHitbox>();
-        FindObjectOfType<AudioManager>().Play("Slash"); //sfx
+        FindObjectOfType<AudioManager>().Play("SpinAtk"); //sfx
         hitBox.Initialize("Player", new Vector2(10, 7.5f), new Vector2(0, 0), .3f, 30, 5);
     }
     
