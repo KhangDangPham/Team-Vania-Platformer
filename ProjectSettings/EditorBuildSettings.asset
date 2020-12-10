@@ -24,6 +24,11 @@ EditorBuildSettings:
     path: Assets/Scenes/Cave.unity
     guid: 38c7d6893496fa64dbac4581c3aa04e8
   - enabled: 1
+<<<<<<< HEAD
     path: Assets/Scenes/Credits.unity
     guid: 44fb3053ce233ea4ca58519bc1d0cd3a
+=======
+    path: Assets/Scenes/Hell.unity
+    guid: dd14497b515053e4db58a32f6ac5f89c
+>>>>>>> master
   m_configObjects: {}

@@ -64,6 +64,7 @@ public class PlayerController : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Q) && mana >= 100)
         {
             invulnerabilityTimer = 4f;
+            FindObjectOfType<AudioManager>().Play("MagicBurst"); //sfx
             animator.SetTrigger("Magic");
         }
         
@@ -149,7 +150,9 @@ public class PlayerController : MonoBehaviour
 
     bool Grounded(Vector3 startPos)
     {
-        RaycastHit2D hit = Physics2D.Raycast(startPos, -Vector2.up);
+
+        int groundOnlyLayer = LayerMask.NameToLayer("Ground"); //remove this if problems caused
+        RaycastHit2D hit = Physics2D.Raycast(startPos, -Vector2.up, 100, 1 << groundOnlyLayer);
 
         if (hit.collider != null)
         {
@@ -360,6 +363,7 @@ public class PlayerController : MonoBehaviour
 
     private void Die()
     {
+        FindObjectOfType<AudioManager>().Play("Death"); //sfx
         animator.SetTrigger("Die");
         StartCoroutine(playerDied());
         canMove = false;
@@ -380,7 +384,7 @@ public class PlayerController : MonoBehaviour
         Vector3 spawnPosition = transform.position;
 
         BasicHitbox hitBox = Instantiate(attackHitBox, transform).GetComponent<BasicHitbox>();
-        FindObjectOfType<AudioManager>().Play("Slash"); //sfx
+        FindObjectOfType<AudioManager>().Play("SpinAtk"); //sfx
         hitBox.Initialize("Player", new Vector2(10, 7.5f), new Vector2(0, 0), .3f, 30, 5);
     }
     

@@ -21,9 +21,9 @@ TagManager:
   - Ground
   - Player
   - Background
-  - 
-  - 
-  - 
+  - Boss
+  - BossRoomBorder
+  - NoGroundCollide
   - 
   - 
   - 
