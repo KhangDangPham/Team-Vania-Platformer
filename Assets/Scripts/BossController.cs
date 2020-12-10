@@ -12,8 +12,11 @@ public class BossController : MeleeEnemyController
     string mode = "Idle";
 
     float idleTime = 0f;
-
+    float comboCd = 10f;
     bool enraged = false;
+    bool comboing = false;
+    List<string> comboQueue = new List<string>();
+
     // Update is called once per frame
     void Update()
     { 
@@ -25,16 +28,26 @@ public class BossController : MeleeEnemyController
         if (health < (maxHealth / 2))
         {
             //enter enrageMode
-            enraged = true;
+            if(comboQueue.Count == 0)
+            {
+                GenerateCombo();
+            }
         }
 
 
         if(mode == "Idle") //boss is waiting between an attack
         {         
-            //pick a new action
-            if(idleTime <= 0)
+            if(enraged && comboCd <= 0)
             {
-                ChooseAction();
+                ChooseComboAction();
+            }
+            else
+            {
+                //pick a new action
+                if (idleTime <= 0)
+                {
+                    ChooseAction();
+                }
             }
         }
         else if (mode == "Slash")
@@ -44,8 +57,6 @@ public class BossController : MeleeEnemyController
             if (distance <= attackRange) //we're close enough to the target position, so stop the attack
             {
                 animator.SetTrigger("Slash");
-                mode = "Idle";
-                idleTime = 2f;
             }
             else
             {
@@ -64,7 +75,15 @@ public class BossController : MeleeEnemyController
                 Destroy(spinHitBox);
 
                 mode = "Idle";
-                idleTime = 1.5f;
+                mode = "Idle";
+                if (comboing)
+                {
+                    idleTime = 0f;
+                }
+                else
+                {
+                    idleTime = 2f;
+                }
             }
             else //we still have to move closer
             {
@@ -83,13 +102,12 @@ public class BossController : MeleeEnemyController
             {
                 spriteRenderer.flipX = false;
             }
-            mode = "Idle";
-            idleTime = 3f;
         }
 
         currentCooldown -= Time.deltaTime;
         invulnerabilityTimer -= Time.deltaTime;
         idleTime -= Time.deltaTime;
+        comboCd -= Time.deltaTime;
 
     }
 
@@ -109,6 +127,7 @@ public class BossController : MeleeEnemyController
 
     void ChooseAction()
     {
+        comboing = false;
         int action = Random.Range(0, 3);
         Debug.Log("Chose: " + action);
         rb.velocity = Vector2.zero;
@@ -133,23 +152,92 @@ public class BossController : MeleeEnemyController
         
     }
 
+    void ChooseComboAction()
+    {
+        mode = comboQueue[0];
+        comboQueue.RemoveAt(0);
+        comboing = true;
+        if (mode == "Slash")
+        {
+            //nothing
+        }
+        else if (mode == "Spinning")
+        {
+            mode = "Spinning";
+            animator.SetBool("Spinning", true);
+            targetPosition = player.transform.position;
+        }
+        else if (mode == "Magic")
+        {
+            mode = "Magic";
+            animator.SetTrigger("Magic");
+        }
+    }
+
+    void GenerateCombo()
+    {
+        if (enraged)
+        {
+            comboCd = 10f;
+        }
+
+        enraged = true;
+
+        int action = Random.Range(0, 4);
+
+        if (action == 0) 
+        {
+            comboQueue.Add("Spinning");
+            comboQueue.Add("Magic");
+            comboQueue.Add("Slash");
+        }
+        else if (action == 1)
+        {
+            comboQueue.Add("Spinning");
+            comboQueue.Add("Spinning");
+            comboQueue.Add("Slash");
+        }
+        else if (action == 2)
+        {
+            comboQueue.Add("Magic");
+            comboQueue.Add("Magic");
+            comboQueue.Add("Magic");
+        }
+        else if (action == 3)
+        {
+            comboQueue.Add("Magic");
+            comboQueue.Add("Spinning");
+            comboQueue.Add("Slash");
+        }
+    }
+
     public void SlashAttack()
     {
         animator.ResetTrigger("Hit");
+        animator.ResetTrigger("Slash");
 
+        mode = "Idle";
+        idleTime = 2f;
 
-        currentCooldown = attackCooldown;
         Vector3 spawnPosition = transform.position;
 
         spawnPosition += spriteRenderer.flipX ? transform.right * -1 : transform.right * 1;
         BasicHitbox hitBox = Instantiate(attackHitBox, spawnPosition, Quaternion.identity).GetComponent<BasicHitbox>();
 
         hitBox.Initialize("Enemy", new Vector2(1.5f, 1.5f), new Vector2(0, 0), .1f, 20, 2f);
+
+        if (comboing)
+        {
+            idleTime = 1f;
+        }
+        else
+        {
+            idleTime = 2f;
+        }
     }
 
     public void SpinAttack() //boss targets where player currently is and twirls scythe moving towards that location
     {
-        targetPosition = player.transform.position; //simply pick where the player is
         targetPosition = player.transform.position; //simply pick where the player is
 
         int bossBorderLayer = LayerMask.NameToLayer("BossRoomBorder");
@@ -171,6 +259,7 @@ public class BossController : MeleeEnemyController
         BasicHitbox hitBox = Instantiate(attackHitBox, transform).GetComponent<BasicHitbox>();
         spinHitBox = hitBox.gameObject;
         hitBox.Initialize("Enemy", new Vector2(8f, 5f), new Vector2(0, 0), 100f, 20, 4f);
+
     }
 
     public void MagicAttack()
@@ -197,6 +286,16 @@ public class BossController : MeleeEnemyController
 
         //Initialize the projectile, giving it the information it needs
         Projectile.GetComponent<Projectile>().InitializeProjectile(transform.position, 20);
+
+        mode = "Idle";
+        if(comboing)
+        {
+            idleTime = 1f;
+        }
+        else
+        {
+            idleTime = 3f;
+        }
     }
 
     public void BossDeath()
