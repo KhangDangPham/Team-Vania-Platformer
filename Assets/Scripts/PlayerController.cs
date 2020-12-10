@@ -198,6 +198,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void SetGrounded()
+    {
+        animator.SetBool("IsJumping", false);
+        animator.ResetTrigger("DoubleJump");
+        isJumping = false;
+        hasJumped = false;
+        jumps = 2;
+    }
+
     public void Jump()
     {
         rb.velocity = new Vector2(rb.velocity.x, 0);
