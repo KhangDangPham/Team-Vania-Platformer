@@ -15,7 +15,7 @@ public class BossController : MeleeEnemyController
     string mode = "Idle";
 
     float idleTime = 5f;
-    float heartSpawnTime = 15f;
+    float heartSpawnTime = 30f;
     float comboCd = 10f;
     bool enraged = false;
     bool comboing = false;
@@ -49,83 +49,83 @@ public class BossController : MeleeEnemyController
                 if(heartSpawnTime <= 0)
                 {
                     DropHeart();
-                    heartSpawnTime = 15f;
+                    heartSpawnTime = 30f;
                 }
             }
         }
 
-
-        if(mode == "Idle") //boss is waiting between an attack
-        {         
-            if(enraged && comboCd <= 0)
-            {
-                ChooseComboAction();
-            }
-            else
-            {
-                //pick a new action
-                if (idleTime <= 0)
-                {
-                    ChooseAction();
-                }
-            }
-        }
-        else if (mode == "Slash")
+        if(idleTime <= 0)
         {
-            targetPosition = player.transform.position;
-            float distance = Vector2.Distance(transform.position, targetPosition);
-            if (distance <= attackRange) //we're close enough to the target position, so stop the attack
+            if (mode == "Idle") //boss is waiting between an attack
             {
-                animator.SetTrigger("Slash");
-            }
-            else
-            {
-                MoveToPoint(speed+(-1 * idleTime));
-            }
-        }
-        else if (mode == "Spinning")
-        {
-            float distance = Vector2.Distance(transform.position, targetPosition);
-
-            if(distance <= 1f) //we're close enough to the target position, so stop the attack
-            {
-                animator.SetBool("Spinning", false);
-                animator.ResetTrigger("Hit");
-
-                Debug.Log("destroying spinbox");
-
-                Destroy(spinHitBox);
-
-               
-                if (comboing)
+                if (enraged && comboCd <= 0 && idleTime <= 0)
                 {
-                    idleTime = 1f;
+                    ChooseComboAction();
                 }
                 else
                 {
-                    idleTime = 3f;
+                    //pick a new action
+                    if (idleTime <= 0)
+                    {
+                        ChooseAction();
+                    }
+                }
+            }
+            else if (mode == "Slash")
+            {
+                targetPosition = player.transform.position;
+                float distance = Vector2.Distance(transform.position, targetPosition);
+                if (distance <= attackRange) //we're close enough to the target position, so stop the attack
+                {
+                    animator.SetTrigger("Slash"); //perform the attack
+                }
+                else
+                {
+                    MoveToPoint(speed + (-1 * idleTime)); //otherwise move closer
+                }
+            }
+            else if (mode == "Spinning")
+            {
+                float distance = Vector2.Distance(transform.position, targetPosition);
+
+                if (distance <= 1f) //we're close enough to the target position, so stop the attack
+                {
+                    animator.SetBool("Spinning", false); //stop spinning because we're close enough
+
+                    
+                    Destroy(spinHitBox);
+
+                    if (comboing) //if we're in a combo lower the idleTime
+                    {
+                        idleTime = .5f;
+                    }
+                    else
+                    {
+                        idleTime = 3f;
+                    }
+
+                    mode = "Idle"; //set mode to idle, but it will have to wait for idleTime to tick down still
+                }
+                else //we still have to move closer
+                {
+                    MoveToPoint(slashSpeed);
                 }
 
-                mode = "Idle";
             }
-            else //we still have to move closer
+            else if (mode == "Magic") //face player and then do nothing (animation already playing)
             {
-                MoveToPoint(slashSpeed);
-            }
-            
-        }
-        else if (mode == "Magic") //face player and then do nothing (animation already playing)
-        {
-            targetPosition = player.transform.position;
-            if (targetPosition.x - transform.position.x < 0)
-            {
-                spriteRenderer.flipX = true;
-            }
-            else
-            {
-                spriteRenderer.flipX = false;
+                targetPosition = player.transform.position;
+                if (targetPosition.x - transform.position.x < 0)
+                {
+                    spriteRenderer.flipX = true;
+                }
+                else
+                {
+                    spriteRenderer.flipX = false;
+                }
             }
         }
+        
 
         currentCooldown -= Time.deltaTime;
         invulnerabilityTimer -= Time.deltaTime;
@@ -162,7 +162,8 @@ public class BossController : MeleeEnemyController
         }
         else if (action == 1)
         {
-            animator.SetBool("Spinning", true);
+            Debug.Log("Spin1");
+            SpinAttack();
         }
         else if (action == 2)
         {
@@ -183,7 +184,8 @@ public class BossController : MeleeEnemyController
         }
         else if (mode == "Spinning")
         {
-            animator.SetBool("Spinning", true);
+            Debug.Log("Spin2");
+            SpinAttack();
         }
         else if (mode == "Magic")
         {
@@ -200,7 +202,7 @@ public class BossController : MeleeEnemyController
 
         enraged = true;
 
-        int action = Random.Range(0, 5);
+        int action = Random.Range(0, 6);
 
         if (action == 0) 
         {
@@ -232,6 +234,12 @@ public class BossController : MeleeEnemyController
             comboQueue.Add("Slash");
             comboQueue.Add("Spinning");
         }
+        else if (action == 5)
+        {
+            comboQueue.Add("Spinning");
+            comboQueue.Add("Spinning");
+            comboQueue.Add("Spinning");
+        }
     }
 
     public void SlashAttack()
@@ -261,13 +269,11 @@ public class BossController : MeleeEnemyController
 
     public void SpinAttack() //boss targets where player currently is and twirls scythe moving towards that location
     {
-        if(mode == "Spinning")
-        {
-            return;
-        }
-
-        animator.ResetTrigger("Hit");
+        
         animator.ResetTrigger("Slash");
+        animator.SetBool("Spinning", true);
+
+        mode = "Spinning";
 
         targetPosition = player.transform.position; //simply pick where the player is
 
@@ -282,8 +288,6 @@ public class BossController : MeleeEnemyController
             Debug.DrawRay(transform.position, relativePosition, Color.green, 2f);
         }
 
-        mode = "Spinning";
-
         if(spinHitBox != null)
         {
             Destroy(spinHitBox);
@@ -291,7 +295,6 @@ public class BossController : MeleeEnemyController
         }
 
         BasicHitbox hitBox = Instantiate(attackHitBox, transform).GetComponent<BasicHitbox>();
-        Debug.Log("Spawned Hitbox");
         spinHitBox = hitBox.gameObject;
         hitBox.Initialize("Enemy", new Vector2(8f, 5f), new Vector2(0, 0), 100f, 20, 4f);
     }
@@ -324,11 +327,11 @@ public class BossController : MeleeEnemyController
         mode = "Idle";
         if(comboing)
         {
-            idleTime = 2f;
+            idleTime = 1f;
         }
         else
         {
-            idleTime = 4f;
+            idleTime = 3f;
         }
     }
 
@@ -340,8 +343,8 @@ public class BossController : MeleeEnemyController
     public void BossDeath()
     {
         LevelChanger levelChanger = GameObject.Find("LevelChanger").GetComponent<LevelChanger>();
-        levelChanger.GoToScene("Start Menu"); //Change this text to the name of the epilogue scene
-        levelChanger.FadeToLevel("Start Menu");
+        levelChanger.GoToScene("Credits"); //Change this text to the name of the epilogue scene
+        levelChanger.FadeToLevel("Credits");
         DestroyMob();
     }
 }
