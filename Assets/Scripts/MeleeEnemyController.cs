@@ -14,6 +14,8 @@ public class MeleeEnemyController : MonoBehaviour
     public float attackCooldown = 1f;
 
     public GameObject attackHitBox;
+    public string deathSound = "GoblinDeath";
+    public string hurtSound = "GoblinHurt";
 
     protected SpriteRenderer spriteRenderer;
     protected Animator animator;
@@ -182,6 +184,7 @@ public class MeleeEnemyController : MonoBehaviour
         }
         else
         {
+            FindObjectOfType<AudioManager>().Play(hurtSound); //sfx
             hpBar.UpdateHealth(health);
             turnRed = true;
         }
@@ -292,6 +295,7 @@ public class MeleeEnemyController : MonoBehaviour
     protected virtual void Attack()
     {
         animator.SetBool("IsWalking", false);
+        FindObjectOfType<AudioManager>().Play("GoblinSwing"); //sfx
         animator.SetTrigger("Attack");
     }
 
@@ -309,6 +313,7 @@ public class MeleeEnemyController : MonoBehaviour
 
     public void GolemAttack()
     {
+        FindObjectOfType<AudioManager>().Play("GolemAtk"); //sfx
         animator.ResetTrigger("Attack");
         currentCooldown = attackCooldown;
         Vector3 spawnPosition = transform.position;
@@ -321,7 +326,7 @@ public class MeleeEnemyController : MonoBehaviour
 
     private void Die()
     {
-        FindObjectOfType<AudioManager>().Play("GoblinDeath");
+        FindObjectOfType<AudioManager>().Play(deathSound);
 
         animator.ResetTrigger("Attack");
         animator.ResetTrigger("Hit");

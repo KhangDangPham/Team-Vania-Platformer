@@ -56,6 +56,7 @@ public class FlyingEnemyController : MeleeEnemyController
     {
         if(collision.gameObject.tag == "Player")
         {
+            FindObjectOfType<AudioManager>().Play("BatAtk"); //sfx
             collision.gameObject.GetComponent<PlayerController>().TakeDamage(10, transform.position, 2);
             currentWaitTime = 1;
         }

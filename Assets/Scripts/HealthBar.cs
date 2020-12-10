@@ -10,9 +10,9 @@ public class HealthBar : MonoBehaviour
 
     List<Image> hearts = new List<Image>();
 
-    int currentHp;
+    protected int currentHp;
 
-    public void InitializeHealthBar(int maxHealth)
+    public virtual void InitializeHealthBar(int maxHealth)
     {
         currentHp = maxHealth;
         int numHearts = maxHealth / 20;
@@ -35,7 +35,7 @@ public class HealthBar : MonoBehaviour
         UpdateHealth(currentHp);
     }
 
-    public void UpdateHealth(int health)
+    public virtual void UpdateHealth(int health)
     {
         currentHp = health;
         int fullHearts = currentHp % 20;
