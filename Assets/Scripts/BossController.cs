@@ -49,7 +49,10 @@ public class BossController : MeleeEnemyController
 
         }
 
-        
+        currentCooldown -= Time.deltaTime;
+        jumpCooldown -= Time.deltaTime;
+        invulnerabilityTimer -= Time.deltaTime;
+
     }
 
     void ChooseAction()
