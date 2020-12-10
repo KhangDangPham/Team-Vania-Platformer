@@ -7,12 +7,17 @@ public class Platform : MonoBehaviour
     public Transform pos1, pos2;
     public float speed;
     public Transform startPos;
-
+    public bool moving = true;
     Vector3 nextPos;
+
     // Start is called before the first frame update
     void Start()
     {
-        nextPos = startPos.position;
+        if(moving)
+        {
+            nextPos = startPos.position;
+        }
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -20,6 +25,10 @@ public class Platform : MonoBehaviour
         if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Enemy")
         {
             collision.gameObject.transform.SetParent(transform);
+            if(collision.gameObject.tag == "Player")
+            {
+                collision.gameObject.GetComponent<PlayerController>().SetGrounded();
+            }
         }
     }
 
@@ -34,20 +43,27 @@ public class Platform : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(transform.position == pos1.position)
+        if(moving)
         {
-            nextPos = pos2.position;
-        }
-        if(transform.position == pos2.position)
-        {
-            nextPos = pos1.position;
-        }
 
-        transform.position = Vector3.MoveTowards(transform.position, nextPos, speed * Time.deltaTime);
+            if (transform.position == pos1.position)
+            {
+                nextPos = pos2.position;
+            }
+            if (transform.position == pos2.position)
+            {
+                nextPos = pos1.position;
+            }
+
+            transform.position = Vector3.MoveTowards(transform.position, nextPos, speed * Time.deltaTime);
+        }
     }
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawLine(pos1.position, pos2.position);
+        if(moving)
+        {
+            Gizmos.DrawLine(pos1.position, pos2.position);
+        }
     }
 }

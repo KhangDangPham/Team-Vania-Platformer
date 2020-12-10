@@ -10,25 +10,13 @@ public class LevelEnd : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        StartCoroutine(fade());
-    }
-
-    public IEnumerator fade()
-    {
-        Image faderImage = GameObject.Find("BlackImg").GetComponent<Image>();
-
-        for (int i = 0; i <= 100; i++)
+        if(collision.gameObject.tag == "Player")
         {
-            faderImage.color = new Color(0, 0, 0, (float)i / 100.0f);
-            yield return new WaitForSeconds(0.02f);
+            LevelChanger levelChanger = GameObject.Find("LevelChanger").GetComponent<LevelChanger>();
+            levelChanger.GoToScene(sceneName);
+            levelChanger.FadeToLevel(sceneName);
         }
 
-        ChangeScene(sceneName);
-    }
-
-    public void ChangeScene(string sceneName)
-    {
-        SceneManager.LoadScene(sceneName);
     }
 
 }
