@@ -8,26 +8,47 @@ public class BossController : MeleeEnemyController
     public float slashSpeed = 15f;
     Vector2 targetPosition;
 
+    GameObject spinHitBox;
     string mode = "Idle";
 
     float idleTime = 0f;
 
+    bool enraged = false;
     // Update is called once per frame
     void Update()
     { 
-        if(mode == "Idle") //boss is waiting between an attack
+        if(health <= 0)
         {
-            
+            return;
+        }
+
+        if (health < (maxHealth / 2))
+        {
+            //enter enrageMode
+            enraged = true;
+        }
+
+
+        if(mode == "Idle") //boss is waiting between an attack
+        {         
             //pick a new action
             if(idleTime <= 0)
             {
                 ChooseAction();
             }
+        }
+        else if (mode == "Slash")
+        {
+            targetPosition = player.transform.position;
+            float distance = Vector2.Distance(transform.position, targetPosition);
+            if (distance <= attackRange) //we're close enough to the target position, so stop the attack
+            {
+                animator.SetTrigger("Slash");
+            }
             else
             {
-                idleTime -= Time.deltaTime;
+                MoveToPoint(speed+(-1 * idleTime));
             }
-
         }
         else if (mode == "Spinning")
         {
@@ -35,33 +56,43 @@ public class BossController : MeleeEnemyController
 
             if(distance <= 1f) //we're close enough to the target position, so stop the attack
             {
+                animator.SetBool("Spinning", false);
+                animator.ResetTrigger("Hit");
+
+                Destroy(spinHitBox);
+
                 mode = "Idle";
-                idleTime = 2f;
+                idleTime = 1.5f;
             }
             else //we still have to move closer
             {
-                transform.position = Vector2.MoveTowards(transform.position, targetPosition, slashSpeed * Time.deltaTime);
+                MoveToPoint(slashSpeed);
             }
             
         }
-        else if (mode == "Fireball")
+        else if (mode == "Magic") //face player and then do nothing (animation already playing)
         {
-
+            targetPosition = player.transform.position;
+            if (targetPosition.x - transform.position.x < 0)
+            {
+                spriteRenderer.flipX = true;
+            }
+            else
+            {
+                spriteRenderer.flipX = false;
+            }
+            mode = "Idle";
+            idleTime = 3f;
         }
 
         currentCooldown -= Time.deltaTime;
-        jumpCooldown -= Time.deltaTime;
         invulnerabilityTimer -= Time.deltaTime;
+        idleTime -= Time.deltaTime;
 
     }
 
-    void ChooseAction()
+    void MoveToPoint(float moveSpeed)
     {
-        rb.velocity = Vector2.zero;
-
-        mode = "Spinning";
-        targetPosition = player.transform.position;
-
         if (targetPosition.x - transform.position.x < 0)
         {
             spriteRenderer.flipX = true;
@@ -70,43 +101,85 @@ public class BossController : MeleeEnemyController
         {
             spriteRenderer.flipX = false;
         }
-    }
-    protected override void Attack()
-    {
-        animator.SetBool("IsWalking", false);
-        animator.SetTrigger("Attack");
+
+        transform.position = Vector2.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
     }
 
-    public void BasicAttack() //spawn basic melee attack
+    void ChooseAction()
     {
-        animator.ResetTrigger("Attack");
+        int action = Random.Range(1, 1);
+        Debug.Log("Chose: " + action);
+        rb.velocity = Vector2.zero;
+        animator.ResetTrigger("Hit");
+
+        if(action == 0)
+        {
+            mode = "Slash";
+        }
+        else if (action == 1)
+        {
+            mode = "Spinning";
+            animator.SetBool("Spinning", true);
+            targetPosition = player.transform.position;
+
+        }
+        else if (action == 2)
+        {
+            mode = "Magic";
+            animator.SetTrigger("Magic");
+        }
+        
+    }
+
+    public void SlashAttack()
+    {
+        mode = "Idle";
+        idleTime = 1f;
+        animator.ResetTrigger("Hit");
+
+
         currentCooldown = attackCooldown;
         Vector3 spawnPosition = transform.position;
 
-        spawnPosition += spriteRenderer.flipX ? transform.right * 1 : transform.right * -1;
+        spawnPosition += spriteRenderer.flipX ? transform.right * -1 : transform.right * 1;
         BasicHitbox hitBox = Instantiate(attackHitBox, spawnPosition, Quaternion.identity).GetComponent<BasicHitbox>();
 
-        hitBox.Initialize("Enemy", new Vector2(1.5f, 1.5f), new Vector2(0, 0), .1f, 25, 2.5f);
+        hitBox.Initialize("Enemy", new Vector2(1.5f, 1.5f), new Vector2(0, 0), .1f, 20, 2f);
     }
 
     public void SpinAttack() //boss targets where player currently is and twirls scythe moving towards that location
     {
-        targetPosition = player.transform.position;
+        targetPosition = player.transform.position; //simply pick where the player is
+        targetPosition = player.transform.position; //simply pick where the player is
+
+        int bossBorderLayer = LayerMask.NameToLayer("BossRoomBorder");
+        Vector2 relativePosition = player.transform.position - transform.position;
+        relativePosition = relativePosition.normalized; //get vector for direction
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, relativePosition, 100, 1 << bossBorderLayer);
+
+        Debug.DrawRay(transform.position, relativePosition, Color.green, 2f);
+
+        if (hit.collider != null)
+        {
+            targetPosition = hit.point;
+        }
+
+        //Debug.DrawLine(transform.position, targetPosition, Color.red, 2f);
         mode = "Spinning";
+        animator.SetBool("Spinning", true);
 
         BasicHitbox hitBox = Instantiate(attackHitBox, transform).GetComponent<BasicHitbox>();
-        hitBox.Initialize("Enemy", new Vector2(1.5f, 1.5f), new Vector2(0, 0), .1f, 25, 2.5f);
+        spinHitBox = hitBox.gameObject;
+        hitBox.Initialize("Enemy", new Vector2(8f, 5f), new Vector2(0, 0), 100f, 20, 4f);
     }
 
     public void MagicAttack()
     {
-        animator.ResetTrigger("Attack");
-        currentCooldown = attackCooldown;
         //Calculate relative position in order to spawn the projectile between the player and the enemy
         Vector2 spawnPosition = (Vector2)transform.position;
         Vector2 relativePosition = player.transform.position - transform.position;
 
-        if (relativePosition.x > 0)
+        if (relativePosition.x < 0)
         {
             spriteRenderer.flipX = true;
         }
@@ -124,5 +197,10 @@ public class BossController : MeleeEnemyController
 
         //Initialize the projectile, giving it the information it needs
         Projectile.GetComponent<Projectile>().InitializeProjectile(transform.position, 20);
+    }
+
+    public void BossDeath()
+    {
+        DestroyMob();
     }
 }
