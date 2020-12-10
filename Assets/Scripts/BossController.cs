@@ -14,7 +14,7 @@ public class BossController : MeleeEnemyController
     GameObject spinHitBox;
     string mode = "Idle";
 
-    float idleTime = 5f;
+    float idleTime = 3f;
     float heartSpawnTime = 30f;
     float comboCd = 10f;
     bool enraged = false;
