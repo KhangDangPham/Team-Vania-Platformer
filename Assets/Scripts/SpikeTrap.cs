@@ -24,6 +24,17 @@ public class SpikeTrap : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            collision.gameObject.GetComponent<PlayerController>().TakeDamage(damage);
+        }
+        else if (collision.gameObject.tag == "Enemy")
+        {
+            collision.gameObject.GetComponent<MeleeEnemyController>().TakeDamage(100);
+        }
+    }
     // Update is called once per frame
     void Update()
     {
