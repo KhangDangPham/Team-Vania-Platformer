@@ -242,7 +242,7 @@ TextureImporter:
       name: Golem Attack_2
       rect:
         serializedVersion: 2
-        x: 126
+        x: 113
         y: 2000
         width: 521
         height: 667
@@ -305,7 +305,7 @@ TextureImporter:
       name: Golem Attack_17
       rect:
         serializedVersion: 2
-        x: 179
+        x: 182
         y: 1041
         width: 521
         height: 858
@@ -347,7 +347,7 @@ TextureImporter:
       name: Golem Attack_20
       rect:
         serializedVersion: 2
-        x: 2091
+        x: 2094
         y: 995
         width: 724
         height: 795
