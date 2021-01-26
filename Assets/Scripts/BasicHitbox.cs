@@ -17,7 +17,7 @@ public class BasicHitbox : MonoBehaviour
         if(initialized)
         {
             lifespan -= Time.deltaTime;
-            if(lifespan <= 0)
+            if (lifespan <= 0)
             {
                 Destroy(gameObject);
             }
