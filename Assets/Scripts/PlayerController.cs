@@ -33,6 +33,13 @@ public class PlayerController : MonoBehaviour
     float invulnerabilityTimer = 0f;
     int blinkMode = 0; //0 = no blinking, 1 = decreasing opacity, 2 = increasing opacity
 
+    private BoxCollider2D boxCollider2d;
+
+    private void Awake()
+    {
+        boxCollider2d = GetComponent<BoxCollider2D>();
+    }
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -47,15 +54,13 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-
         if (Input.GetButtonDown("Jump") && jumps > 0 && canMove)
         {
-
-            if (!isJumping) //if not already jumping, call jump animation
+            if (!isJumping) //if not already jumping and spin attacking, call jump animation
             {
                 animator.SetBool("IsJumping", true);
             }
-            else //if we're already jumping, do double jump
+            if (isJumping)//if we're already jumping, do double jump
             {
                 animator.SetTrigger("DoubleJump");
             }
@@ -71,7 +76,7 @@ public class PlayerController : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Mouse0))
         {
             string clipName = animator.GetCurrentAnimatorClipInfo(0)[0].clip.name;
-            Debug.Log(clipName);
+            // Debug.Log(clipName);
             if (clipName != "slash" && clipName != "SpinAttack")
             {
                 animator.SetTrigger("BasicAttack");
@@ -167,7 +172,7 @@ public class PlayerController : MonoBehaviour
             {
                 if(hasJumped && jumpTimer < 0) //check for grounded after player has jumped
                 {
-                    animator.SetBool("IsJumping", false);
+                    // animator.SetBool("IsJumping", false);
                     animator.ResetTrigger("DoubleJump");
                     isJumping = false;
                     hasJumped = false;
@@ -225,7 +230,6 @@ public class PlayerController : MonoBehaviour
         jumpTimer = .4f;
         hasJumped = true;
         isJumping = true;
-
     }
 
     public void TakeDamage(int damage)
@@ -391,7 +395,7 @@ public class PlayerController : MonoBehaviour
 
         BasicHitbox hitBox = Instantiate(attackHitBox, transform).GetComponent<BasicHitbox>();
         FindObjectOfType<AudioManager>().Play("SpinAtk"); //sfx
-        hitBox.Initialize("Player", new Vector2(10, 7.5f), new Vector2(0, 0), .3f, 30, 5);
+        hitBox.Initialize("Player", new Vector2(10, 7.5f), new Vector2(0, 0), 1f, 30, 5);
     }
     
     public void ResetAttack()
@@ -429,5 +433,21 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("IsAiming", false);
         animator.ResetTrigger("Magic");
         canShoot = false;
+    }
+
+    private void OnCollisionStay2D(Collision2D col)
+    {
+        if (col.gameObject.tag == "Ground" && animator.GetBool("IsJumping") == true)
+        {
+            animator.SetBool("IsJumping", false);
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D col)
+    {
+        if (col.gameObject.tag == "Ground")
+        {
+            animator.SetBool("IsJumping", true);
+        }
     }
 }
