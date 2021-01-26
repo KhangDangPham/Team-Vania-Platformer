@@ -33,13 +33,6 @@ public class PlayerController : MonoBehaviour
     float invulnerabilityTimer = 0f;
     int blinkMode = 0; //0 = no blinking, 1 = decreasing opacity, 2 = increasing opacity
 
-    private BoxCollider2D boxCollider2d;
-
-    private void Awake()
-    {
-        boxCollider2d = GetComponent<BoxCollider2D>();
-    }
-
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
