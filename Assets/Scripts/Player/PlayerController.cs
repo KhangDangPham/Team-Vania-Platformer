@@ -47,14 +47,8 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetButtonDown("Jump") && jumps > 0 && canMove)
         {
-            if (!animator.GetBool("IsJumping")) //if not already jumping and spin attacking, call jump animation
-            {
-                animator.SetBool("IsJumping", true);
-            }
-            else //if we're already jumping, do double jump
-            {
-                animator.SetTrigger("DoubleJump");
-            }
+            animator.SetTrigger("Jump");
+            Jump();
         }
 
         if(Input.GetKeyDown(KeyCode.Q) && mana >= 100)
@@ -141,7 +135,7 @@ public class PlayerController : MonoBehaviour
         }
         
 
-        RobustGrounded();
+        // RobustGrounded();
 
         invulnerabilityTimer -= Time.deltaTime;
         jumpTimer -= Time.deltaTime;
@@ -149,7 +143,7 @@ public class PlayerController : MonoBehaviour
         hpBar.UpdateMana(mana);
     }
 
-    bool Grounded(Vector3 startPos)
+/*    bool Grounded(Vector3 startPos)
     {
 
         int groundOnlyLayer = LayerMask.NameToLayer("Ground"); //remove this if problems caused
@@ -178,9 +172,9 @@ public class PlayerController : MonoBehaviour
         {
             return false;
         }
-    }
+    }*/
 
-    bool RobustGrounded()
+/*    bool RobustGrounded()
     {
         if (Grounded(transform.position + new Vector3(.47f, 0, 0)))
         {
@@ -198,12 +192,12 @@ public class PlayerController : MonoBehaviour
         {
             return false;
         }
-    }
+    }*/
 
     public void SetGrounded()
     {
-        animator.SetBool("IsJumping", false);
-        animator.ResetTrigger("DoubleJump");
+        animator.SetBool("IsAerial", false);
+        animator.ResetTrigger("Jump");
         jumps = 2;
     }
 
@@ -379,7 +373,7 @@ public class PlayerController : MonoBehaviour
 
         BasicHitbox hitBox = Instantiate(attackHitBox, transform).GetComponent<BasicHitbox>();
         FindObjectOfType<AudioManager>().Play("SpinAtk"); //sfx
-        hitBox.Initialize("Player", new Vector2(10, 7.5f), new Vector2(0, 0), 1f, 30, 5);
+        hitBox.Initialize("Player", new Vector2(10, 7.5f), new Vector2(0, 0), .3f, 30, 5);
     }
     
     public void ResetAttack()
@@ -419,12 +413,19 @@ public class PlayerController : MonoBehaviour
         canShoot = false;
     }
 
-    private void OnCollisionStay2D(Collision2D col)
+    private void OnCollisionStay2D(Collision2D collision)
     {
-        if (col.gameObject.tag == "Ground" && animator.GetBool("IsJumping") == true)
+        if (collision.gameObject.tag == "Ground" && animator.GetBool("IsAerial") == true)
         {
-            animator.SetBool("IsJumping", false);
-            jumps = 2;
+            SetGrounded();
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            animator.SetBool("IsAerial", true);
         }
     }
 }
