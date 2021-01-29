@@ -23,8 +23,6 @@ public class PlayerController : MonoBehaviour
 
     bool canMove = true;
     bool canShoot = false;
-    bool isJumping = false;
-    bool hasJumped = false;
     int jumps = 2;
     float jumpTimer = 0f;
     int maxHealth;
@@ -49,11 +47,11 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetButtonDown("Jump") && jumps > 0 && canMove)
         {
-            if (!isJumping) //if not already jumping and spin attacking, call jump animation
+            if (!animator.GetBool("IsJumping")) //if not already jumping and spin attacking, call jump animation
             {
                 animator.SetBool("IsJumping", true);
             }
-            if (isJumping)//if we're already jumping, do double jump
+            else //if we're already jumping, do double jump
             {
                 animator.SetTrigger("DoubleJump");
             }
@@ -140,7 +138,6 @@ public class PlayerController : MonoBehaviour
         else
         {
             animator.SetBool("IsWalking", false);
-            
         }
         
 
@@ -163,12 +160,10 @@ public class PlayerController : MonoBehaviour
             float distanceToGround = Mathf.Abs(hit.point.y - startPos.y);
             if(distanceToGround < .94)
             {
-                if(hasJumped && jumpTimer < 0) //check for grounded after player has jumped
+                if(animator.GetBool("IsJumping") && jumpTimer < 0) //check for grounded after player has jumped
                 {
                     // animator.SetBool("IsJumping", false);
                     animator.ResetTrigger("DoubleJump");
-                    isJumping = false;
-                    hasJumped = false;
                     jumps = 2;
                 }
 
@@ -209,8 +204,6 @@ public class PlayerController : MonoBehaviour
     {
         animator.SetBool("IsJumping", false);
         animator.ResetTrigger("DoubleJump");
-        isJumping = false;
-        hasJumped = false;
         jumps = 2;
     }
 
@@ -221,8 +214,6 @@ public class PlayerController : MonoBehaviour
         FindObjectOfType<AudioManager>().Play("Jump"); //sfx
         jumps -= 1;
         jumpTimer = .4f;
-        hasJumped = true;
-        isJumping = true;
     }
 
     public void TakeDamage(int damage)
@@ -433,14 +424,7 @@ public class PlayerController : MonoBehaviour
         if (col.gameObject.tag == "Ground" && animator.GetBool("IsJumping") == true)
         {
             animator.SetBool("IsJumping", false);
-        }
-    }
-
-    private void OnCollisionExit2D(Collision2D col)
-    {
-        if (col.gameObject.tag == "Ground")
-        {
-            animator.SetBool("IsJumping", true);
+            jumps = 2;
         }
     }
 }
