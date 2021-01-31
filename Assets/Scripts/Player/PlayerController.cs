@@ -7,7 +7,8 @@ using UnityEngine.SceneManagement;
 //This script will handle all of the player's movement
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 10;
+    public float acceleration = 10;
+    public float max_speed = 100;
     public float jumpForce = 10;
     public int health = 100;
     public float mana = 100;
@@ -107,7 +108,7 @@ public class PlayerController : MonoBehaviour
                 spriteRenderer.flipX = false;
             }
 
-            //Set walking variable
+/*            //Set walking variable
             if (horizontalMove != 0 && rb.velocity.x == 0)
             {
                 animator.SetBool("IsWalking", true);
@@ -115,15 +116,15 @@ public class PlayerController : MonoBehaviour
             else
             {
                 animator.SetBool("IsWalking", false);
-            }
+            }*/
         }
         else
         {
             horizontalMove = 0;
         }
-        
 
-        Vector2 movement = new Vector2(horizontalMove, verticalMove);
+
+        /*Vector2 movement = new Vector2(horizontalMove, verticalMove);
 
         if(!CheckSidesWalk(movement.x))
         {
@@ -132,8 +133,15 @@ public class PlayerController : MonoBehaviour
         else
         {
             animator.SetBool("IsWalking", false);
+        }*/
+
+        if(rb.velocity.magnitude < max_speed)
+        {
+            float x_movement = Input.GetAxis("Horizontal");
+            Vector2 movement = new Vector2(x_movement, 0);
+            rb.AddForce(acceleration * movement);
         }
-        
+
 
         // RobustGrounded();
 
@@ -415,7 +423,9 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Ground" && animator.GetBool("IsAerial") == true)
+        Vector3 contact_point = collision.contacts[0].point;
+        Vector3 center = collision.collider.bounds.center;
+        if (collision.gameObject.tag == "Ground" && animator.GetBool("IsAerial") == true || contact_point.y < center.y)
         {
             SetGrounded();
         }

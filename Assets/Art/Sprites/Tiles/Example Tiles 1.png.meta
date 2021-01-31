@@ -1,19 +1,28 @@
 fileFormatVersion: 2
-guid: a1a4272c628955944b8ae3bbcf4c67ce
+guid: 465f240309c55c4459c04450d849383a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7165744913840883351
-    second: Cave Tileset example_0
+      213: -205876208096676150
+    second: Example Tiles 1_0
   - first:
-      213: 294863552773208188
-    second: Cave Tileset example_1
+      213: 5955717571558957125
+    second: Example Tiles 1_1
   - first:
-      213: 4094214790550512050
-    second: Cave Tileset example_2
+      213: -1802438347599728872
+    second: Example Tiles 1_2
   - first:
-      213: 7028420003390510886
-    second: Cave Tileset example_3
+      213: -5583688962385466409
+    second: Example Tiles 1_3
+  - first:
+      213: -3275614339134923971
+    second: Example Tiles 1_4
+  - first:
+      213: 1490528238696277471
+    second: Example Tiles 1_5
+  - first:
+      213: 5757783250868770375
+    second: Example Tiles 1_6
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -58,7 +67,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 64
+  spritePixelsToUnits: 65
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -97,89 +106,164 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Cave Tileset example_0
+      name: Example Tiles 1_0
       rect:
         serializedVersion: 2
-        x: 1
-        y: 2
-        width: 64
-        height: 64
+        x: 99
+        y: 88
+        width: 65
+        height: 65
       alignment: 0
       pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 1, y: 1, z: 1, w: 1}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 969b37377f82e8c90800000000000000
-      internalID: -7165744913840883351
+      spriteID: ac671b4fda4942df0800000000000000
+      internalID: -205876208096676150
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cave Tileset example_1
+      name: Example Tiles 1_1
       rect:
         serializedVersion: 2
-        x: 66
-        y: 2
-        width: 64
-        height: 64
+        x: 165
+        y: 88
+        width: 65
+        height: 65
       alignment: 0
       pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 1, y: 1, z: 1, w: 1}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c78b148c6d0971400800000000000000
-      internalID: 294863552773208188
+      spriteID: 540e25b9395f6a250800000000000000
+      internalID: 5955717571558957125
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cave Tileset example_2
+      name: Example Tiles 1_2
       rect:
         serializedVersion: 2
-        x: 131
-        y: 2
-        width: 64
-        height: 64
+        x: 232
+        y: 88
+        width: 65
+        height: 65
       alignment: 0
       pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 1, y: 1, z: 1, w: 1}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2b1e9e0f8a291d830800000000000000
-      internalID: 4094214790550512050
+      spriteID: 81fa6c16fd37cf6e0800000000000000
+      internalID: -1802438347599728872
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cave Tileset example_3
+      name: Example Tiles 1_3
       rect:
         serializedVersion: 2
-        x: 196
-        y: 2
-        width: 64
-        height: 64
+        x: 310
+        y: 88
+        width: 65
+        height: 65
       alignment: 0
       pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 1, y: 1, z: 1, w: 1}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 627575241c6f98160800000000000000
-      internalID: 7028420003390510886
+      spriteID: 7dbaebce870c282b0800000000000000
+      internalID: -5583688962385466409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Example Tiles 1_4
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 20
+        width: 65
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 1, y: 1, z: 1, w: 1}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d3bdfae0d1eaa82d0800000000000000
+      internalID: -3275614339134923971
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Example Tiles 1_5
+      rect:
+        serializedVersion: 2
+        x: 232
+        y: 20
+        width: 65
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 1, y: 1, z: 1, w: 1}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd52e23398b6fa410800000000000000
+      internalID: 1490528238696277471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Example Tiles 1_6
+      rect:
+        serializedVersion: 2
+        x: 310
+        y: 21
+        width: 65
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 1, y: 1, z: 1, w: 1}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7461ab15c51c7ef40800000000000000
+      internalID: 5757783250868770375
       vertices: []
       indices: 
       edges: []

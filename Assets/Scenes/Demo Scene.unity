@@ -854,6 +854,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 562fc99fbc906134f9742688c014cb78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  respawn: 0
   fallSpeed: 7.5
   lifeTime: 2
 --- !u!114 &651686532
@@ -868,6 +869,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cfa834dd0a49ef4d9cf2cdc4bec185e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 100
 --- !u!61 &651686533
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5561,7 +5563,7 @@ TilemapCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
+  m_UsedByComposite: 1
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001
@@ -5607,7 +5609,7 @@ Transform:
   m_Children:
   - {fileID: 1448510064}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1592355774
 PrefabInstance:
@@ -5847,6 +5849,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 562fc99fbc906134f9742688c014cb78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  respawn: 0
   fallSpeed: 7.5
   lifeTime: 2
 --- !u!114 &2144181540
@@ -5861,6 +5864,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cfa834dd0a49ef4d9cf2cdc4bec185e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 100
 --- !u!61 &2144181541
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5950,6 +5954,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cfa834dd0a49ef4d9cf2cdc4bec185e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 100
 --- !u!61 &1442983760406082160
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6073,6 +6078,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 562fc99fbc906134f9742688c014cb78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  respawn: 0
   fallSpeed: 7.5
   lifeTime: 2
 --- !u!1001 &1442983760515478976
