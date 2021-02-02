@@ -35,6 +35,7 @@ public class RangedVisualController : MonoBehaviour
 
     public void EnterShootMode()
     {
+        playerController.DisableMovement();
         shootMode = true;
         currentFireDelay = fireDelay;
         head.SetActive(true);

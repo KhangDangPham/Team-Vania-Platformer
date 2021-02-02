@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 //This script will handle all of the player's movement
 public class PlayerController : MonoBehaviour
 {
-    public float acceleration = 10;
-    public float max_speed = 100;
+    public float playerSpeed = 2f;
     public float jumpForce = 10;
     public int health = 100;
     public float mana = 100;
@@ -28,9 +28,18 @@ public class PlayerController : MonoBehaviour
     float jumpTimer = 0f;
     int maxHealth;
 
+    float horizontalMove = 0f;
+    [SerializeField] private Transform m_GroundCheck;							// A position marking where to check if the player is grounded.
+    [SerializeField] private LayerMask m_WhatIsGround;							// A mask determining what is ground to the character
+    const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
+    private bool m_Grounded;            // Whether or not the player is grounded.
+
     //used when the player gets hit
     float invulnerabilityTimer = 0f;
     int blinkMode = 0; //0 = no blinking, 1 = decreasing opacity, 2 = increasing opacity
+
+    [Range(0, .3f)] [SerializeField] private float m_MovementSmoothing = .05f;  // How much to smooth out the movement
+    private Vector3 velocity = Vector3.zero;
 
     void Start()
     {
@@ -90,117 +99,55 @@ public class PlayerController : MonoBehaviour
         }
 
         HandleBlink();
+
+        horizontalMove = Input.GetAxisRaw("Horizontal") * playerSpeed;
     }
     void FixedUpdate()
     {
-        float horizontalMove = Input.GetAxis("Horizontal");
-        float verticalMove = 0; //placeholder for other vertical forces minus jumping
+        m_Grounded = false;
 
-        if(canMove)
+        // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
+        // This can be done using layers instead but Sample Assets will not overwrite your project settings.
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
+        for (int i = 0; i < colliders.Length; i++)
+        {
+            if (colliders[i].gameObject != gameObject)
+                m_Grounded = true;
+        }
+
+        if (canMove)
         {
             //flip the character to face the movement direction
             if (horizontalMove < 0)
             {
                 spriteRenderer.flipX = true;
+                animator.SetBool("IsWalking", true);
             }
             else if (horizontalMove > 0)
             {
                 spriteRenderer.flipX = false;
-            }
-
-/*            //Set walking variable
-            if (horizontalMove != 0 && rb.velocity.x == 0)
-            {
                 animator.SetBool("IsWalking", true);
             }
             else
             {
                 animator.SetBool("IsWalking", false);
-            }*/
+            }
+
+            // Move the character by finding the target velocity
+            Vector3 targetVelocity = new Vector2(horizontalMove * Time.fixedDeltaTime * 10f, rb.velocity.y);
+            // And then smoothing it out and applying it to the character
+            rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, m_MovementSmoothing);
         }
         else
         {
             horizontalMove = 0;
         }
 
-
-        /*Vector2 movement = new Vector2(horizontalMove, verticalMove);
-
-        if(!CheckSidesWalk(movement.x))
-        {
-            transform.position += new Vector3(movement.x, movement.y, 0) * speed * Time.deltaTime;
-        }
-        else
-        {
-            animator.SetBool("IsWalking", false);
-        }*/
-
-        if(rb.velocity.magnitude < max_speed)
-        {
-            float x_movement = Input.GetAxis("Horizontal");
-            Vector2 movement = new Vector2(x_movement, 0);
-            rb.AddForce(acceleration * movement);
-        }
-
-
-        // RobustGrounded();
-
         invulnerabilityTimer -= Time.deltaTime;
         jumpTimer -= Time.deltaTime;
         mana = mana >= 100 ? 100 : mana + Time.deltaTime;
         hpBar.UpdateMana(mana);
     }
-
-/*    bool Grounded(Vector3 startPos)
-    {
-
-        int groundOnlyLayer = LayerMask.NameToLayer("Ground"); //remove this if problems caused
-        RaycastHit2D hit = Physics2D.Raycast(startPos, -Vector2.up, 100, 1 << groundOnlyLayer);
-
-        if (hit.collider != null)
-        {
-            float distanceToGround = Mathf.Abs(hit.point.y - startPos.y);
-            if(distanceToGround < .94)
-            {
-                if(animator.GetBool("IsJumping") && jumpTimer < 0) //check for grounded after player has jumped
-                {
-                    // animator.SetBool("IsJumping", false);
-                    animator.ResetTrigger("DoubleJump");
-                    jumps = 2;
-                }
-
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-        else
-        {
-            return false;
-        }
-    }*/
-
-/*    bool RobustGrounded()
-    {
-        if (Grounded(transform.position + new Vector3(.47f, 0, 0)))
-        {
-            return true;
-        }
-        else if (Grounded(transform.position))
-        {
-            return true;
-        }
-        else if(Grounded(transform.position + new Vector3(-.47f, 0, 0)))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }*/
 
     public void SetGrounded()
     {
@@ -275,35 +222,6 @@ public class PlayerController : MonoBehaviour
         }
 
         hpBar.UpdateHealth(health);
-    }
-
-    bool CheckSidesWalk(float xMove)
-    {
-        int groundOnlyMask = LayerMask.GetMask("Ground");
-        Vector3 shootPos = transform.position - new Vector3(0, .9f, 0);
-        RaycastHit2D leftCheck = Physics2D.Raycast(shootPos, Vector2.left, 10f, groundOnlyMask);
-        RaycastHit2D rightCheck = Physics2D.Raycast(shootPos, Vector2.right, 10f, groundOnlyMask);
-        float distanceLeft = 100f;
-        float distanceRight = 100f;
-
-        if (leftCheck.collider != null)
-        {
-            distanceLeft = Mathf.Abs(leftCheck.point.x - transform.position.x);
-        }
-
-        if (rightCheck.collider != null)
-        {
-            distanceRight = Mathf.Abs(rightCheck.point.x - transform.position.x);
-        }
-
-        if (xMove < 0)
-        {
-            return distanceLeft <= .5f;
-        }
-        else
-        {
-            return distanceRight <= .5f;
-        }
     }
 
     private void HandleBlink()
@@ -409,7 +327,10 @@ public class PlayerController : MonoBehaviour
     public void DisableMovement()
     {
         canMove = false;
-        
+        // Move the character by finding the target velocity
+        Vector3 targetVelocity = new Vector2(0, rb.velocity.y);
+        // And then smoothing it out and applying it to the character
+        rb.velocity = new Vector2(0,0); // Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, m_MovementSmoothing);
     }
 
     public void EnableMovement()
@@ -423,9 +344,15 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        Vector3 contact_point = collision.contacts[0].point;
-        Vector3 center = collision.collider.bounds.center;
-        if (collision.gameObject.tag == "Ground" && animator.GetBool("IsAerial") == true || contact_point.y < center.y)
+        if(m_Grounded && jumps == 0)
+        {
+            jumps = 2;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Ground" && animator.GetBool("IsAerial") == true || m_Grounded)
         {
             SetGrounded();
         }
