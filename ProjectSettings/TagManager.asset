@@ -9,6 +9,7 @@ TagManager:
   - Platform
   - VolumeSlider
   - Volume
+  - Unclimbable
   layers:
   - Default
   - TransparentFX

@@ -110,9 +110,12 @@ public class PlayerController : MonoBehaviour
         // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
         // This can be done using layers instead but Sample Assets will not overwrite your project settings.
         Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
+        if(colliders.Length == 0)
+            animator.SetBool("IsAerial", true);
+
         for (int i = 0; i < colliders.Length; i++)
         {
-            if (colliders[i].gameObject != gameObject)
+            if (colliders[i].gameObject != gameObject && colliders[i].tag != "Unclimbable")
                 m_Grounded = true;
         }
 
@@ -353,7 +356,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Ground" && animator.GetBool("IsAerial") == true || m_Grounded)
+        if (collision.gameObject.tag == "Ground" && collision.gameObject.tag != "Unclimbable" && animator.GetBool("IsAerial") == true || m_Grounded)
         {
             SetGrounded();
         }
