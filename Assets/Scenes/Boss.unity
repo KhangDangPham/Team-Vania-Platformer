@@ -1294,7 +1294,7 @@ Transform:
   - {fileID: 461141852}
   - {fileID: 1476786737}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &433861657
 PrefabInstance:
@@ -1975,6 +1975,8 @@ GameObject:
   - component: {fileID: 673874735}
   - component: {fileID: 673874734}
   - component: {fileID: 673874736}
+  - component: {fileID: 673874738}
+  - component: {fileID: 673874737}
   m_Layer: 8
   m_Name: Tilemap
   m_TagString: Ground
@@ -14104,6 +14106,75 @@ TilemapCollider2D:
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001
+--- !u!66 &673874737
+CompositeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 673874732}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_GeometryType: 0
+  m_GenerationType: 0
+  m_EdgeRadius: 0
+  m_ColliderPaths:
+  - m_Collider: {fileID: 673874736}
+    m_ColliderPaths:
+    - - X: 30000000
+        Y: 560000000
+      - X: -500000000
+        Y: 560000000
+      - X: -500000000
+        Y: 270000000
+      - X: 30000000
+        Y: 270000000
+    - - X: -350000000
+        Y: 370000000
+      - X: -350000000
+        Y: 460000000
+      - X: -110000000
+        Y: 460000000
+      - X: -110000000
+        Y: 370000000
+  m_CompositePaths:
+    m_Paths:
+    - - {x: 2.999971, y: 27}
+      - {x: 2.999971, y: 56}
+      - {x: -50, y: 55.99997}
+      - {x: -49.999973, y: 27}
+    - - {x: -11, y: 37.00003}
+      - {x: -35, y: 37.00003}
+      - {x: -34.999973, y: 46}
+      - {x: -11, y: 45.999973}
+  m_VertexDistance: 0.0005
+  m_OffsetDistance: 0.00005
+--- !u!50 &673874738
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 673874732}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &683206009
 GameObject:
   m_ObjectHideFlags: 0
