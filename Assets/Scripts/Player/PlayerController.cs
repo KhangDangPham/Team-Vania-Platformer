@@ -62,38 +62,37 @@ public class PlayerController : MonoBehaviour
             Jump();
         }
 
-        if(Input.GetKeyDown(KeyCode.Q) && mana >= 100)
+        if (Input.GetKeyDown(KeyCode.Q) && mana >= 100)
         {
             invulnerabilityTimer = 4f;
             FindObjectOfType<AudioManager>().Play("MagicBurst"); //sfx
             animator.SetTrigger("Magic");
         }
-        
-        if(Input.GetKeyDown(KeyCode.Mouse0))
+
+        if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             string clipName = animator.GetCurrentAnimatorClipInfo(0)[0].clip.name;
-            Debug.Log(clipName);
             if (clipName != "slash" && clipName != "SpinAttack")
             {
                 animator.SetTrigger("BasicAttack");
             }
         }
 
-        if(Input.GetKeyDown(KeyCode.Mouse1))
+        if (Input.GetKeyDown(KeyCode.Mouse1))
         {
-            if(!canShoot)
+            if (!canShoot)
             {
                 animator.SetBool("IsAiming", true);
                 canShoot = true;
             }
         }
 
-        if(Input.GetKeyDown(KeyCode.X))
+        if (Input.GetKeyDown(KeyCode.X))
         {
             TakeDamage(15);
         }
 
-        if(Input.GetKeyDown(KeyCode.C))
+        if (Input.GetKeyDown(KeyCode.C))
         {
             health = maxHealth;
             hpBar.UpdateHealth(health);
@@ -110,7 +109,7 @@ public class PlayerController : MonoBehaviour
         // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
         // This can be done using layers instead but Sample Assets will not overwrite your project settings.
         Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
-        if(colliders.Length == 0)
+        if (colliders.Length == 0)
             animator.SetBool("IsAerial", true);
 
         for (int i = 0; i < colliders.Length; i++)
@@ -163,7 +162,7 @@ public class PlayerController : MonoBehaviour
     public void Jump()
     {
         rb.velocity = new Vector2(rb.velocity.x, 0);
-        rb.AddForce(transform.up*jumpForce,ForceMode2D.Impulse);
+        rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
         FindObjectOfType<AudioManager>().Play("Jump"); //sfx
         jumps -= 1;
         jumpTimer = .4f;
@@ -199,11 +198,11 @@ public class PlayerController : MonoBehaviour
         }
 
         FindObjectOfType<AudioManager>().Play("Hurt"); //sfx
-        TakeDamage(damage);       
+        TakeDamage(damage);
 
         Vector2 kbMovement = (Vector2)transform.position - enemyPosition;
 
-        if(kbMovement.x < 0)
+        if (kbMovement.x < 0)
         {
             kbMovement.x = -1;
         }
@@ -220,7 +219,7 @@ public class PlayerController : MonoBehaviour
     public void Heal(int amountHealed)
     {
         health += amountHealed;
-        if(health > maxHealth)
+        if (health > maxHealth)
         {
             health = maxHealth;
         }
@@ -231,7 +230,7 @@ public class PlayerController : MonoBehaviour
     private void HandleBlink()
     {
 
-        if(blinkMode == 0) //blink mode is 0 so we shouldn't be blinking
+        if (blinkMode == 0) //blink mode is 0 so we shouldn't be blinking
         {
             return;
         }
@@ -239,12 +238,12 @@ public class PlayerController : MonoBehaviour
         Color tempColor = spriteRenderer.color;
         if (blinkMode == 1)
         {
-            if(tempColor.a > .9)
+            if (tempColor.a > .9)
             {
                 blinkMode = 2;
             }
         }
-        else if(blinkMode == 2)
+        else if (blinkMode == 2)
         {
             if (tempColor.a < .2)
             {
@@ -252,9 +251,9 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        tempColor.a += blinkMode == 1 ? 2*Time.deltaTime : -2*Time.deltaTime; //if blink mode is 1, we are decreasing opacity, if not, we are increasing opacity
+        tempColor.a += blinkMode == 1 ? 2 * Time.deltaTime : -2 * Time.deltaTime; //if blink mode is 1, we are decreasing opacity, if not, we are increasing opacity
 
-        if(invulnerabilityTimer <= 0) //player is done being invulnerable
+        if (invulnerabilityTimer <= 0) //player is done being invulnerable
         {
             tempColor.a = 1;
             blinkMode = 0;
@@ -305,7 +304,7 @@ public class PlayerController : MonoBehaviour
         FindObjectOfType<AudioManager>().Play("SpinAtk"); //sfx
         hitBox.Initialize("Player", new Vector2(10, 7.5f), new Vector2(0, 0), .3f, 30, 5);
     }
-    
+
     public void ResetAttack()
     {
         animator.ResetTrigger("BasicAttack");
@@ -321,7 +320,7 @@ public class PlayerController : MonoBehaviour
 
     public void CallShootMode()
     {
-        if(canShoot)
+        if (canShoot)
         {
             canMove = false;
             rangedVisual.EnterShootMode();
@@ -334,7 +333,7 @@ public class PlayerController : MonoBehaviour
         // Move the character by finding the target velocity
         Vector3 targetVelocity = new Vector2(0, rb.velocity.y);
         // And then smoothing it out and applying it to the character
-        rb.velocity = new Vector2(0,0); // Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, m_MovementSmoothing);
+        rb.velocity = new Vector2(0, 0); // Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, m_MovementSmoothing);
     }
 
     public void EnableMovement()
@@ -348,7 +347,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if(m_Grounded && jumps == 0)
+        if (m_Grounded && jumps == 0)
         {
             jumps = 2;
         }
