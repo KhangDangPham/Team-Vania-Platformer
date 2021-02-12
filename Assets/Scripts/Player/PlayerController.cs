@@ -5,9 +5,10 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Events;
 
-//This script will handle all of the player's movement
-public class PlayerController : MonoBehaviour
+//This script will handle the player
+public class PlayerController : MonoBehaviour, IShopCustomer
 {
+    public PlayerCoins playerCoins;
     public float playerSpeed = 2f;
     public float jumpForce = 10;
     public int health = 100;
@@ -367,5 +368,16 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetBool("IsAerial", true);
         }
+    }
+
+    public bool SpendCoins(int cost)
+    {
+        Debug.Log("item cost: " + cost);
+        return true;
+    }
+
+    public void ObtainItem(Item.ItemType itemType)
+    {
+        Debug.Log("Item type: " + itemType);
     }
 }

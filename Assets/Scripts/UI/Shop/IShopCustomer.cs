@@ -4,6 +4,6 @@ using UnityEngine;
 
 public interface IShopCustomer
 {
-    void BuyItem(int cost);
+    bool SpendCoins(int cost);
     void ObtainItem(Item.ItemType itemType);
 }

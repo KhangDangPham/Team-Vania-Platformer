@@ -1265,6 +1265,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f12291168e26014d9ea41aa88b6f6fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerCoins: {fileID: 11400000, guid: a5f3879578e1e5a438a9d3ed5c681bd3, type: 2}
   playerSpeed: 50
   jumpForce: 10
   health: 100
