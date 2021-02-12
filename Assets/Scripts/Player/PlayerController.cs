@@ -372,12 +372,19 @@ public class PlayerController : MonoBehaviour, IShopCustomer
 
     public bool SpendCoins(int cost)
     {
-        Debug.Log("item cost: " + cost);
-        return true;
+        if (playerCoins.numCoins >= cost)
+        {
+            playerCoins.numCoins -= cost;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public void ObtainItem(Item.ItemType itemType)
     {
-        Debug.Log("Item type: " + itemType);
+        Debug.Log("item type: " + itemType);
     }
 }
