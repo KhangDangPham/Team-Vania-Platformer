@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
 
     public GameObject attackHitBox;
     public GameObject magicBurstPrefab;
+    public GameObject Grapple;
     Rigidbody2D rb;
     Animator animator;
     SpriteRenderer spriteRenderer;
@@ -32,7 +33,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform m_GroundCheck;							// A position marking where to check if the player is grounded.
     [SerializeField] private LayerMask m_WhatIsGround;							// A mask determining what is ground to the character
     const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
-    private bool m_Grounded;            // Whether or not the player is grounded.
+    public bool m_Grounded;            // Whether or not the player is grounded.
 
     //used when the player gets hit
     float invulnerabilityTimer = 0f;
@@ -99,6 +100,11 @@ public class PlayerController : MonoBehaviour
             hpBar.UpdateHealth(health);
         }
 
+        if (Input.GetMouseButtonDown(2))
+        {
+            ShootGrapple();
+        }
+
         HandleBlink();
 
         horizontalMove = Input.GetAxisRaw("Horizontal") * playerSpeed;
@@ -135,7 +141,7 @@ public class PlayerController : MonoBehaviour
             }
 
             // Move the character by finding the target velocity
-            Vector3 targetVelocity = new Vector2(horizontalMove * Time.fixedDeltaTime * 10f, rb.velocity.y);
+            Vector3 targetVelocity = new Vector2(horizontalMove * Time.fixedDeltaTime, rb.velocity.y);
             // And then smoothing it out and applying it to the character
             rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, m_MovementSmoothing);
         }
@@ -341,6 +347,26 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("IsAiming", false);
         animator.ResetTrigger("Magic");
         canShoot = false;
+    }
+
+    public void ShootGrapple()
+    {
+        if(Grapple.activeSelf==false)
+        {
+            
+            Vector2 target = this.transform.position-Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            float angle = Mathf.Atan2(target.x, target.y) * Mathf.Rad2Deg;
+            Grapple.transform.eulerAngles = new Vector3(0, 0, -angle-90);
+            Grapple.SetActive(true);
+            Grapple.GetComponent<PlayerGrapple>().startLaunch(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            
+        }
+        else
+        {
+            Grapple.GetComponent<PlayerGrapple>().ForceReturn();
+        }
+
+        //Physics.Raycast(mousePosition, )
     }
 
     private void OnCollisionStay2D(Collision2D collision)
