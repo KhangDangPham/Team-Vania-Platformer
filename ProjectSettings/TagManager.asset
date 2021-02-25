@@ -9,6 +9,7 @@ TagManager:
   - Platform
   - VolumeSlider
   - Volume
+  - Grapple
   layers:
   - Default
   - TransparentFX
@@ -24,7 +25,7 @@ TagManager:
   - Boss
   - BossRoomBorder
   - NoGroundCollide
-  - 
+  - Grapple
   - 
   - 
   - 
