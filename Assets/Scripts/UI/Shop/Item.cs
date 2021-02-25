@@ -16,7 +16,7 @@ public class Item
         {
             case ItemType.Shield: return 100;
             case ItemType.Grapple: return 100;
-            default: return 99999;
+            default: return -1;
         }
     }
 

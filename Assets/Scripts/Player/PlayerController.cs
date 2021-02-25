@@ -372,7 +372,7 @@ public class PlayerController : MonoBehaviour, IShopCustomer
 
     public bool SpendCoins(int cost)
     {
-        if (playerCoins.numCoins >= cost)
+        if (playerCoins.numCoins >= cost && cost >= 0)
         {
             playerCoins.numCoins -= cost;
             return true;
