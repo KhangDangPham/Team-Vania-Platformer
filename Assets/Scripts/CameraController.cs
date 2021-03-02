@@ -23,11 +23,12 @@ public class CameraController : MonoBehaviour
         {
             
            
-
+            /*
             if (!target.gameObject.GetComponent<PlayerController>().m_Grounded && target.GetComponent<Rigidbody2D>().velocity.y < 0 && !isLowering)
             {
                 //StartCoroutine("lowerCamera");
             }
+            */
 
             newPosition = new Vector3(target.position.x, target.position.y + offset, transform.position.z);
             transform.position = Vector3.Lerp(transform.position, newPosition, smoothing);

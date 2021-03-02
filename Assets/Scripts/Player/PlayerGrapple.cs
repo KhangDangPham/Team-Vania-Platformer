@@ -32,14 +32,14 @@ public class PlayerGrapple : MonoBehaviour
 
     public void startLaunch(Vector2 mouse)
     {
-        destinationPoint.transform.position = mouse;
+        //destinationPoint.transform.position = mouse;
         //destinationPoint.SetActive(true);
         grappleRB.AddForce(transform.right * speed, ForceMode2D.Impulse);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-
+        Debug.Log("COLLIDED");
         contact = true;
         rope.enabled = true;
         StopCoroutine("startGrappleLife");
@@ -67,7 +67,7 @@ public class PlayerGrapple : MonoBehaviour
 
     IEnumerator startGrappleLife()
     {
-        yield return new WaitForSeconds(.75f);
+        yield return new WaitForSeconds(.5f);
         Debug.Log("LIFE OVER");
         returnToPlayer();
     }
