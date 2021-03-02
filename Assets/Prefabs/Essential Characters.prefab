@@ -105,6 +105,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: bb89cf1cf905b33448934e0177c7b2be,
         type: 2}
+    - target: {fileID: 7182048693486178430, guid: 29f62f5980fd74c4291ee74bd8e68912,
+        type: 3}
+      propertyPath: playerSpeed
+      value: 38
+      objectReference: {fileID: 0}
+    - target: {fileID: 7182048693486178430, guid: 29f62f5980fd74c4291ee74bd8e68912,
+        type: 3}
+      propertyPath: jumpForce
+      value: 11
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29f62f5980fd74c4291ee74bd8e68912, type: 3}
 --- !u!4 &2127609002916198183 stripped
@@ -133,13 +143,13 @@ PrefabInstance:
     - target: {fileID: 5142621068702767205, guid: 10bd66d2dc9ddf64d9aacb9131e85c01,
         type: 3}
       propertyPath: smoothing
-      value: 0.5
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 5142621068702767205, guid: 10bd66d2dc9ddf64d9aacb9131e85c01,
         type: 3}
       propertyPath: target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2127609002916198183}
     - target: {fileID: 5966882083232162251, guid: 10bd66d2dc9ddf64d9aacb9131e85c01,
         type: 3}
       propertyPath: m_LocalPosition.x

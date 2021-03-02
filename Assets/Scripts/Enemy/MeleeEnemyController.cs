@@ -311,7 +311,7 @@ public class MeleeEnemyController : MonoBehaviour
         spawnPosition += spriteRenderer.flipX ? transform.right * 1 : transform.right * -1;
         BasicHitbox hitBox = Instantiate(attackHitBox, spawnPosition, Quaternion.identity).GetComponent<BasicHitbox>();
 
-        hitBox.Initialize("Enemy", new Vector2(1.5f, 1.5f), new Vector2(0, 0), .1f, 25, 2.5f);
+        hitBox.Initialize("Enemy", new Vector2(1.5f, 1.5f), new Vector2(0, 0), .05f, 25, 2.5f);
     }
 
     public void GolemAttack()
