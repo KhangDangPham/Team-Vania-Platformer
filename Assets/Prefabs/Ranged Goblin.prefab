@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1999906705006930629}
   - component: {fileID: 1999906705006930630}
   - component: {fileID: 1999906705006930634}
+  - component: {fileID: 690284594}
   m_Layer: 0
   m_Name: Ranged Goblin
   m_TagString: Enemy
@@ -173,9 +174,26 @@ MonoBehaviour:
   attackRange: 30
   attackCooldown: 4
   attackHitBox: {fileID: 0}
+  deathSound: GoblinDeath
+  hurtSound: GoblinHurt
   projectile: {fileID: 6668560351099667932, guid: 4b859d1f9d08534458551d8954fb09b2,
     type: 3}
   projectileDamage: 10
+--- !u!114 &690284594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1999906705006930631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9784ce87f39abe646adff9438a3d8492, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CoinPrefab: {fileID: 8610983461810705596, guid: 799031007cce237449530b8c71652779,
+    type: 3}
+  coinCount: 10
 --- !u!1 &2548903244376494851
 GameObject:
   m_ObjectHideFlags: 0
@@ -188,7 +206,7 @@ GameObject:
   - component: {fileID: 7708008864185053614}
   - component: {fileID: 5970437029853731244}
   - component: {fileID: 6212623959292858375}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -273,7 +291,7 @@ GameObject:
   - component: {fileID: 9134927702234571790}
   - component: {fileID: 7495530522649051041}
   - component: {fileID: 5606897160912326561}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: EnemyHUD
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -48,13 +48,13 @@ public class UI_Shop : MonoBehaviour
 
     private void BuyItem(Item.ItemType itemType)
     {
-        if (shopCustomer.SpendCoins(Item.GetCost(itemType)))
+        if (shopCustomer.SpendCoins(Item.GetCost(itemType), itemType))
         {
             shopCustomer.ObtainItem(itemType);
         }
         else
         {
-            Tooltip_Warning.ShowTooltip_Static("Cannot afford " + Item.GetCost(itemType) + "!");
+            Tooltip_Warning.ShowTooltip_Static("Cannot afford " + Item.GetCost(itemType) + " or already own!");
         }
     }
 

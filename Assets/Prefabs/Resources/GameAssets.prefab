@@ -44,4 +44,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   s_Shield: {fileID: 21300000, guid: c9c33603cb2cd4740b06a7dbe746f62d, type: 3}
-  s_Grapple: {fileID: 21300000, guid: 683f97e38e8f7354683b20fabc9c42e0, type: 3}
+  s_Grapple: {fileID: 21300000, guid: 32e673bbfc493524d99361988d0c1777, type: 3}

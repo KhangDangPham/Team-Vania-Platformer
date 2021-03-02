@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(ItemDrop))]
+
 public class MeleeEnemyController : MonoBehaviour
 {
-
     public int health = 100;
-
     public int damage = 25;
     public float aggroRange = 10f;
     public float speed = 1f;
@@ -30,6 +30,8 @@ public class MeleeEnemyController : MonoBehaviour
     protected bool turnRed = false;
     protected float currentRedTime = 0;
     protected float defaultR;
+
+    private ItemDrop itemDrop;
     protected void Start()
     {
         //Looks for a gameobject with the tag "Player", and gets the PlayerController script
@@ -38,6 +40,7 @@ public class MeleeEnemyController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         hpBar = GetComponentInChildren<HealthBar>();
+        itemDrop = GetComponent<ItemDrop>();
 
         hpBar.InitializeHealthBar(health);
         maxHealth = health;
@@ -223,11 +226,11 @@ public class MeleeEnemyController : MonoBehaviour
         animator.SetTrigger("Hit");
 
         rb.AddForce(kbMovement, ForceMode2D.Impulse);
-
     }
 
     public void DestroyMob()
     {
+        itemDrop.DropCoins();
         Destroy(gameObject);
     }
 

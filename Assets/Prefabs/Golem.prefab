@@ -198,6 +198,7 @@ GameObject:
   - component: {fileID: 7926191397366077320}
   - component: {fileID: 7926191397366077323}
   - component: {fileID: 7926191397366077319}
+  - component: {fileID: 5246529676874185371}
   m_Layer: 0
   m_Name: Golem
   m_TagString: Enemy
@@ -360,3 +361,18 @@ MonoBehaviour:
     type: 3}
   deathSound: GolemDeath
   hurtSound: GolemHurt
+--- !u!114 &5246529676874185371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7926191397366077322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9784ce87f39abe646adff9438a3d8492, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CoinPrefab: {fileID: 8610983461810705596, guid: 799031007cce237449530b8c71652779,
+    type: 3}
+  coinCount: 30

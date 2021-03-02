@@ -8,26 +8,30 @@ using UnityEngine.Events;
 //This script will handle the player
 public class PlayerController : MonoBehaviour, IShopCustomer
 {
+    public PlayerPosition playerPosition;
+    public PlayerHealth playerHealth;
+    public PlayerMana playerMana;
     public PlayerCoins playerCoins;
+
+    public bool canShield = true;
+    public bool canGrapple = false;
+
     public float playerSpeed = 2f;
     public float jumpForce = 10;
-    public int health = 100;
-    public float mana = 100;
 
     public GameObject attackHitBox;
     public GameObject magicBurstPrefab;
-    Rigidbody2D rb;
+    Rigidbody2D rigidBody;
     Animator animator;
     SpriteRenderer spriteRenderer;
     RangedCombat bowScript;
-    HealthBar hpBar;
     RangedVisualController rangedVisual;
 
     bool canMove = true;
     bool canShoot = false;
     int jumps = 2;
     float jumpTimer = 0f;
-    int maxHealth;
+    float elapsed_time = 0f;
 
     float horizontalMove = 0f;
     [SerializeField] private Transform m_GroundCheck;							// A position marking where to check if the player is grounded.
@@ -39,23 +43,23 @@ public class PlayerController : MonoBehaviour, IShopCustomer
     float invulnerabilityTimer = 0f;
     int blinkMode = 0; //0 = no blinking, 1 = decreasing opacity, 2 = increasing opacity
 
+    float blockTimer = 0f;
+
     [Range(0, .3f)] [SerializeField] private float m_MovementSmoothing = .05f;  // How much to smooth out the movement
     private Vector3 velocity = Vector3.zero;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        hpBar = GetComponentInChildren<HealthBar>();
         rangedVisual = GetComponentInChildren<RangedVisualController>();
-
-        hpBar.InitializeHealthBar(health);
-        maxHealth = health;
+        playerHealth.currentHealth = 100;
     }
 
     private void Update()
     {
+        playerPosition.position = rigidBody.position;
 
         if (Input.GetButtonDown("Jump") && jumps > 0 && canMove)
         {
@@ -63,7 +67,7 @@ public class PlayerController : MonoBehaviour, IShopCustomer
             Jump();
         }
 
-        if (Input.GetKeyDown(KeyCode.Q) && mana >= 100)
+        if (Input.GetKeyDown(KeyCode.Q) && playerMana.currentMana >= 100)
         {
             invulnerabilityTimer = 4f;
             FindObjectOfType<AudioManager>().Play("MagicBurst"); //sfx
@@ -95,8 +99,12 @@ public class PlayerController : MonoBehaviour, IShopCustomer
 
         if (Input.GetKeyDown(KeyCode.C))
         {
-            health = maxHealth;
-            hpBar.UpdateHealth(health);
+            playerHealth.currentHealth = playerHealth.maxHealth;
+        }
+
+        if (canShield && Input.GetKeyDown(KeyCode.F))
+        {
+            animator.SetTrigger("Block");
         }
 
         HandleBlink();
@@ -138,9 +146,9 @@ public class PlayerController : MonoBehaviour, IShopCustomer
             }
 
             // Move the character by finding the target velocity
-            Vector3 targetVelocity = new Vector2(horizontalMove * Time.fixedDeltaTime * 10f, rb.velocity.y);
+            Vector3 targetVelocity = new Vector2(horizontalMove * Time.fixedDeltaTime * 10f, rigidBody.velocity.y);
             // And then smoothing it out and applying it to the character
-            rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, m_MovementSmoothing);
+            rigidBody.velocity = Vector3.SmoothDamp(rigidBody.velocity, targetVelocity, ref velocity, m_MovementSmoothing);
         }
         else
         {
@@ -148,9 +156,15 @@ public class PlayerController : MonoBehaviour, IShopCustomer
         }
 
         invulnerabilityTimer -= Time.deltaTime;
+        blockTimer -= Time.deltaTime;
         jumpTimer -= Time.deltaTime;
-        mana = mana >= 100 ? 100 : mana + Time.deltaTime;
-        hpBar.UpdateMana(mana);
+        elapsed_time += Time.deltaTime;
+
+        if(elapsed_time >= 1)
+        {
+            elapsed_time = 0f;
+            playerMana.currentMana = playerMana.currentMana >= playerMana.maxMana ? playerMana.maxMana : playerMana.currentMana + 1;
+        }
     }
 
     public void SetGrounded()
@@ -162,8 +176,8 @@ public class PlayerController : MonoBehaviour, IShopCustomer
 
     public void Jump()
     {
-        rb.velocity = new Vector2(rb.velocity.x, 0);
-        rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
+        rigidBody.velocity = new Vector2(rigidBody.velocity.x, 0);
+        rigidBody.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
         FindObjectOfType<AudioManager>().Play("Jump"); //sfx
         jumps -= 1;
         jumpTimer = .4f;
@@ -171,17 +185,15 @@ public class PlayerController : MonoBehaviour, IShopCustomer
 
     public void TakeDamage(int damage)
     {
-        if (invulnerabilityTimer > 0)
+        if (invulnerabilityTimer > 0 || blockTimer > 0)
         {
             return;
         }
-        health -= damage;
+        playerHealth.currentHealth -= damage;
 
-        hpBar.UpdateHealth(health);
-
-        if (health <= 0)
+        if (playerHealth.currentHealth <= 0)
         {
-            health = 0;
+            playerHealth.currentHealth = 0;
             Die();
             return;
         }
@@ -193,7 +205,7 @@ public class PlayerController : MonoBehaviour, IShopCustomer
 
     public void TakeDamage(int damage, Vector2 enemyPosition, float force = 6f)
     {
-        if (invulnerabilityTimer > 0)
+        if (invulnerabilityTimer > 0 || blockTimer > 0)
         {
             return;
         }
@@ -214,18 +226,16 @@ public class PlayerController : MonoBehaviour, IShopCustomer
 
         DisableMovement();
 
-        rb.AddForce(kbMovement, ForceMode2D.Impulse);
+        rigidBody.AddForce(kbMovement, ForceMode2D.Impulse);
     }
 
     public void Heal(int amountHealed)
     {
-        health += amountHealed;
-        if (health > maxHealth)
+        playerHealth.currentHealth += amountHealed;
+        if (playerHealth.currentHealth > playerHealth.maxHealth)
         {
-            health = maxHealth;
+            playerHealth.currentHealth = playerHealth.maxHealth;
         }
-
-        hpBar.UpdateHealth(health);
     }
 
     private void HandleBlink()
@@ -314,7 +324,7 @@ public class PlayerController : MonoBehaviour, IShopCustomer
     public void MagicBurstAttack()
     {
         canMove = false;
-        mana = 0;
+        playerMana.currentMana = 0;
         Instantiate(magicBurstPrefab, transform);
         animator.ResetTrigger("Magic");
     }
@@ -332,9 +342,9 @@ public class PlayerController : MonoBehaviour, IShopCustomer
     {
         canMove = false;
         // Move the character by finding the target velocity
-        Vector3 targetVelocity = new Vector2(0, rb.velocity.y);
+        Vector3 targetVelocity = new Vector2(0, rigidBody.velocity.y);
         // And then smoothing it out and applying it to the character
-        rb.velocity = new Vector2(0, 0); // Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, m_MovementSmoothing);
+        rigidBody.velocity = new Vector2(0, 0); // Vector3.SmoothDamp(rigidBody.velocity, targetVelocity, ref velocity, m_MovementSmoothing);
     }
 
     public void EnableMovement()
@@ -370,9 +380,9 @@ public class PlayerController : MonoBehaviour, IShopCustomer
         }
     }
 
-    public bool SpendCoins(int cost)
+    public bool SpendCoins(int cost, Item.ItemType itemType)
     {
-        if (playerCoins.numCoins >= cost && cost >= 0)
+        if (playerCoins.numCoins >= cost && cost >= 0 && !HaveItem(itemType))
         {
             playerCoins.numCoins -= cost;
             return true;
@@ -383,8 +393,45 @@ public class PlayerController : MonoBehaviour, IShopCustomer
         }
     }
 
+    public bool HaveItem(Item.ItemType itemType)
+    {
+        if (itemType == Item.ItemType.Shield && canShield)
+        {
+            return true;
+        }
+        else if (itemType == Item.ItemType.Grapple && canGrapple)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     public void ObtainItem(Item.ItemType itemType)
     {
-        Debug.Log("item type: " + itemType);
+        if (itemType == Item.ItemType.Shield)
+        {
+            canShield = true;
+        }
+        else if (itemType == Item.ItemType.Grapple)
+        {
+            canGrapple = true;
+        }
+    }
+
+    public void ActivateBlock()
+    {
+        //DisableMovement();
+        blockTimer = 1f;
+        Debug.Log("Blocking");
+    }
+
+    public void DeactivateBlock()
+    {
+        //EnableMovement();
+        blockTimer = 0f;
+        Debug.Log("Not Blocking");
     }
 }

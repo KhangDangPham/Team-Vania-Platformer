@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1193427596}
   - component: {fileID: 1193427594}
   - component: {fileID: 8683152283550103367}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 1787328672}
   - component: {fileID: 1787328671}
   - component: {fileID: 1787328670}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: EnemyHUD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -198,6 +198,7 @@ GameObject:
   - component: {fileID: 8044193964930640905}
   - component: {fileID: 8044193964930640906}
   - component: {fileID: 8044193964930640902}
+  - component: {fileID: -2401253869040108411}
   m_Layer: 0
   m_Name: Melee Goblin
   m_TagString: Enemy
@@ -357,3 +358,20 @@ MonoBehaviour:
   attackCooldown: 1
   attackHitBox: {fileID: 9177505655542393021, guid: 606ff7b029ad5a2419e37749eb402cae,
     type: 3}
+  deathSound: GoblinDeath
+  hurtSound: GoblinHurt
+--- !u!114 &-2401253869040108411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8044193964930640907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9784ce87f39abe646adff9438a3d8492, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CoinPrefab: {fileID: 8610983461810705596, guid: 799031007cce237449530b8c71652779,
+    type: 3}
+  coinCount: 10
