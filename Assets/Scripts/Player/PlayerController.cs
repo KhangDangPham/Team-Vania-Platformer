@@ -5,13 +5,19 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Events;
 
-//This script will handle all of the player's movement
-public class PlayerController : MonoBehaviour
+//This script will handle the player
+public class PlayerController : MonoBehaviour, IShopCustomer
 {
+    public PlayerPosition playerPosition;
+    public PlayerHealth playerHealth;
+    public PlayerMana playerMana;
+    public PlayerCoins playerCoins;
+
+    public bool canShield = true;
+    public bool canGrapple = false;
+
     public float playerSpeed = 2f;
     public float jumpForce = 10;
-    public int health = 100;
-    public float mana = 100;
 
     public GameObject attackHitBox;
     public GameObject magicBurstPrefab;
@@ -20,14 +26,13 @@ public class PlayerController : MonoBehaviour
     Animator animator;
     SpriteRenderer spriteRenderer;
     RangedCombat bowScript;
-    HealthBar hpBar;
     RangedVisualController rangedVisual;
 
     bool canMove = true;
     bool canShoot = false;
     int jumps = 2;
     float jumpTimer = 0f;
-    int maxHealth;
+    float elapsed_time = 0f;
 
     float horizontalMove = 0f;
     [SerializeField] private Transform m_GroundCheck;							// A position marking where to check if the player is grounded.
@@ -39,6 +44,8 @@ public class PlayerController : MonoBehaviour
     float invulnerabilityTimer = 0f;
     int blinkMode = 0; //0 = no blinking, 1 = decreasing opacity, 2 = increasing opacity
 
+    float blockTimer = 0f;
+
     [Range(0, .3f)] [SerializeField] private float m_MovementSmoothing = .05f;  // How much to smooth out the movement
     private Vector3 velocity = Vector3.zero;
 
@@ -47,15 +54,13 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        hpBar = GetComponentInChildren<HealthBar>();
         rangedVisual = GetComponentInChildren<RangedVisualController>();
-
-        hpBar.InitializeHealthBar(health);
-        maxHealth = health;
+        playerHealth.currentHealth = 100;
     }
 
     private void Update()
     {
+        playerPosition.position = rb.position;
 
         if (Input.GetButtonDown("Jump") && jumps > 0 && canMove)
         {
@@ -63,41 +68,44 @@ public class PlayerController : MonoBehaviour
             Jump();
         }
 
-        if(Input.GetKeyDown(KeyCode.Q) && mana >= 100)
+        if (Input.GetKeyDown(KeyCode.Q) && playerMana.currentMana >= 100)
         {
             invulnerabilityTimer = 4f;
             FindObjectOfType<AudioManager>().Play("MagicBurst"); //sfx
             animator.SetTrigger("Magic");
         }
-        
-        if(Input.GetKeyDown(KeyCode.Mouse0))
+
+        if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             string clipName = animator.GetCurrentAnimatorClipInfo(0)[0].clip.name;
-            Debug.Log(clipName);
             if (clipName != "slash" && clipName != "SpinAttack")
             {
                 animator.SetTrigger("BasicAttack");
             }
         }
 
-        if(Input.GetKeyDown(KeyCode.Mouse1))
+        if (Input.GetKeyDown(KeyCode.Mouse1))
         {
-            if(!canShoot)
+            if (!canShoot)
             {
                 animator.SetBool("IsAiming", true);
                 canShoot = true;
             }
         }
 
-        if(Input.GetKeyDown(KeyCode.X))
+        if (Input.GetKeyDown(KeyCode.X))
         {
             TakeDamage(15);
         }
 
-        if(Input.GetKeyDown(KeyCode.C))
+        if (Input.GetKeyDown(KeyCode.C))
         {
-            health = maxHealth;
-            hpBar.UpdateHealth(health);
+            playerHealth.currentHealth = playerHealth.maxHealth;
+        }
+
+        if (canShield && Input.GetKeyDown(KeyCode.F))
+        {
+            animator.SetTrigger("Block");
         }
 
         if (Input.GetMouseButtonDown(2))
@@ -116,9 +124,12 @@ public class PlayerController : MonoBehaviour
         // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
         // This can be done using layers instead but Sample Assets will not overwrite your project settings.
         Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
+        if (colliders.Length == 0)
+            animator.SetBool("IsAerial", true);
+
         for (int i = 0; i < colliders.Length; i++)
         {
-            if (colliders[i].gameObject != gameObject)
+            if (colliders[i].gameObject != gameObject && colliders[i].tag != "Unclimbable")
                 m_Grounded = true;
         }
 
@@ -141,7 +152,7 @@ public class PlayerController : MonoBehaviour
             }
 
             // Move the character by finding the target velocity
-            Vector3 targetVelocity = new Vector2(horizontalMove * Time.fixedDeltaTime, rb.velocity.y);
+            Vector3 targetVelocity = new Vector2(horizontalMove * Time.fixedDeltaTime * 10f, rb.velocity.y);
             // And then smoothing it out and applying it to the character
             rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, m_MovementSmoothing);
         }
@@ -151,9 +162,15 @@ public class PlayerController : MonoBehaviour
         }
 
         invulnerabilityTimer -= Time.deltaTime;
+        blockTimer -= Time.deltaTime;
         jumpTimer -= Time.deltaTime;
-        mana = mana >= 100 ? 100 : mana + Time.deltaTime;
-        hpBar.UpdateMana(mana);
+        elapsed_time += Time.deltaTime;
+
+        if(elapsed_time >= 1)
+        {
+            elapsed_time = 0f;
+            playerMana.currentMana = playerMana.currentMana >= playerMana.maxMana ? playerMana.maxMana : playerMana.currentMana + 1;
+        }
     }
 
     public void SetGrounded()
@@ -166,7 +183,7 @@ public class PlayerController : MonoBehaviour
     public void Jump()
     {
         rb.velocity = new Vector2(rb.velocity.x, 0);
-        rb.AddForce(transform.up*jumpForce,ForceMode2D.Impulse);
+        rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
         FindObjectOfType<AudioManager>().Play("Jump"); //sfx
         jumps -= 1;
         jumpTimer = .4f;
@@ -174,17 +191,15 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        if (invulnerabilityTimer > 0)
+        if (invulnerabilityTimer > 0 || blockTimer > 0)
         {
             return;
         }
-        health -= damage;
+        playerHealth.currentHealth -= damage;
 
-        hpBar.UpdateHealth(health);
-
-        if (health <= 0)
+        if (playerHealth.currentHealth <= 0)
         {
-            health = 0;
+            playerHealth.currentHealth = 0;
             Die();
             return;
         }
@@ -196,17 +211,17 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage(int damage, Vector2 enemyPosition, float force = 6f)
     {
-        if (invulnerabilityTimer > 0)
+        if (invulnerabilityTimer > 0 || blockTimer > 0)
         {
             return;
         }
 
         FindObjectOfType<AudioManager>().Play("Hurt"); //sfx
-        TakeDamage(damage);       
+        TakeDamage(damage);
 
         Vector2 kbMovement = (Vector2)transform.position - enemyPosition;
 
-        if(kbMovement.x < 0)
+        if (kbMovement.x < 0)
         {
             kbMovement.x = -1;
         }
@@ -222,19 +237,17 @@ public class PlayerController : MonoBehaviour
 
     public void Heal(int amountHealed)
     {
-        health += amountHealed;
-        if(health > maxHealth)
+        playerHealth.currentHealth += amountHealed;
+        if (playerHealth.currentHealth > playerHealth.maxHealth)
         {
-            health = maxHealth;
+            playerHealth.currentHealth = playerHealth.maxHealth;
         }
-
-        hpBar.UpdateHealth(health);
     }
 
     private void HandleBlink()
     {
 
-        if(blinkMode == 0) //blink mode is 0 so we shouldn't be blinking
+        if (blinkMode == 0) //blink mode is 0 so we shouldn't be blinking
         {
             return;
         }
@@ -242,12 +255,12 @@ public class PlayerController : MonoBehaviour
         Color tempColor = spriteRenderer.color;
         if (blinkMode == 1)
         {
-            if(tempColor.a > .9)
+            if (tempColor.a > .9)
             {
                 blinkMode = 2;
             }
         }
-        else if(blinkMode == 2)
+        else if (blinkMode == 2)
         {
             if (tempColor.a < .2)
             {
@@ -255,9 +268,9 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        tempColor.a += blinkMode == 1 ? 2*Time.deltaTime : -2*Time.deltaTime; //if blink mode is 1, we are decreasing opacity, if not, we are increasing opacity
+        tempColor.a += blinkMode == 1 ? 2 * Time.deltaTime : -2 * Time.deltaTime; //if blink mode is 1, we are decreasing opacity, if not, we are increasing opacity
 
-        if(invulnerabilityTimer <= 0) //player is done being invulnerable
+        if (invulnerabilityTimer <= 0) //player is done being invulnerable
         {
             tempColor.a = 1;
             blinkMode = 0;
@@ -308,7 +321,7 @@ public class PlayerController : MonoBehaviour
         FindObjectOfType<AudioManager>().Play("SpinAtk"); //sfx
         hitBox.Initialize("Player", new Vector2(10, 7.5f), new Vector2(0, 0), .3f, 30, 5);
     }
-    
+
     public void ResetAttack()
     {
         animator.ResetTrigger("BasicAttack");
@@ -317,14 +330,14 @@ public class PlayerController : MonoBehaviour
     public void MagicBurstAttack()
     {
         canMove = false;
-        mana = 0;
+        playerMana.currentMana = 0;
         Instantiate(magicBurstPrefab, transform);
         animator.ResetTrigger("Magic");
     }
 
     public void CallShootMode()
     {
-        if(canShoot)
+        if (canShoot)
         {
             canMove = false;
             rangedVisual.EnterShootMode();
@@ -337,7 +350,7 @@ public class PlayerController : MonoBehaviour
         // Move the character by finding the target velocity
         Vector3 targetVelocity = new Vector2(0, rb.velocity.y);
         // And then smoothing it out and applying it to the character
-        rb.velocity = new Vector2(0,0); // Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, m_MovementSmoothing);
+        rb.velocity = new Vector2(0, 0); // Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, m_MovementSmoothing);
     }
 
     public void EnableMovement()
@@ -353,13 +366,13 @@ public class PlayerController : MonoBehaviour
     {
         if(Grapple.activeSelf==false)
         {
-            
+
             Vector2 target = this.transform.position-Camera.main.ScreenToWorldPoint(Input.mousePosition);
             float angle = Mathf.Atan2(target.x, target.y) * Mathf.Rad2Deg;
             Grapple.transform.eulerAngles = new Vector3(0, 0, -angle-90);
             Grapple.SetActive(true);
             Grapple.GetComponent<PlayerGrapple>().startLaunch(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-            
+
         }
         else
         {
@@ -371,7 +384,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if(m_Grounded && jumps == 0)
+        if (m_Grounded && jumps == 0)
         {
             jumps = 2;
         }
@@ -391,5 +404,60 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetBool("IsAerial", true);
         }
+    }
+
+    public bool SpendCoins(int cost, Item.ItemType itemType)
+    {
+        if (playerCoins.numCoins >= cost && cost >= 0 && !HaveItem(itemType))
+        {
+            playerCoins.numCoins -= cost;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public bool HaveItem(Item.ItemType itemType)
+    {
+        if (itemType == Item.ItemType.Shield && canShield)
+        {
+            return true;
+        }
+        else if (itemType == Item.ItemType.Grapple && canGrapple)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public void ObtainItem(Item.ItemType itemType)
+    {
+        if (itemType == Item.ItemType.Shield)
+        {
+            canShield = true;
+        }
+        else if (itemType == Item.ItemType.Grapple)
+        {
+            canGrapple = true;
+        }
+    }
+
+    public void ActivateBlock()
+    {
+        //DisableMovement();
+        blockTimer = 1f;
+        Debug.Log("Blocking");
+    }
+
+    public void DeactivateBlock()
+    {
+        //EnableMovement();
+        blockTimer = 0f;
+        Debug.Log("Not Blocking");
     }
 }

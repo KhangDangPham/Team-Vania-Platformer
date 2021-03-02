@@ -9,16 +9,18 @@ TagManager:
   - Platform
   - VolumeSlider
   - Volume
+  - Unclimbable
+  - ShopArea
   - Grapple
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  -
   - Water
   - UI
-  - 
-  - 
+  -
+  -
   - Ground
   - Player
   - Background
@@ -26,24 +28,30 @@ TagManager:
   - BossRoomBorder
   - NoGroundCollide
   - Grapple
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: UI
+    uniqueID: 1446881805
+    locked: 0
+  - name: Player
+    uniqueID: 312526745
     locked: 0
