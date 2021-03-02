@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour, IShopCustomer
     public PlayerHealth playerHealth;
     public PlayerMana playerMana;
     public PlayerCoins playerCoins;
+    public PlayerAbility playerAbility;
 
     public bool canShield = true;
     public bool canGrapple = false;
@@ -103,12 +104,12 @@ public class PlayerController : MonoBehaviour, IShopCustomer
             playerHealth.currentHealth = playerHealth.maxHealth;
         }
 
-        if (canShield && Input.GetKeyDown(KeyCode.F))
+        if (playerAbility.shield && Input.GetKeyDown(KeyCode.F))
         {
             animator.SetTrigger("Block");
         }
 
-        if (Input.GetMouseButtonDown(2))
+        if (playerAbility.grapple && Input.GetMouseButtonDown(2))
         {
             ShootGrapple();
         }
@@ -421,11 +422,11 @@ public class PlayerController : MonoBehaviour, IShopCustomer
 
     public bool HaveItem(Item.ItemType itemType)
     {
-        if (itemType == Item.ItemType.Shield && canShield)
+        if (itemType == Item.ItemType.Shield && playerAbility.shield)
         {
             return true;
         }
-        else if (itemType == Item.ItemType.Grapple && canGrapple)
+        else if (itemType == Item.ItemType.Grapple && playerAbility.grapple)
         {
             return true;
         }
@@ -439,11 +440,11 @@ public class PlayerController : MonoBehaviour, IShopCustomer
     {
         if (itemType == Item.ItemType.Shield)
         {
-            canShield = true;
+            playerAbility.shield = true;
         }
         else if (itemType == Item.ItemType.Grapple)
         {
-            canGrapple = true;
+            playerAbility.grapple = true;
         }
     }
 
@@ -451,13 +452,11 @@ public class PlayerController : MonoBehaviour, IShopCustomer
     {
         //DisableMovement();
         blockTimer = 1f;
-        Debug.Log("Blocking");
     }
 
     public void DeactivateBlock()
     {
         //EnableMovement();
         blockTimer = 0f;
-        Debug.Log("Not Blocking");
     }
 }
