@@ -10,6 +10,8 @@ public class CameraController : MonoBehaviour
     public Transform target;
     public float smoothing;
     public float offset;
+    private Vector3 newPosition;
+    private bool isLowering;
 
     private void Start()
     {
@@ -19,7 +21,15 @@ public class CameraController : MonoBehaviour
     {
         if (target != null && transform.position != target.position)
         {
-            Vector3 newPosition = new Vector3(target.position.x, target.position.y + offset, transform.position.z);
+            
+           
+
+            if (!target.gameObject.GetComponent<PlayerController>().m_Grounded && target.GetComponent<Rigidbody2D>().velocity.y < 0 && !isLowering)
+            {
+                //StartCoroutine("lowerCamera");
+            }
+
+            newPosition = new Vector3(target.position.x, target.position.y + offset, transform.position.z);
             transform.position = Vector3.Lerp(transform.position, newPosition, smoothing);
         }
         else
@@ -41,5 +51,19 @@ public class CameraController : MonoBehaviour
         {
             camera.orthographicSize = 3;
         }
+    }
+
+    IEnumerator lowerCamera()
+    {
+        isLowering = true;
+        yield return new WaitForSeconds(0.15f);
+        while(!target.gameObject.GetComponent<PlayerController>().m_Grounded && offset>0)
+        {
+            
+            offset = offset-Time.deltaTime;
+            Debug.Log(offset);
+        }
+        offset = 2.5f;
+        isLowering = false;
     }
 }

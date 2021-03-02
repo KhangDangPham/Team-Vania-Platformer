@@ -21,7 +21,8 @@ public class PlayerController : MonoBehaviour, IShopCustomer
 
     public GameObject attackHitBox;
     public GameObject magicBurstPrefab;
-    Rigidbody2D rigidBody;
+    public GameObject Grapple;
+    Rigidbody2D rb;
     Animator animator;
     SpriteRenderer spriteRenderer;
     RangedCombat bowScript;
@@ -37,7 +38,7 @@ public class PlayerController : MonoBehaviour, IShopCustomer
     [SerializeField] private Transform m_GroundCheck;							// A position marking where to check if the player is grounded.
     [SerializeField] private LayerMask m_WhatIsGround;							// A mask determining what is ground to the character
     const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
-    private bool m_Grounded;            // Whether or not the player is grounded.
+    public bool m_Grounded;            // Whether or not the player is grounded.
 
     //used when the player gets hit
     float invulnerabilityTimer = 0f;
@@ -50,7 +51,7 @@ public class PlayerController : MonoBehaviour, IShopCustomer
 
     void Start()
     {
-        rigidBody = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         rangedVisual = GetComponentInChildren<RangedVisualController>();
@@ -59,7 +60,7 @@ public class PlayerController : MonoBehaviour, IShopCustomer
 
     private void Update()
     {
-        playerPosition.position = rigidBody.position;
+        playerPosition.position = rb.position;
 
         if (Input.GetButtonDown("Jump") && jumps > 0 && canMove)
         {
@@ -107,6 +108,11 @@ public class PlayerController : MonoBehaviour, IShopCustomer
             animator.SetTrigger("Block");
         }
 
+        if (Input.GetMouseButtonDown(2))
+        {
+            ShootGrapple();
+        }
+
         HandleBlink();
 
         horizontalMove = Input.GetAxisRaw("Horizontal") * playerSpeed;
@@ -146,9 +152,9 @@ public class PlayerController : MonoBehaviour, IShopCustomer
             }
 
             // Move the character by finding the target velocity
-            Vector3 targetVelocity = new Vector2(horizontalMove * Time.fixedDeltaTime * 10f, rigidBody.velocity.y);
+            Vector3 targetVelocity = new Vector2(horizontalMove * Time.fixedDeltaTime * 10f, rb.velocity.y);
             // And then smoothing it out and applying it to the character
-            rigidBody.velocity = Vector3.SmoothDamp(rigidBody.velocity, targetVelocity, ref velocity, m_MovementSmoothing);
+            rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, m_MovementSmoothing);
         }
         else
         {
@@ -176,8 +182,8 @@ public class PlayerController : MonoBehaviour, IShopCustomer
 
     public void Jump()
     {
-        rigidBody.velocity = new Vector2(rigidBody.velocity.x, 0);
-        rigidBody.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
+        rb.velocity = new Vector2(rb.velocity.x, 0);
+        rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
         FindObjectOfType<AudioManager>().Play("Jump"); //sfx
         jumps -= 1;
         jumpTimer = .4f;
@@ -226,7 +232,7 @@ public class PlayerController : MonoBehaviour, IShopCustomer
 
         DisableMovement();
 
-        rigidBody.AddForce(kbMovement, ForceMode2D.Impulse);
+        rb.AddForce(kbMovement, ForceMode2D.Impulse);
     }
 
     public void Heal(int amountHealed)
@@ -342,9 +348,9 @@ public class PlayerController : MonoBehaviour, IShopCustomer
     {
         canMove = false;
         // Move the character by finding the target velocity
-        Vector3 targetVelocity = new Vector2(0, rigidBody.velocity.y);
+        Vector3 targetVelocity = new Vector2(0, rb.velocity.y);
         // And then smoothing it out and applying it to the character
-        rigidBody.velocity = new Vector2(0, 0); // Vector3.SmoothDamp(rigidBody.velocity, targetVelocity, ref velocity, m_MovementSmoothing);
+        rb.velocity = new Vector2(0, 0); // Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, m_MovementSmoothing);
     }
 
     public void EnableMovement()
@@ -354,6 +360,26 @@ public class PlayerController : MonoBehaviour, IShopCustomer
         animator.SetBool("IsAiming", false);
         animator.ResetTrigger("Magic");
         canShoot = false;
+    }
+
+    public void ShootGrapple()
+    {
+        if(Grapple.activeSelf==false)
+        {
+
+            Vector2 target = this.transform.position-Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            float angle = Mathf.Atan2(target.x, target.y) * Mathf.Rad2Deg;
+            Grapple.transform.eulerAngles = new Vector3(0, 0, -angle-90);
+            Grapple.SetActive(true);
+            Grapple.GetComponent<PlayerGrapple>().startLaunch(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+
+        }
+        else
+        {
+            Grapple.GetComponent<PlayerGrapple>().ForceReturn();
+        }
+
+        //Physics.Raycast(mousePosition, )
     }
 
     private void OnCollisionStay2D(Collision2D collision)
