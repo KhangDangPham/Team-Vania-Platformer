@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[ExecuteInEditMode]
+[RequireComponent(typeof(Camera))]
 public class CameraController : MonoBehaviour
 {
     public PlayerPosition playerPosition;
@@ -10,6 +12,9 @@ public class CameraController : MonoBehaviour
     public Transform target;
     public float smoothing;
     public float offset;
+    public bool maintainWidth = true;
+    public bool maintainHeight = true;
+
     private Vector3 newPosition;
     private bool isLowering;
 
@@ -17,6 +22,7 @@ public class CameraController : MonoBehaviour
     {
         camera = GetComponent<Camera>();
     }
+
     void FixedUpdate()
     {
         if (target != null && transform.position != target.position)
@@ -43,15 +49,15 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        camera.orthographicSize += Input.GetAxis("Mouse ScrollWheel") * 2;
-        if(camera.orthographicSize > 10)
+/*        camera.orthographicSize += Input.GetAxis("Mouse ScrollWheel") * 2;
+        if (camera.orthographicSize > 10)
         {
             camera.orthographicSize = 10;
         }
-        else if(camera.orthographicSize < 3)
+        else if (camera.orthographicSize < 3)
         {
             camera.orthographicSize = 3;
-        }
+        }*/
     }
 
     IEnumerator lowerCamera()
