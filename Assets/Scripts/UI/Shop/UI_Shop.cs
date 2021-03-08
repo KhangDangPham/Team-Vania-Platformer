@@ -32,7 +32,7 @@ public class UI_Shop : MonoBehaviour
         shopItemTransform.gameObject.SetActive(true);
         RectTransform shopItemRectTransform = shopItemTransform.GetComponent<RectTransform>();
         
-        float shopItemHeight = 120f;
+        float shopItemHeight = 60f;
         shopItemRectTransform.anchoredPosition = new Vector2(0, -shopItemHeight * positionIndex);
 
         shopItemTransform.Find("nameTxt").GetComponent<TextMeshProUGUI>().SetText(itemName);
