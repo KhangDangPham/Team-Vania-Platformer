@@ -14,6 +14,7 @@ public class MeleeEnemyController : MonoBehaviour
     public float attackCooldown = 1f;
 
     public GameObject attackHitBox;
+    public GameObject newHitbox;
     public string deathSound = "GoblinDeath";
     public string hurtSound = "GoblinHurt";
 
@@ -29,6 +30,7 @@ public class MeleeEnemyController : MonoBehaviour
     protected float currentRedTime = 0;
     protected float defaultR;
 
+    protected bool attacking;
     private ItemDrop itemDrop;
     protected void Start()
     {
@@ -52,11 +54,11 @@ public class MeleeEnemyController : MonoBehaviour
         float distance = Vector2.Distance(transform.position, player.gameObject.transform.position);
 
         Vector2 positionDifference = player.gameObject.transform.position - transform.position;
-
+        
         //if within aggro range but not within attack range
-        if (attackRange < distance && distance <= aggroRange)
+        if (attackRange < distance && distance <= aggroRange && !attacking)
         {
-
+            
             //move towards player
             Vector2 movement = Vector2.zero;
 
@@ -65,12 +67,14 @@ public class MeleeEnemyController : MonoBehaviour
                 if (positionDifference.x > 0.5f)
                 {
                     movement.x = 1;
-                    spriteRenderer.flipX = true;
+                    //spriteRenderer.flipX = true;
+                    this.transform.rotation = Quaternion.Euler(new Vector3(0,180,0));
                 }
                 else if (positionDifference.x < 0.5f)
                 {
                     movement.x = -1;
-                    spriteRenderer.flipX = false;
+                    //spriteRenderer.flipX = false;
+                    this.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0f));
                 }
             }
             else
@@ -88,9 +92,11 @@ public class MeleeEnemyController : MonoBehaviour
                 animator.SetBool("IsWalking", false);
             }
         }
-        else if (distance <= attackRange && currentCooldown <= 0) //attack
+        else if (distance <= attackRange && currentCooldown <= 0 && !attacking) //attack
         {
-            Attack();
+            animator.SetBool("Attack",true);
+            attacking = true;
+
         }
         else
         {
@@ -173,7 +179,7 @@ public class MeleeEnemyController : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-
+        attacking = false;
         health -= damage;
         if (health <= 0)
         {
@@ -204,8 +210,8 @@ public class MeleeEnemyController : MonoBehaviour
         kbMovement.y = 1;
 
         kbMovement *= force;
-
-        animator.ResetTrigger("Attack");
+        attacking = false;
+        animator.SetBool("Attack",false);
         animator.SetTrigger("Hit");
 
         rb.AddForce(kbMovement, ForceMode2D.Impulse);
@@ -246,13 +252,13 @@ public class MeleeEnemyController : MonoBehaviour
     protected virtual void Attack()
     {
         animator.SetBool("IsWalking", false);
-        FindObjectOfType<AudioManager>().Play("GoblinSwing"); //sfx
-        animator.SetTrigger("Attack");
+        animator.SetBool("Attack",true) ;
+        
     }
 
     public void SpawnHitbox()
     {
-        animator.ResetTrigger("Attack");
+        animator.SetBool("Attack",false);
         currentCooldown = attackCooldown;
         Vector3 spawnPosition = transform.position;
 
@@ -261,6 +267,24 @@ public class MeleeEnemyController : MonoBehaviour
 
         hitBox.Initialize("Enemy", new Vector2(1.5f, 1.5f), new Vector2(0, 0), .05f, 25, 2.5f);
     }
+
+
+    public void StartAttack()
+    {
+        FindObjectOfType<AudioManager>().Play("GoblinSwing"); //sfx
+        newHitbox.SetActive(true);
+        attacking = true;
+
+
+    }
+
+    public void EndAttack()
+    {
+        newHitbox.SetActive(false);
+        animator.SetBool("Attack", false);
+        attacking = false;
+    }
+
 
     public void GolemAttack()
     {
