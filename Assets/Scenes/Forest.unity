@@ -7365,12 +7365,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &575846002 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4639489829611760747, guid: 0828c99452cc1ff49ae98c291c5a5e66,
-    type: 3}
-  m_PrefabInstance: {fileID: 7457811111628250410}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &581816521
 GameObject:
   m_ObjectHideFlags: 0
@@ -71433,20 +71427,53 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1257812880500468897, guid: 0828c99452cc1ff49ae98c291c5a5e66,
-        type: 3}
-      propertyPath: optionsMenuUI
-      value: 
-      objectReference: {fileID: 575846002}
-    - target: {fileID: 1257812880500468899, guid: 0828c99452cc1ff49ae98c291c5a5e66,
-        type: 3}
-      propertyPath: m_OverrideSorting
+    - target: {fileID: 1740323406, guid: 0828c99452cc1ff49ae98c291c5a5e66, type: 3}
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1257812880500468899, guid: 0828c99452cc1ff49ae98c291c5a5e66,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 31
+    - target: {fileID: 1740323407, guid: 0828c99452cc1ff49ae98c291c5a5e66, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1740323407, guid: 0828c99452cc1ff49ae98c291c5a5e66, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1740323407, guid: 0828c99452cc1ff49ae98c291c5a5e66, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1740323407, guid: 0828c99452cc1ff49ae98c291c5a5e66, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1740323409, guid: 0828c99452cc1ff49ae98c291c5a5e66, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1740323409, guid: 0828c99452cc1ff49ae98c291c5a5e66, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1740323409, guid: 0828c99452cc1ff49ae98c291c5a5e66, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1740323409, guid: 0828c99452cc1ff49ae98c291c5a5e66, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.00016785
+      objectReference: {fileID: 0}
+    - target: {fileID: 1740323409, guid: 0828c99452cc1ff49ae98c291c5a5e66, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 800.0005
+      objectReference: {fileID: 0}
+    - target: {fileID: 1740323409, guid: 0828c99452cc1ff49ae98c291c5a5e66, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.00011444
+      objectReference: {fileID: 0}
+    - target: {fileID: 1740323409, guid: 0828c99452cc1ff49ae98c291c5a5e66, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 325.16104
       objectReference: {fileID: 0}
     - target: {fileID: 4030777606368915985, guid: 0828c99452cc1ff49ae98c291c5a5e66,
         type: 3}
