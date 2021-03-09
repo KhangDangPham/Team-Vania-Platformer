@@ -289,6 +289,8 @@ public class MeleeEnemyController : MonoBehaviour
     public void GolemAttack()
     {
         FindObjectOfType<AudioManager>().Play("GolemAtk"); //sfx
+        newHitbox.SetActive(true);
+        /*
         animator.ResetTrigger("Attack");
         currentCooldown = attackCooldown;
         Vector3 spawnPosition = transform.position;
@@ -297,7 +299,9 @@ public class MeleeEnemyController : MonoBehaviour
         BasicHitbox hitBox = Instantiate(attackHitBox, spawnPosition, Quaternion.identity).GetComponent<BasicHitbox>();
 
         hitBox.Initialize("Enemy", new Vector2(3f, 3.5f), new Vector2(-1, 1.6f), 1f, 40, 4f);
+        */
     }
+
 
     private void Die()
     {
