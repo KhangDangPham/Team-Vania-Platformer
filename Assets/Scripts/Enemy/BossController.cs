@@ -128,11 +128,9 @@ public class BossController : MeleeEnemyController
         
 
         currentCooldown -= Time.deltaTime;
-        invulnerabilityTimer -= Time.deltaTime;
         idleTime -= Time.deltaTime;
         comboCd -= Time.deltaTime;
         heartSpawnTime -= Time.deltaTime;
-
     }
 
     void MoveToPoint(float moveSpeed)

@@ -26,7 +26,7 @@ public class FlyingEnemyController : MeleeEnemyController
     {
         targetPosition = ChooseNewTargetPoint();
 
-        if(currentWaitTime <= 0 && invulnerabilityTimer <= 0)
+        if(currentWaitTime <= 0)
         {
             //face the enemy towards its movement position
 
@@ -42,14 +42,8 @@ public class FlyingEnemyController : MeleeEnemyController
         }
 
         currentCooldown -= Time.deltaTime;
-        invulnerabilityTimer -= Time.deltaTime;
         currentWaitTime -= Time.deltaTime;
-        HandleBlink();
         TurnRed();
-        if (invulnerabilityTimer <= 0)
-        {
-            rb.velocity = Vector2.zero;
-        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
