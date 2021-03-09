@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Events;
+using System;
 
 //This script will handle the player
 public class PlayerController : MonoBehaviour, IShopCustomer
@@ -14,20 +15,21 @@ public class PlayerController : MonoBehaviour, IShopCustomer
     public PlayerCoins playerCoins;
     public PlayerAbility playerAbility;
 
-    public bool canShield = true;
-    public bool canGrapple = false;
-
     public float playerSpeed = 2f;
     public float jumpForce = 10;
 
     public GameObject attackHitBox;
     public GameObject magicBurstPrefab;
     public GameObject Grapple;
+    public GameObject attkHitbox;
+    public GameObject fader;
+
     Rigidbody2D rb;
     Animator animator;
     SpriteRenderer spriteRenderer;
     RangedCombat bowScript;
     RangedVisualController rangedVisual;
+    BasicHitbox basicHitbox;
 
     bool canMove = true;
     bool canShoot = false;
@@ -57,6 +59,7 @@ public class PlayerController : MonoBehaviour, IShopCustomer
         spriteRenderer = GetComponent<SpriteRenderer>();
         rangedVisual = GetComponentInChildren<RangedVisualController>();
         playerHealth.currentHealth = 100;
+        basicHitbox = attkHitbox.GetComponent<BasicHitbox>();
     }
 
     private void Update()
@@ -139,12 +142,12 @@ public class PlayerController : MonoBehaviour, IShopCustomer
             //flip the character to face the movement direction
             if (horizontalMove < 0)
             {
-                spriteRenderer.flipX = true;
+                FaceLeft();
                 animator.SetBool("IsWalking", true);
             }
             else if (horizontalMove > 0)
             {
-                spriteRenderer.flipX = false;
+                FaceRight();
                 animator.SetBool("IsWalking", true);
             }
             else
@@ -174,6 +177,18 @@ public class PlayerController : MonoBehaviour, IShopCustomer
         }
     }
 
+    public void FaceRight()
+    {
+        Vector3 scale = transform.localScale;
+        transform.localScale = new Vector3(Math.Abs(scale.x), scale.y, scale.z);
+    }
+
+    public void FaceLeft()
+    {
+        Vector3 scale = transform.localScale;
+        transform.localScale = new Vector3(Math.Abs(scale.x) * -1, scale.y, scale.z);
+    }
+
     public void SetGrounded()
     {
         animator.SetBool("IsAerial", false);
@@ -192,7 +207,7 @@ public class PlayerController : MonoBehaviour, IShopCustomer
 
     public void TakeDamage(int damage)
     {
-        if (invulnerabilityTimer > 0 || blockTimer > 0)
+        if (playerHealth.currentHealth <= 0 || invulnerabilityTimer > 0 || blockTimer > 0)
         {
             return;
         }
@@ -287,13 +302,15 @@ public class PlayerController : MonoBehaviour, IShopCustomer
 
     public IEnumerator playerDied()
     {
-        Image faderImage = GameObject.Find("Fader").GetComponent<Image>();
+        fader.SetActive(true);
+        Image faderImage = fader.GetComponent<Image>();
 
         for (int i = 0; i <= 100; i++)
         {
             faderImage.color = new Color(0, 0, 0, (float)i / 100.0f);
             yield return new WaitForSeconds(0.015f);
         }
+        fader.SetActive(false);
     }
 
     private void Die()
@@ -306,25 +323,21 @@ public class PlayerController : MonoBehaviour, IShopCustomer
 
     public void BasicMeleeAttack()
     {
-        Vector3 spawnPosition = transform.position;
-
-        spawnPosition += spriteRenderer.flipX ? transform.right * -1 : transform.right * 1;
-        BasicHitbox hitBox = Instantiate(attackHitBox, spawnPosition, Quaternion.identity).GetComponent<BasicHitbox>();
+        basicHitbox.damage = 20;
+        basicHitbox.knockbackForce = 3f;
         FindObjectOfType<AudioManager>().Play("Slash"); //sfx
-        hitBox.Initialize("Player", new Vector2(2, 2), new Vector2(0, 0), .1f, 20, 3);
     }
 
     public void SpinAttack()
     {
-        Vector3 spawnPosition = transform.position;
-
-        BasicHitbox hitBox = Instantiate(attackHitBox, transform).GetComponent<BasicHitbox>();
+        basicHitbox.damage = 30;
+        basicHitbox.knockbackForce = 5;
         FindObjectOfType<AudioManager>().Play("SpinAtk"); //sfx
-        hitBox.Initialize("Player", new Vector2(10, 7.5f), new Vector2(0, 0), .3f, 30, 5);
     }
 
     public void ResetAttack()
     {
+        attkHitbox.SetActive(false);
         animator.ResetTrigger("BasicAttack");
     }
 

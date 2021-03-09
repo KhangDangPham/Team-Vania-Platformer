@@ -27,7 +27,7 @@ public class PlayerProjectile : MonoBehaviour
             collision.gameObject.GetComponent<MeleeEnemyController>().TakeDamage(10);
             Destroy(gameObject);
         }
-        else if (collision.gameObject.tag == "Ground")
+        else if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Unclimbable")
         {
             Destroy(gameObject);
         }

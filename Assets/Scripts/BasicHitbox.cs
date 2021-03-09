@@ -6,9 +6,9 @@ public class BasicHitbox : MonoBehaviour
 {
     bool initialized = false;
     float lifespan = 0f;
-    int damage;
+    public int damage;
     string spawner;
-    float knockbackForce;
+    public float knockbackForce;
     
 
     // Update is called once per frame

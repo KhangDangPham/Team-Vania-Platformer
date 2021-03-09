@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class RangedVisualController : MonoBehaviour
 {
@@ -20,7 +21,6 @@ public class RangedVisualController : MonoBehaviour
 
     public Transform playerTransform;
     public PlayerController playerController;
-    public SpriteRenderer playerSprite;
     public GameObject head;
     public GameObject bowArm;
     public GameObject drawArm;
@@ -66,14 +66,12 @@ public class RangedVisualController : MonoBehaviour
 
             if (direction.x < 0)
             {
-                transform.localScale = new Vector3(-1, 1, 1);
-                playerSprite.flipX = true;
+                playerController.FaceLeft();
                 flipRot = true;
             }
             else
             {
-                transform.localScale = new Vector3(1, 1, 1);
-                playerSprite.flipX = false;
+                playerController.FaceRight();
                 flipRot = false;
             }
         }
