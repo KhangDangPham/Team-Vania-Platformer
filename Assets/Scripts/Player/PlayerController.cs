@@ -123,18 +123,24 @@ public class PlayerController : MonoBehaviour, IShopCustomer
     }
     void FixedUpdate()
     {
-        m_Grounded = false;
-
         // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
         // This can be done using layers instead but Sample Assets will not overwrite your project settings.
         Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
         if (colliders.Length == 0)
-            animator.SetBool("IsAerial", true);
-
-        for (int i = 0; i < colliders.Length; i++)
         {
-            if (colliders[i].gameObject != gameObject && colliders[i].tag != "Unclimbable")
-                m_Grounded = true;
+            animator.SetBool("IsAerial", true);
+            m_Grounded = false;
+        }
+        else
+        {
+            for (int i = 0; i < colliders.Length; i++)
+            {
+                if (colliders[i].gameObject != gameObject && colliders[i].tag != "Unclimbable")
+                {
+                    m_Grounded = true;
+                    SetGrounded();
+                }
+            }
         }
 
         if (canMove)
@@ -170,7 +176,7 @@ public class PlayerController : MonoBehaviour, IShopCustomer
         jumpTimer -= Time.deltaTime;
         elapsed_time += Time.deltaTime;
 
-        if(elapsed_time >= 1)
+        if (elapsed_time >= 1)
         {
             elapsed_time = 0f;
             playerMana.currentMana = playerMana.currentMana >= playerMana.maxMana ? playerMana.maxMana : playerMana.currentMana + 1;
@@ -378,12 +384,12 @@ public class PlayerController : MonoBehaviour, IShopCustomer
 
     public void ShootGrapple()
     {
-        if(Grapple.activeSelf==false)
+        if (Grapple.activeSelf == false)
         {
 
-            Vector2 target = this.transform.position-Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 target = this.transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
             float angle = Mathf.Atan2(target.x, target.y) * Mathf.Rad2Deg;
-            Grapple.transform.eulerAngles = new Vector3(0, 0, -angle-90);
+            Grapple.transform.eulerAngles = new Vector3(0, 0, -angle - 90);
             Grapple.SetActive(true);
             Grapple.GetComponent<PlayerGrapple>().startLaunch(Camera.main.ScreenToWorldPoint(Input.mousePosition));
 
@@ -409,14 +415,6 @@ public class PlayerController : MonoBehaviour, IShopCustomer
         if (collision.gameObject.tag == "Ground" && animator.GetBool("IsAerial") == true || m_Grounded)
         {
             SetGrounded();
-        }
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Ground")
-        {
-            animator.SetBool("IsAerial", true);
         }
     }
 
