@@ -9,6 +9,7 @@ using System;
 //This script will handle the player
 public class PlayerController : MonoBehaviour, IShopCustomer
 {
+    public Checkpoint checkpoint;
     public PlayerPosition playerPosition;
     public PlayerHealth playerHealth;
     public PlayerMana playerMana;
@@ -60,6 +61,22 @@ public class PlayerController : MonoBehaviour, IShopCustomer
         rangedVisual = GetComponentInChildren<RangedVisualController>();
         playerHealth.currentHealth = 100;
         basicHitbox = attkHitbox.GetComponent<BasicHitbox>();
+
+        if(checkpoint.sceneName == SceneManager.GetActiveScene().name)
+        {
+            transform.position = checkpoint.position;
+            
+            playerHealth.currentHealth = checkpoint.currentHealth;
+            playerHealth.maxHealth = checkpoint.maxHealth;
+
+            playerMana.currentMana = checkpoint.currentMana;
+            playerMana.maxMana = checkpoint.maxMana;
+
+            playerCoins.numCoins = checkpoint.numCoins;
+
+            playerAbility.shield = checkpoint.shield;
+            playerAbility.grapple = checkpoint.grapple;
+        }
     }
 
     private void Update()

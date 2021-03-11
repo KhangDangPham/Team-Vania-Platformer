@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Player Coins", menuName = "Player/PlayerCoins")]
+[CreateAssetMenu(fileName = "Player Coins", menuName = "SO/Player/PlayerCoins")]
 public class PlayerCoins : ScriptableObject
 {
     public int numCoins;

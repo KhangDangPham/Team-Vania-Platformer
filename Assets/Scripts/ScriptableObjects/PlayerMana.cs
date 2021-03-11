@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Player Mana", menuName = "Player/PlayerMana")]
+[CreateAssetMenu(fileName = "Player Mana", menuName = "SO/Player/PlayerMana")]
 public class PlayerMana : ScriptableObject
 {
     public int currentMana;
